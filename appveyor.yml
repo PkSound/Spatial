@@ -1,0 +1,8 @@
+version: 0.0.{build}
+configuration: Release
+before_build:
+- cmd: nuget restore .\source\Pk.Spatial.sln
+build:
+  verbosity: normal
+test_script:
+- ps: .\tests\run_tests.bat
