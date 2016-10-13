@@ -35,9 +35,23 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\..\libraries\Nuget\MathNet.Numerics.3.0.2\lib\net40\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MathNet.Spatial">
+      <HintPath>..\..\libraries\Nuget\MathNet.Spatial.0.2.0-alpha\lib\net40\MathNet.Spatial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Shouldly">
       <HintPath>..\..\libraries\Nuget\Shouldly.2.8.2\lib\net451\Shouldly.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnitsNet">
+      <HintPath>..\..\libraries\Nuget\UnitsNet.3.42.0\lib\net35\UnitsNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="xunit.abstractions">
@@ -58,13 +72,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppVeyorCheckTest.cs" />
+    <Compile Include="Location3DTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\source\Pk.Spatial\Pk.Spatial.csproj">
+      <Project>{B06DA84B-76C8-4D50-81A0-2725F699EE1F}</Project>
+      <Name>Pk.Spatial</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
