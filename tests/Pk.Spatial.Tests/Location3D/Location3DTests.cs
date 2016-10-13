@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Pk.Spatial.Tests
 {
-	[Trait(TestConstants.CategoryName, TestConstants.UnitTestsTag)]
+  [Trait(TestConstants.CategoryName, TestConstants.UnitTestsTag)]
 	public class Location3DTests
 	{
 
