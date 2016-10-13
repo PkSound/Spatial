@@ -34,6 +34,7 @@ deploy:
   api_key:
     secure: BUCXu9ZvnXlGLJHtJTxMDa8nT3UavyVq8azak1NAfiYBLkd/x1n37p+WPB8wSP8i
   artifact: /.*\.nupkg/
+  branch: develop
 
 
 artifacts:
