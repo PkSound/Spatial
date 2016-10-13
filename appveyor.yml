@@ -18,4 +18,3 @@ test_script:
 after_test:
     - cmd: .\libraries\Nuget\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -filter:"+[*]*" -target:".\libraries\Nuget\xunit.runner.console.2.1.0\tools\xunit.console.x86.exe" -targetargs:"/noshadow .\tests\Pk.Spatial.Tests\bin\Release\Pk.Spatial.Tests.dll" -output:coverage.xml
     - cmd: .\libraries\Nuget\coveralls.io.1.3.4\tools\coveralls.net.exe --opencover coverage.xml
-  
