@@ -8,7 +8,7 @@
     <owners>$author$</owners>
     <licenseUrl>https://github.com/PkSound/Spatial/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/PkSound/Spatial/</projectUrl>
-    <iconUrl>https://avatars3.githubusercontent.com/u/22802389?v=3&u=6e5a408640140c46568202156394f28b7cbb95cb&s=140</iconUrl>
+    <!--<iconUrl>https://avatars3.githubusercontent.com/u/22802389?v=3&u=6e5a408640140c46568202156394f28b7cbb95cb&s=140</iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes></releaseNotes>
