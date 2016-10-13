@@ -1,12 +1,22 @@
-version: 0.0.{build}
+version: 0.0.{build}-beta
 configuration: Release
 
 before_build:
 - cmd: nuget restore .\Pk.Spatial.sln
 
+assembly_info: 
+  patch: true 
+  file: AssemblyInfo.* 
+  assembly_version: "{version}" 
+  assembly_file_version: "{version}" 
+  assembly_informational_version: "{version}"
+
 build:
   project: Pk.Spatial.sln
   verbosity: minimal
+  publish_nuget: true
+  publish_nuget_symbols: true
+  include_nuget_references: true
 
 environment:
   COVERALLS_REPO_TOKEN:

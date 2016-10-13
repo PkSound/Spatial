@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/PkSound/Spatial/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/PkSound/Spatial/</projectUrl>
+    <iconUrl>https://avatars3.githubusercontent.com/u/22802389?v=3&u=6e5a408640140c46568202156394f28b7cbb95cb&s=140</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>math spatial goemetry 3D unit units measurement si metric imperial convert c# .net parse immutable</tags>
+  </metadata>
+</package>
