@@ -9,7 +9,7 @@ namespace Pk.Spatial
   /// </summary>
   public struct Location3D
   {
-    public Location3D(Length x, Length y, Length z) 
+    public Location3D(Length x, Length y, Length z)
     {
       this.X = x;
       this.Y = y;
