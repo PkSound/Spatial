@@ -2,9 +2,10 @@ version: 0.0.{build}
 configuration: Release
 
 before_build:
-- cmd: nuget restore .\source\Pk.Spatial.sln
+- cmd: nuget restore .\Pk.Spatial.sln
 
 build:
+  project: Pk.Spatial.sln
   verbosity: normal
   
 environment:
