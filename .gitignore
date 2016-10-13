@@ -253,3 +253,4 @@ paket-files/
 libraries/Nuget/*
 tests/xunit/
 xunit-results.xml
+coverage.xml
