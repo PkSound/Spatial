@@ -56,6 +56,10 @@
       <HintPath>..\..\libraries\Nuget\xunit.extensibility.execution.2.1.0\lib\net45\xunit.execution.desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="xunit.execution.dotnet">
+      <HintPath>..\..\libraries\Nuget\xunit.extensibility.execution.2.1.0\lib\dotnet\xunit.execution.dotnet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppVeyorCheckTest.cs" />
