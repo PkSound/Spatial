@@ -18,7 +18,7 @@ notifications:
   body: >-
     { 
       "payload":
-	  {
+      {
         "build_num": {{buildVersion}},
         "status": "done"
       }
