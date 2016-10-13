@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Pk.Spatial
 {
-  internal sealed class IHaveXyzEqualityComparer<TUnit> : IEqualityComparer<IHaveXyz<TUnit>> where TUnit : IEquatable<TUnit>
+  internal sealed class IHaveXyzEqualityComparer<TUnit> : IEqualityComparer<IPoint3D<TUnit>> where TUnit : IComparable<TUnit>
   {
-    public bool Equals(IHaveXyz<TUnit> x, IHaveXyz<TUnit> y)
+    public bool Equals(IPoint3D<TUnit> x, IPoint3D<TUnit> y)
     {
       if (x == null || y == null) return false;
       if (x.X.Equals(y.X) && x.Y.Equals(y.Y))
@@ -13,7 +13,7 @@ namespace Pk.Spatial
       return false;
     }
 
-    public int GetHashCode(IHaveXyz<TUnit> obj)
+    public int GetHashCode(IPoint3D<TUnit> obj)
     {
       var num1 = obj.X;
       var num2 = num1.GetHashCode() * 397;

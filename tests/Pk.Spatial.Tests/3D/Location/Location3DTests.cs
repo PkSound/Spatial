@@ -3,7 +3,7 @@ using Shouldly;
 using UnitsNet;
 using Xunit;
 
-namespace Pk.Spatial.Tests
+namespace Pk.Spatial.Tests._3D.Location
 {
   [Trait(TestConstants.CategoryName, TestConstants.UnitTestsTag)]
 	public class Location3DTests
@@ -12,7 +12,7 @@ namespace Pk.Spatial.Tests
 		[Fact]
 		public void ConstructionUsingDirectionAndMagnitude()
 		{
-			var locationUnderTest = Location3D.From(UnitVector3D.XAxis, Length.FromMeters(2));
+			var locationUnderTest = Spatial.Location3D.From(UnitVector3D.XAxis, Length.FromMeters(2));
 
 			locationUnderTest.X.Meters.ShouldBe(2);
 			locationUnderTest.Y.Meters.ShouldBe(0);
@@ -23,7 +23,7 @@ namespace Pk.Spatial.Tests
 		[Fact]
 		public void ConstructionUsingLengths()
 		{
-			var locationUnderTest = new Location3D(Length.FromMeters(3), Length.FromMeters(2), Length.FromMeters(1));
+			var locationUnderTest = new Spatial.Location3D(Length.FromMeters(3), Length.FromMeters(2), Length.FromMeters(1));
 			
 			locationUnderTest.X.Meters.ShouldBe(3);
 			locationUnderTest.Y.Meters.ShouldBe(2);
@@ -33,7 +33,7 @@ namespace Pk.Spatial.Tests
 		[Fact]
 		public void OriginIsAt000()
 		{
-			var locationUnderTest = Location3D.Origin;
+			var locationUnderTest = Spatial.Location3D.Origin;
 
 			locationUnderTest.X.ShouldBe(Length.Zero);
 			locationUnderTest.Y.ShouldBe(Length.Zero);
@@ -45,7 +45,7 @@ namespace Pk.Spatial.Tests
 		[Fact]
 		public void ExposesXYZCoordinatesAsLengths()
 		{
-			var locationUnderTest = new Location3D();
+			var locationUnderTest = new Spatial.Location3D();
 
 			locationUnderTest.X.ShouldBe(Length.Zero);
 			locationUnderTest.Y.ShouldBe(Length.Zero);

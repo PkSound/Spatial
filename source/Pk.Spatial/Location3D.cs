@@ -7,7 +7,7 @@ namespace Pk.Spatial
   ///   Describes a location in 3D space.
   ///   X Y and Z each describe the distance from the origin in their respective axis.
   /// </summary>
-  public struct Location3D
+  public struct Location3D : IPoint3D<Length>
   {
     public Location3D(Length x, Length y, Length z)
     {
@@ -18,9 +18,9 @@ namespace Pk.Spatial
 
 
     public static Location3D Origin { get { return new Location3D(); } }
-    public Length X { get; private set; }
-    public Length Y { get; private set; }
-    public Length Z { get; private set; }
+    public Length X { get; }
+    public Length Y { get; }
+    public Length Z { get; }
 
 
     public static Location3D From(UnitVector3D direction, Length magnitude)

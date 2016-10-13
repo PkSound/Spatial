@@ -1,6 +1,6 @@
 ﻿namespace Pk.Spatial
 {
-  internal interface IHaveXyz<TUnit>
+  internal interface IPoint3D<TUnit>
   {
     TUnit X { get; }
     TUnit Y { get; }
