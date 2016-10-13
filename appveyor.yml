@@ -10,8 +10,7 @@ build:
   
 environment:
   COVERALLS_REPO_TOKEN:
-    secure:2UvNfuCS0FwWR4gtOjeVihCCir28bHEcr2kQlD7hpYXI0WFPCDjuXA3tCieyEwdm
-  
+    secure: 2UvNfuCS0FwWR4gtOjeVihCCir28bHEcr2kQlD7hpYXI0WFPCDjuXA3tCieyEwdm
 test_script:
   - ps: .\tests\run_tests.bat
 
