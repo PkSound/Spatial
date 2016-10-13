@@ -8,7 +8,7 @@ build:
   project: Pk.Spatial.sln
   verbosity: minimal
 
- environment:
+environment:
   COVERALLS_REPO_TOKEN:
     secure: 2UvNfuCS0FwWR4gtOjeVihCCir28bHEcr2kQlD7hpYXI0WFPCDjuXA3tCieyEwdm
 	
