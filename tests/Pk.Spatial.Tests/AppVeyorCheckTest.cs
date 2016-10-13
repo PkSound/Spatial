@@ -10,7 +10,7 @@ namespace Pk.Spatial.Tests
     public void TestShouldPass()
     {
       // Intentional failure to convince myself that appveyor will catch failing tests
-      false.ShouldBeTrue();
+      false.ShouldBeFalse();
     }
   }
 }
