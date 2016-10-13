@@ -63,7 +63,7 @@ for /f "tokens=*" %%a in ('dir /b /s /a:d "%root%\*.Tests"') do (
 echo on
 
 :: 32 bit version
-"%bin%\xunit.console.x86.exe" %testAssemblies% -xml %outputPath% -parallel all
+"%bin%\xunit.console.exe" %testAssemblies% -xml %outputPath% -parallel all
 
 @echo off
 
