@@ -6,3 +6,10 @@ build:
   verbosity: normal
 test_script:
 - ps: .\tests\run_tests.bat
+notifications:
+- provider: Webhook
+  url: https://coveralls.io/webhook?repo_token=eqm3cm2pkhj9j7E8WqrudIotXeSJnaTYv
+  method: POST
+  on_build_success: true
+  on_build_failure: false
+  on_build_status_changed: false
