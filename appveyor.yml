@@ -6,11 +6,12 @@ before_build:
 
 build:
   project: Pk.Spatial.sln
-  verbosity: normal
-  
-environment:
+  verbosity: minimal
+
+ environment:
   COVERALLS_REPO_TOKEN:
     secure: 2UvNfuCS0FwWR4gtOjeVihCCir28bHEcr2kQlD7hpYXI0WFPCDjuXA3tCieyEwdm
+	
 test_script:
   - ps: .\tests\run_tests.bat
 
