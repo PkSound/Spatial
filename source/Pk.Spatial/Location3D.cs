@@ -43,6 +43,7 @@ namespace Pk.Spatial
 
 
     public Displacement3D DisplacementFromOrigin() { return this - Location3D.Origin; }
+    public Displacement3D DisplacementTo(Location3D other) { return other - this; }
 
 
     public override bool Equals(object obj)
