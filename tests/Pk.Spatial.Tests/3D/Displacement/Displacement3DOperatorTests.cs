@@ -111,7 +111,7 @@ namespace Pk.Spatial.Tests._3D.Displacement
 
 
     [Fact]
-    public void UnequalDisplacementsShouldHaveSameHashCode()
+    public void UnequalDisplacementsShouldHaveDifferentHashCode()
     {
       var some = new Displacement3D();
       var other = new Displacement3D(1, 0, 0);

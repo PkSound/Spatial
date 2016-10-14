@@ -69,7 +69,7 @@ namespace Pk.Spatial.Tests._3D.Location
     
 
     [Fact]
-    public void UnequalLocationsShouldHaveSameHashCode()
+    public void UnequalLocationsShouldHaveDifferentHashCode()
     {
       var locationUnderTest = new Location3D();
       var other = new Location3D(1, 0, 0);

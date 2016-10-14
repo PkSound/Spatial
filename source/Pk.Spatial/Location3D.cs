@@ -45,6 +45,16 @@ namespace Pk.Spatial
     public Displacement3D DisplacementFromOrigin() { return this - Location3D.Origin; }
 
 
+    public override bool Equals(object obj)
+    {
+      if (object.ReferenceEquals(null, obj)) return false;
+      return obj is Location3D && this.Equals((Location3D) obj);
+    }
+
+
+    public override int GetHashCode() { return this.underlyingPoint.GetHashCode(); }
+
+
     public static Location3D operator +(Location3D l, Displacement3D d)
     {
       return new Location3D(l.Freeze() + d.Freeze());

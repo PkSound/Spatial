@@ -53,6 +53,15 @@ namespace Pk.Spatial
     public Length X => Length.From(this.underlyingVector.X, StandardUnits.Length);
     public Length Y => Length.From(this.underlyingVector.Y, StandardUnits.Length);
     public Length Z => Length.From(this.underlyingVector.Z, StandardUnits.Length);
+
+
+    public override bool Equals(object obj)
+    {
+      if (object.ReferenceEquals(null, obj)) return false;
+      return obj is Displacement3D && this.Equals((Displacement3D) obj);
+    }
+
+
     public override int GetHashCode() { return this.underlyingVector.GetHashCode(); }
 
 
