@@ -1,4 +1,5 @@
-﻿using UnitsNet.Units;
+﻿using MathNet.Spatial.Euclidean;
+using UnitsNet.Units;
 
 namespace Pk.Spatial
 {
@@ -7,6 +8,6 @@ namespace Pk.Spatial
     TUnit X { get; }
     TUnit Y { get; }
     TUnit Z { get; }
-    IPoint3D<double> Freeze(LengthUnit unit);
+    Point3D Freeze(LengthUnit unit);
   }
 }
