@@ -68,6 +68,11 @@ namespace Pk.Spatial
     }
 
 
+    public static Displacement3D FromMeters(double x, double y, double z)
+    {
+      return Displacement3D.From(x, y, z, LengthUnit.Meter);
+    }
+
     public static Displacement3D From(double x, double y, double z, LengthUnit unit)
     {
       return new Displacement3D(Length.From(x, unit), Length.From(y, unit), Length.From(z, unit));
