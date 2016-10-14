@@ -54,6 +54,18 @@ namespace Pk.Spatial.Tests._3D.Location
 
 
     [Fact]
+    public void GetsDisplacementFromOrigin()
+    {
+      var locationUnderTest = new Location3D(3, 80, -92);
+
+      var displacementFromOrigin = locationUnderTest.DisplacementFromOrigin();
+      displacementFromOrigin.X.As(StandardUnits.Length).ShouldBe(3);
+      displacementFromOrigin.Y.As(StandardUnits.Length).ShouldBe(80);
+      displacementFromOrigin.Z.As(StandardUnits.Length).ShouldBe(-92);
+    }
+
+
+    [Fact]
     public void GetsPoint3DOfDesiredUnits()
     {
       var locationUnderTest = new Location3D(10.0, 30.1, -85.0, LengthUnit.Kilometer);

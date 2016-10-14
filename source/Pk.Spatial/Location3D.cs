@@ -42,6 +42,9 @@ namespace Pk.Spatial
     }
 
 
+    public Displacement3D DisplacementFromOrigin() { return this - Location3D.Origin; }
+
+
     public static Location3D operator +(Location3D l, Displacement3D d)
     {
       return new Location3D(l.Freeze() + d.Freeze());
