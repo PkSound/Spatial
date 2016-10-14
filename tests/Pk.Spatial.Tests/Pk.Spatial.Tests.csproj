@@ -72,7 +72,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Location3DTests.cs" />
+    <Compile Include="3D\Displacement\Displacement3DOperatorTests.cs" />
+    <Compile Include="3D\Displacement\Displacement3DPropertyTests.cs" />
+    <Compile Include="3D\Location\Location3DOperatorTests.cs" />
+    <Compile Include="3D\Location\Location3DPropertyTests.cs" />
+    <Compile Include="Tolerance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestConstants.cs" />
   </ItemGroup>
