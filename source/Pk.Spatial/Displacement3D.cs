@@ -40,20 +40,36 @@ namespace Pk.Spatial
         : this(Length.From(vector.X, units), Length.From(vector.Y, units), Length.From(vector.Z, units)) {}
 
 
-    public bool Equals(Displacement3D other)
+    public bool Equals(Displacement3D other) { return this.underlyingVector.Equals(other.Freeze()); }
+    public Length Magnitude => Length.From(this.underlyingVector.Length, StandardUnits.Length);
+
+
+    public Vector3D Freeze(LengthUnit unit = StandardUnits.Length)
     {
-      return this.underlyingVector.Equals(other.Freeze());
+      return new Vector3D(this.X.As(unit), this.Y.As(unit), this.Z.As(unit));
     }
 
 
-    public Length Magnitude => Length.From(this.underlyingVector.Length, StandardUnits.Length);
-    public Vector3D Freeze(LengthUnit unit = StandardUnits.Length) { return new Vector3D(this.X.As(unit), this.Y.As(unit), this.Z.As(unit)); }
     public Length X => Length.From(this.underlyingVector.X, StandardUnits.Length);
     public Length Y => Length.From(this.underlyingVector.Y, StandardUnits.Length);
     public Length Z => Length.From(this.underlyingVector.Z, StandardUnits.Length);
     public override int GetHashCode() { return this.underlyingVector.GetHashCode(); }
-    public static bool operator ==(Displacement3D left, Displacement3D right) { return left.Equals(right); }
-    public static bool operator !=(Displacement3D left, Displacement3D right) { return !(left == right); }
+
+
+    public static Displacement3D operator +(Displacement3D lhs, Displacement3D rhs)
+    {
+      return new Displacement3D(lhs.Freeze() + rhs.Freeze());
+    }
+
+
+    public static bool operator ==(Displacement3D lhs, Displacement3D rhs) { return lhs.Equals(rhs); }
+    public static bool operator !=(Displacement3D lhs, Displacement3D rhs) { return !(lhs == rhs); }
+
+
+    public static Displacement3D operator -(Displacement3D lhs, Displacement3D rhs)
+    {
+      return new Displacement3D(lhs.Freeze() - rhs.Freeze());
+    }
 
 
     public Displacement3D Rotate(UnitVector3D axisOfRotation, Angle angleOfRotation)

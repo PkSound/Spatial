@@ -44,10 +44,7 @@ namespace Pk.Spatial
 
     public static Location3D operator +(Location3D l, Displacement3D d)
     {
-      var point = l.Freeze();
-      var vector = d.Freeze();
-      var resultPoint = point + vector;
-      return new Location3D(resultPoint);
+      return new Location3D(l.Freeze() + d.Freeze());
     }
 
 
@@ -57,19 +54,13 @@ namespace Pk.Spatial
 
     public static Location3D operator -(Location3D l, Displacement3D d)
     {
-      var point = l.Freeze();
-      var vector = d.Freeze();
-      var resultPoint = point - vector;
-      return new Location3D(resultPoint);
+      return new Location3D(l.Freeze() - d.Freeze());
     }
 
 
     public static Displacement3D operator -(Location3D lhs, Location3D rhs)
     {
-      var p1 = lhs.Freeze();
-      var p2 = rhs.Freeze();
-      var resultVector = p1 - p2;
-      return new Displacement3D(resultVector);
+      return new Displacement3D(lhs.Freeze() - rhs.Freeze());
     }
   }
 }

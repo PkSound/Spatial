@@ -21,11 +21,31 @@ namespace Pk.Spatial.Tests._3D.Displacement
 
 
     [Fact]
-    public void Displacement3DLessDisplacement3DisADisplacement3D() { throw new NotImplementedException(); }
+    public void Displacement3DLessDisplacement3DisADisplacement3D()
+    {
+      var some = new Displacement3D(2,5,10);
+      var other = new Displacement3D(3,7,8);
+
+      var result = some + other;
+      result.ShouldBeOfType<Displacement3D>();
+      result.X.As(StandardUnits.Length).ShouldBe(5);
+      result.Y.As(StandardUnits.Length).ShouldBe(12);
+      result.Z.As(StandardUnits.Length).ShouldBe(18);
+    }
 
 
     [Fact]
-    public void Displacement3DPlusDisplacement3DisADisplacement3D() { throw new NotImplementedException(); }
+    public void Displacement3DPlusDisplacement3DisADisplacement3D()
+    {
+      var some = new Displacement3D(3, 7, 8);
+      var other = new Displacement3D(2, 5, 10);
+
+      var result = some - other;
+      result.ShouldBeOfType<Displacement3D>();
+      result.X.As(StandardUnits.Length).ShouldBe(1);
+      result.Y.As(StandardUnits.Length).ShouldBe(2);
+      result.Z.As(StandardUnits.Length).ShouldBe(-2);
+    }
 
 
     [Fact]
