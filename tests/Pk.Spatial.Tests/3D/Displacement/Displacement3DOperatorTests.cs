@@ -132,6 +132,16 @@ namespace Pk.Spatial.Tests._3D.Displacement
       d.Equals(null).ShouldBeFalse();
     }
 
+    [Fact]
+    public void AngleTo()
+    {
+      var angle = new Displacement3D(1, 1, 0).AngleTo(new Displacement3D(10, 0, 0));
+      angle.Degrees.ShouldBe(45, Tolerance.ToWithinOneHundredth);
+
+      angle = new Displacement3D(0,1,1).AngleTo(UnitVector3D.ZAxis);
+      angle.Degrees.ShouldBe(45, Tolerance.ToWithinOneHundredth);
+    }
+
 
     [Fact]
     public void ZeroLengthDisplacementsAreEqual()

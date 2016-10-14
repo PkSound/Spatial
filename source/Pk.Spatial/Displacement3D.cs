@@ -92,5 +92,19 @@ namespace Pk.Spatial
 
       return new Displacement3D(x, y, z);
     }
+
+
+    public Angle AngleTo(Displacement3D other)
+    {
+      var result = this.Freeze().AngleTo(other.Freeze());
+      return Angle.FromDegrees(result.Degrees);
+    }
+
+
+    public Angle AngleTo(UnitVector3D other)
+    {
+      var result = this.Freeze().AngleTo(other);
+      return Angle.FromDegrees(result.Degrees);
+    }
   }
 }
