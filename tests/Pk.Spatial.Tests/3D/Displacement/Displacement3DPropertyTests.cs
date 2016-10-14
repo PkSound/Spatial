@@ -20,6 +20,16 @@ namespace Pk.Spatial.Tests._3D.Displacement
 
 
     [Fact]
+    public void ConstructUsingVector3D()
+    {
+      var locationUnderTest = new Displacement3D(new Vector3D(5.0, 6.0, 7.0), LengthUnit.Centimeter);
+
+      locationUnderTest.X.As(LengthUnit.Decimeter).ShouldBe(0.5, Tolerance.ToWithinOneHundredth);
+      locationUnderTest.Y.As(LengthUnit.Decimeter).ShouldBe(0.6, Tolerance.ToWithinOneHundredth);
+      locationUnderTest.Z.As(LengthUnit.Decimeter).ShouldBe(0.7, Tolerance.ToWithinOneHundredth);
+    }
+
+    [Fact]
     public void ConstructsUsingDoublesAndALengthUnit()
     {
       var displacementUnderTest = new Displacement3D(1.1, 2.2, 3.3, LengthUnit.Mile);

@@ -36,6 +36,10 @@ namespace Pk.Spatial
     }
 
 
+    public Displacement3D(Vector3D vector, LengthUnit units)
+        : this(Length.From(vector.X, units), Length.From(vector.Y, units), Length.From(vector.Z, units)) {}
+
+
     public bool Equals(Displacement3D other)
     {
       return this.underlyingVector.Equals(other.Freeze(StandardUnits.Length));

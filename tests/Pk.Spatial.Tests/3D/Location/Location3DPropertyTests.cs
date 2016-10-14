@@ -1,4 +1,5 @@
-﻿using Shouldly;
+﻿using MathNet.Spatial.Euclidean;
+using Shouldly;
 using UnitsNet;
 using UnitsNet.Units;
 using Xunit;
@@ -29,15 +30,15 @@ namespace Pk.Spatial.Tests._3D.Location
       locationUnderTest.Z.Miles.ShouldBe(3.3);
     }
 
-    [Fact]
-    public void GetsPoint3DOfDesiredUnits()
-    {
-      var locationUnderTest = new Location3D(10.0, 30.1, -85.0, LengthUnit.Kilometer);
 
-      var result = locationUnderTest.Freeze(LengthUnit.Mile);
-      result.X.ShouldBe(6.2, Tolerance.ToWithinOneTenth);
-      result.Y.ShouldBe(18.7, Tolerance.ToWithinOneTenth);
-      result.Z.ShouldBe(-52.8, Tolerance.ToWithinOneTenth);
+    [Fact]
+    public void ConstructUsingPoint3D()
+    {
+      var locationUnderTest = new Location3D(new Point3D(5.0, 6.0, 7.0), LengthUnit.Centimeter);
+
+      locationUnderTest.X.As(LengthUnit.Decimeter).ShouldBe(0.5, Tolerance.ToWithinOneHundredth);
+      locationUnderTest.Y.As(LengthUnit.Decimeter).ShouldBe(0.6, Tolerance.ToWithinOneHundredth);
+      locationUnderTest.Z.As(LengthUnit.Decimeter).ShouldBe(0.7, Tolerance.ToWithinOneHundredth);
     }
 
 
@@ -49,6 +50,18 @@ namespace Pk.Spatial.Tests._3D.Location
       locationUnderTest.X.As(StandardUnits.Length).ShouldBe(1.1);
       locationUnderTest.Y.As(StandardUnits.Length).ShouldBe(2.2);
       locationUnderTest.Z.As(StandardUnits.Length).ShouldBe(3.3);
+    }
+
+
+    [Fact]
+    public void GetsPoint3DOfDesiredUnits()
+    {
+      var locationUnderTest = new Location3D(10.0, 30.1, -85.0, LengthUnit.Kilometer);
+
+      var result = locationUnderTest.Freeze(LengthUnit.Mile);
+      result.X.ShouldBe(6.2, Tolerance.ToWithinOneTenth);
+      result.Y.ShouldBe(18.7, Tolerance.ToWithinOneTenth);
+      result.Z.ShouldBe(-52.8, Tolerance.ToWithinOneTenth);
     }
 
 

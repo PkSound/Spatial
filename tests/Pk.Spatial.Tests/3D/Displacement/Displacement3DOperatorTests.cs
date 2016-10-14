@@ -1,3 +1,4 @@
+using System;
 using MathNet.Spatial.Euclidean;
 using Shouldly;
 using UnitsNet;
@@ -27,6 +28,18 @@ namespace Pk.Spatial.Tests._3D.Displacement
 
       displacementUnderTest.GetHashCode().ShouldBe(other.GetHashCode());
     }
+
+
+    [Fact]
+    public void Location3DLessDisplacement3DisALocation3D() { throw new NotImplementedException(); }
+
+
+    [Fact]
+    public void Location3DLessLocation3DisADisplacement3D() { throw new NotImplementedException(); }
+
+
+    [Fact]
+    public void Location3DPlusDisplacement3DisALocation3D() { throw new NotImplementedException(); }
 
 
     [Fact]
