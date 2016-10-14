@@ -12,34 +12,30 @@ namespace Pk.Spatial.Tests._3D.Displacement
     [Fact]
     public void DifferentLengthDisplacementsAreUnequal()
     {
-      var displacementUnderTest = new Displacement3D();
+      var some = new Displacement3D();
       var other = new Displacement3D(1, 0, 0);
 
-      (displacementUnderTest != other).ShouldBeTrue();
-      (displacementUnderTest == other).ShouldBeFalse();
+      (some != other).ShouldBeTrue();
+      (some == other).ShouldBeFalse();
     }
+
+
+    [Fact]
+    public void Displacement3DLessDisplacement3DisADisplacement3D() { throw new NotImplementedException(); }
+
+
+    [Fact]
+    public void Displacement3DPlusDisplacement3DisADisplacement3D() { throw new NotImplementedException(); }
 
 
     [Fact]
     public void EqualDisplacementsShouldHaveSameHashCode()
     {
-      var displacementUnderTest = new Displacement3D();
+      var some = new Displacement3D();
       var other = new Displacement3D();
 
-      displacementUnderTest.GetHashCode().ShouldBe(other.GetHashCode());
+      some.GetHashCode().ShouldBe(other.GetHashCode());
     }
-
-
-    [Fact]
-    public void Location3DLessDisplacement3DisALocation3D() { throw new NotImplementedException(); }
-
-
-    [Fact]
-    public void Location3DLessLocation3DisADisplacement3D() { throw new NotImplementedException(); }
-
-
-    [Fact]
-    public void Location3DPlusDisplacement3DisALocation3D() { throw new NotImplementedException(); }
 
 
     [Fact]
@@ -97,20 +93,20 @@ namespace Pk.Spatial.Tests._3D.Displacement
     [Fact]
     public void UnequalDisplacementsShouldHaveSameHashCode()
     {
-      var displacementUnderTest = new Displacement3D();
+      var some = new Displacement3D();
       var other = new Displacement3D(1, 0, 0);
-      displacementUnderTest.GetHashCode().ShouldNotBe(other.GetHashCode());
+      some.GetHashCode().ShouldNotBe(other.GetHashCode());
     }
 
 
     [Fact]
     public void ZeroLengthDisplacementsAreEqual()
     {
-      var displacementUnderTest = new Displacement3D();
+      var some = new Displacement3D();
       var other = new Displacement3D();
 
-      (displacementUnderTest == other).ShouldBeTrue();
-      (displacementUnderTest != other).ShouldBeFalse();
+      (some == other).ShouldBeTrue();
+      (some != other).ShouldBeFalse();
     }
   }
 }
