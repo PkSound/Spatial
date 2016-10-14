@@ -12,10 +12,10 @@ namespace Pk.Spatial.Tests._3D.Displacement
     public void AngleTo()
     {
       var angle =
-          new Displacement3D(1, 1, 0, StandardUnits.Length).AngleTo(new Displacement3D(10, 0, 0, StandardUnits.Length));
+          Displacement3D.From(1, 1, 0, StandardUnits.Length).AngleTo(Displacement3D.From(10, 0, 0, StandardUnits.Length));
       angle.Degrees.ShouldBe(45, Tolerance.ToWithinOneHundredth);
 
-      angle = new Displacement3D(0, 1, 1, StandardUnits.Length).AngleTo(UnitVector3D.ZAxis);
+      angle = Displacement3D.From(0, 1, 1, StandardUnits.Length).AngleTo(UnitVector3D.ZAxis);
       angle.Degrees.ShouldBe(45, Tolerance.ToWithinOneHundredth);
     }
 
@@ -24,7 +24,7 @@ namespace Pk.Spatial.Tests._3D.Displacement
     public void DifferentLengthDisplacementsAreUnequal()
     {
       var some = new Displacement3D();
-      var other = new Displacement3D(1, 0, 0, StandardUnits.Length);
+      var other = Displacement3D.From(1, 0, 0, StandardUnits.Length);
 
       (some != other).ShouldBeTrue();
       (some == other).ShouldBeFalse();
@@ -34,8 +34,8 @@ namespace Pk.Spatial.Tests._3D.Displacement
     [Fact]
     public void Displacement3DLessDisplacement3DisADisplacement3D()
     {
-      var some = new Displacement3D(2, 5, 10, StandardUnits.Length);
-      var other = new Displacement3D(3, 7, 8, StandardUnits.Length);
+      var some = Displacement3D.From(2, 5, 10, StandardUnits.Length);
+      var other = Displacement3D.From(3, 7, 8, StandardUnits.Length);
 
       var result = some + other;
       result.ShouldBeOfType<Displacement3D>();
@@ -48,8 +48,8 @@ namespace Pk.Spatial.Tests._3D.Displacement
     [Fact]
     public void Displacement3DPlusDisplacement3DisADisplacement3D()
     {
-      var some = new Displacement3D(3, 7, 8, StandardUnits.Length);
-      var other = new Displacement3D(2, 5, 10, StandardUnits.Length);
+      var some = Displacement3D.From(3, 7, 8, StandardUnits.Length);
+      var other = Displacement3D.From(2, 5, 10, StandardUnits.Length);
 
       var result = some - other;
       result.ShouldBeOfType<Displacement3D>();
@@ -77,7 +77,7 @@ namespace Pk.Spatial.Tests._3D.Displacement
       var d = new Displacement3D();
       d.Equals((object) d).ShouldBeTrue();
 
-      var other = new Displacement3D(1, 2, 3, StandardUnits.Length);
+      var other = Displacement3D.From(1, 2, 3, StandardUnits.Length);
       d.Equals((object) other).ShouldBeFalse();
 
       d.Equals(null).ShouldBeFalse();
@@ -88,7 +88,7 @@ namespace Pk.Spatial.Tests._3D.Displacement
     public void RotatesAboutAxisByNegativeAngle()
     {
       //Starting from a displacement pointing purely in the X direction
-      var displacementUnderTest = new Displacement3D(UnitVector3D.XAxis, Length.FromMeters(1.0));
+      var displacementUnderTest = Displacement3D.From(UnitVector3D.XAxis, Length.FromMeters(1.0));
 
       //Rotation by 90 degrees about z axis gives new vector pointing in Y direction
       var result1 = displacementUnderTest.Rotate(UnitVector3D.ZAxis, Angle.FromDegrees(-90));
@@ -114,7 +114,7 @@ namespace Pk.Spatial.Tests._3D.Displacement
     public void RotatesAboutAxisByPositiveAngle()
     {
       //Starting from a displacement pointing purely in the X direction
-      var displacementUnderTest = new Displacement3D(UnitVector3D.XAxis, Length.FromMeters(1.0));
+      var displacementUnderTest = Displacement3D.From(UnitVector3D.XAxis, Length.FromMeters(1.0));
 
       //Rotation by 90 degrees about z axis gives new vector pointing in Y direction
       var result1 = displacementUnderTest.Rotate(UnitVector3D.ZAxis, Angle.FromDegrees(90));
@@ -140,7 +140,7 @@ namespace Pk.Spatial.Tests._3D.Displacement
     public void UnequalDisplacementsShouldHaveDifferentHashCode()
     {
       var some = new Displacement3D();
-      var other = new Displacement3D(1, 0, 0, StandardUnits.Length);
+      var other = Displacement3D.From(1, 0, 0, StandardUnits.Length);
       some.GetHashCode().ShouldNotBe(other.GetHashCode());
     }
 

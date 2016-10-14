@@ -71,7 +71,7 @@ namespace Pk.Spatial.Tests._3D.Location
     public void Location3DLessDisplacement3DisALocation3D()
     {
       var some = new Location3D();
-      var other = new Displacement3D(4, 3, 2, StandardUnits.Length);
+      var other = Displacement3D.From(4, 3, 2, StandardUnits.Length);
 
       var result = some - other;
       result.ShouldBeOfType<Location3D>();
@@ -99,7 +99,7 @@ namespace Pk.Spatial.Tests._3D.Location
     public void Location3DPlusDisplacement3DisALocation3D()
     {
       var location = new Location3D();
-      var displacement = new Displacement3D(4, 3, 2, StandardUnits.Length);
+      var displacement = Displacement3D.From(4, 3, 2, StandardUnits.Length);
 
       var result = location + displacement;
       result.ShouldBeOfType<Location3D>();

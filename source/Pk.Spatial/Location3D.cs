@@ -84,7 +84,7 @@ namespace Pk.Spatial
     public static Displacement3D operator -(Location3D lhs, Location3D rhs)
     {
       var underlyingVector = lhs.FreezeTo(StandardUnits.Length) - rhs.FreezeTo(StandardUnits.Length);
-      return new Displacement3D(underlyingVector, StandardUnits.Length);
+      return Displacement3D.From(underlyingVector, StandardUnits.Length);
     }
   }
 }
