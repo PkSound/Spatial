@@ -34,8 +34,7 @@ artifacts:
 #  - path: .\coverage.xml
   - path: .\xunit-results.xml
 
--
-  branches:
+- branches:
     only:
       - develop
       - master
