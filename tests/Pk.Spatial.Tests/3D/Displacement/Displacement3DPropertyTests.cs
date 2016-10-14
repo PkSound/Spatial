@@ -9,55 +9,40 @@ namespace Pk.Spatial.Tests._3D.Displacement
   [Trait(TestConstants.CategoryName, TestConstants.UnitTestsTag)]
   public class Displacement3DPropertyTests
   {
-
     [Fact]
     public void CalculatedMagnitudeProperly()
     {
-      var displacementUnderTest = new Displacement3D(5.0, 5.0, 5.0);
+      var displacementUnderTest = Displacement3D.From(5.0, 5.0, 5.0, StandardUnits.Length);
 
       displacementUnderTest.Magnitude.As(StandardUnits.Length).ShouldBe(8.7, Tolerance.ToWithinOneTenth);
     }
 
 
     [Fact]
-    public void ConstructUsingVector3D()
+    public void CheckConstructionMethods()
     {
-      var locationUnderTest = new Displacement3D(new Vector3D(5.0, 6.0, 7.0), LengthUnit.Centimeter);
+      var displacementUnderTest = new Displacement3D(Length.FromFeet(1.1), Length.FromFeet(2.2), Length.FromFeet(3.3));
 
-      locationUnderTest.X.As(LengthUnit.Decimeter).ShouldBe(0.5, Tolerance.ToWithinOneHundredth);
-      locationUnderTest.Y.As(LengthUnit.Decimeter).ShouldBe(0.6, Tolerance.ToWithinOneHundredth);
-      locationUnderTest.Z.As(LengthUnit.Decimeter).ShouldBe(0.7, Tolerance.ToWithinOneHundredth);
-    }
+      displacementUnderTest.X.Feet.ShouldBe(1.1, Tolerance.ToWithinOneTenth);
+      displacementUnderTest.Y.Feet.ShouldBe(2.2, Tolerance.ToWithinOneTenth);
+      displacementUnderTest.Z.Feet.ShouldBe(3.3, Tolerance.ToWithinOneTenth);
+      displacementUnderTest.Magnitude.Feet.ShouldBe(4.1, Tolerance.ToWithinOneTenth);
 
-    [Fact]
-    public void ConstructsUsingDoublesAndALengthUnit()
-    {
-      var displacementUnderTest = new Displacement3D(1.1, 2.2, 3.3, LengthUnit.Mile);
+      displacementUnderTest = Displacement3D.From(1.1, 2.2, 3.3, LengthUnit.Mile);
 
-      displacementUnderTest.X.Miles.ShouldBe(1.1);
-      displacementUnderTest.Y.Miles.ShouldBe(2.2);
-      displacementUnderTest.Z.Miles.ShouldBe(3.3);
+      displacementUnderTest.X.Miles.ShouldBe(1.1, Tolerance.ToWithinOneTenth);
+      displacementUnderTest.Y.Miles.ShouldBe(2.2, Tolerance.ToWithinOneTenth);
+      displacementUnderTest.Z.Miles.ShouldBe(3.3, Tolerance.ToWithinOneTenth);
       displacementUnderTest.Magnitude.Miles.ShouldBe(4.1, Tolerance.ToWithinOneTenth);
-    }
 
+      displacementUnderTest = Displacement3D.FromMeters(1.1, 2.2, 3.3);
 
-    [Fact]
-    public void ConstructsUsingLengths()
-    {
-      var displacementUnderTest = new Displacement3D(Length.FromMeters(1.1), Length.FromMeters(2.2),
-                                                    Length.FromMeters(3.3));
-
-      displacementUnderTest.X.Meters.ShouldBe(1.1);
-      displacementUnderTest.Y.Meters.ShouldBe(2.2);
-      displacementUnderTest.Z.Meters.ShouldBe(3.3);
+      displacementUnderTest.X.Meters.ShouldBe(1.1, Tolerance.ToWithinOneTenth);
+      displacementUnderTest.Y.Meters.ShouldBe(2.2, Tolerance.ToWithinOneTenth);
+      displacementUnderTest.Z.Meters.ShouldBe(3.3, Tolerance.ToWithinOneTenth);
       displacementUnderTest.Magnitude.Meters.ShouldBe(4.1, Tolerance.ToWithinOneTenth);
-    }
 
-
-    [Fact]
-    public void ConstructsWithDirectionAndMagnitude()
-    {
-      var displacementUnderTest = new Displacement3D(new UnitVector3D(5.0, 20.0, 30.1), Length.FromMeters(1.1));
+      displacementUnderTest = Displacement3D.From(new UnitVector3D(5.0, 20.0, 30.1), Length.FromMeters(1.1));
 
       displacementUnderTest.X.Meters.ShouldBe(0.2, Tolerance.ToWithinOneTenth);
       displacementUnderTest.Y.Meters.ShouldBe(0.6, Tolerance.ToWithinOneTenth);
@@ -67,14 +52,25 @@ namespace Pk.Spatial.Tests._3D.Displacement
 
 
     [Fact]
-    public void DefaultsDoublesToStandardLengthUnit()
+    public void ConstructsUsingDoublesAndALengthUnit()
     {
-      var displacementUnderTest = new Displacement3D(1.1, 2.2, 3.3);
+      var displacementUnderTest = Displacement3D.From(1.1, 2.2, 3.3, LengthUnit.Mile);
 
-      displacementUnderTest.X.As(StandardUnits.Length).ShouldBe(1.1);
-      displacementUnderTest.Y.As(StandardUnits.Length).ShouldBe(2.2);
-      displacementUnderTest.Z.As(StandardUnits.Length).ShouldBe(3.3);
-      displacementUnderTest.Magnitude.As(StandardUnits.Length).ShouldBe(4.1, Tolerance.ToWithinOneTenth);
+      displacementUnderTest.X.Miles.ShouldBe(1.1);
+      displacementUnderTest.Y.Miles.ShouldBe(2.2);
+      displacementUnderTest.Z.Miles.ShouldBe(3.3);
+      displacementUnderTest.Magnitude.Miles.ShouldBe(4.1, Tolerance.ToWithinOneTenth);
+    }
+
+
+    [Fact]
+    public void ConstructUsingVector3D()
+    {
+      var locationUnderTest = Displacement3D.From(new Vector3D(5.0, 6.0, 7.0), LengthUnit.Centimeter);
+
+      locationUnderTest.X.As(LengthUnit.Decimeter).ShouldBe(0.5, Tolerance.ToWithinOneHundredth);
+      locationUnderTest.Y.As(LengthUnit.Decimeter).ShouldBe(0.6, Tolerance.ToWithinOneHundredth);
+      locationUnderTest.Z.As(LengthUnit.Decimeter).ShouldBe(0.7, Tolerance.ToWithinOneHundredth);
     }
 
 
@@ -93,9 +89,9 @@ namespace Pk.Spatial.Tests._3D.Displacement
     [Fact]
     public void GetsVector3DOfDesiredUnits()
     {
-      var displacementUnderTest = new Displacement3D(10.0, 30.1, -85.0, LengthUnit.Kilometer);
+      var displacementUnderTest = Displacement3D.From(10.0, 30.1, -85.0, LengthUnit.Kilometer);
 
-      var result = displacementUnderTest.Freeze(LengthUnit.Mile);
+      var result = displacementUnderTest.FreezeTo(LengthUnit.Mile);
       result.X.ShouldBe(6.2, Tolerance.ToWithinOneTenth);
       result.Y.ShouldBe(18.7, Tolerance.ToWithinOneTenth);
       result.Z.ShouldBe(-52.8, Tolerance.ToWithinOneTenth);
