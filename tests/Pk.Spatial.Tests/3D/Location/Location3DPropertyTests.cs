@@ -21,42 +21,9 @@ namespace Pk.Spatial.Tests._3D.Location
 
 
     [Fact]
-    public void ConstructsUsingDoublesAndALengthUnit()
-    {
-      var locationUnderTest = new Location3D(1.1, 2.2, 3.3, LengthUnit.Mile);
-
-      locationUnderTest.X.Miles.ShouldBe(1.1);
-      locationUnderTest.Y.Miles.ShouldBe(2.2);
-      locationUnderTest.Z.Miles.ShouldBe(3.3);
-    }
-
-
-    [Fact]
-    public void ConstructUsingPoint3D()
-    {
-      var locationUnderTest = new Location3D(new Point3D(5.0, 6.0, 7.0), LengthUnit.Centimeter);
-
-      locationUnderTest.X.As(LengthUnit.Decimeter).ShouldBe(0.5, Tolerance.ToWithinOneHundredth);
-      locationUnderTest.Y.As(LengthUnit.Decimeter).ShouldBe(0.6, Tolerance.ToWithinOneHundredth);
-      locationUnderTest.Z.As(LengthUnit.Decimeter).ShouldBe(0.7, Tolerance.ToWithinOneHundredth);
-    }
-
-
-    [Fact]
-    public void DefaultsDoublesToStandardLengthUnit()
-    {
-      var locationUnderTest = new Location3D(1.1, 2.2, 3.3, StandardUnits.Length);
-
-      locationUnderTest.X.As(StandardUnits.Length).ShouldBe(1.1);
-      locationUnderTest.Y.As(StandardUnits.Length).ShouldBe(2.2);
-      locationUnderTest.Z.As(StandardUnits.Length).ShouldBe(3.3);
-    }
-
-
-    [Fact]
     public void GetsDisplacementFromOrigin()
     {
-      var locationUnderTest = new Location3D(3, 80, -92, StandardUnits.Length);
+      var locationUnderTest = Location3D.From(3, 80, -92, StandardUnits.Length);
 
       var displacementFromOrigin = locationUnderTest.DisplacementFromOrigin();
       displacementFromOrigin.X.As(StandardUnits.Length).ShouldBe(3);
@@ -68,7 +35,7 @@ namespace Pk.Spatial.Tests._3D.Location
     [Fact]
     public void GetsPoint3DOfDesiredUnits()
     {
-      var locationUnderTest = new Location3D(10.0, 30.1, -85.0, LengthUnit.Kilometer);
+      var locationUnderTest = Location3D.From(10.0, 30.1, -85.0, LengthUnit.Kilometer);
 
       var result = locationUnderTest.FreezeTo(LengthUnit.Mile);
       result.X.ShouldBe(6.2, Tolerance.ToWithinOneTenth);
@@ -85,6 +52,35 @@ namespace Pk.Spatial.Tests._3D.Location
       locationUnderTest.X.ShouldBe(Length.Zero);
       locationUnderTest.Y.ShouldBe(Length.Zero);
       locationUnderTest.Z.ShouldBe(Length.Zero);
+    }
+
+
+    [Fact]
+    public void StaticFactoryMethodChecks()
+    {
+      var locationUnderTest = Location3D.Origin;
+
+      locationUnderTest.X.Meters.ShouldBe(0.0);
+      locationUnderTest.Y.Meters.ShouldBe(0.0);
+      locationUnderTest.Z.Meters.ShouldBe(0.0);
+
+      locationUnderTest = Location3D.FromMeters(1.1, 2.2, 3.3);
+
+      locationUnderTest.X.Meters.ShouldBe(1.1);
+      locationUnderTest.Y.Meters.ShouldBe(2.2);
+      locationUnderTest.Z.Meters.ShouldBe(3.3);
+
+      locationUnderTest = Location3D.FromMeters(new Point3D(1.1, 2.2, 3.3));
+
+      locationUnderTest.X.Meters.ShouldBe(1.1);
+      locationUnderTest.Y.Meters.ShouldBe(2.2);
+      locationUnderTest.Z.Meters.ShouldBe(3.3);
+
+      locationUnderTest = Location3D.From(new Point3D(5.0, 6.0, 7.0), LengthUnit.Centimeter);
+
+      locationUnderTest.X.As(LengthUnit.Decimeter).ShouldBe(0.5, Tolerance.ToWithinOneHundredth);
+      locationUnderTest.Y.As(LengthUnit.Decimeter).ShouldBe(0.6, Tolerance.ToWithinOneHundredth);
+      locationUnderTest.Z.As(LengthUnit.Decimeter).ShouldBe(0.7, Tolerance.ToWithinOneHundredth);
     }
   }
 }
