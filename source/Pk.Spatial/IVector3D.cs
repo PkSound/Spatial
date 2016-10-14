@@ -9,6 +9,6 @@ namespace Pk.Spatial
     TUnit Y { get; }
     TUnit Z { get; }
     TUnit Magnitude { get; }
-    Vector3D Freeze(LengthUnit unit);
+    Vector3D Freeze(LengthUnit unit = StandardUnits.Length);
   }
 }

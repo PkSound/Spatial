@@ -36,18 +36,18 @@ namespace Pk.Spatial
     }
 
 
-    public Displacement3D(Vector3D vector, LengthUnit units)
+    public Displacement3D(Vector3D vector, LengthUnit units = StandardUnits.Length)
         : this(Length.From(vector.X, units), Length.From(vector.Y, units), Length.From(vector.Z, units)) {}
 
 
     public bool Equals(Displacement3D other)
     {
-      return this.underlyingVector.Equals(other.Freeze(StandardUnits.Length));
+      return this.underlyingVector.Equals(other.Freeze());
     }
 
 
     public Length Magnitude => Length.From(this.underlyingVector.Length, StandardUnits.Length);
-    public Vector3D Freeze(LengthUnit unit) { return new Vector3D(this.X.As(unit), this.Y.As(unit), this.Z.As(unit)); }
+    public Vector3D Freeze(LengthUnit unit = StandardUnits.Length) { return new Vector3D(this.X.As(unit), this.Y.As(unit), this.Z.As(unit)); }
     public Length X => Length.From(this.underlyingVector.X, StandardUnits.Length);
     public Length Y => Length.From(this.underlyingVector.Y, StandardUnits.Length);
     public Length Z => Length.From(this.underlyingVector.Z, StandardUnits.Length);

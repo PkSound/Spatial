@@ -8,6 +8,6 @@ namespace Pk.Spatial
     TUnit X { get; }
     TUnit Y { get; }
     TUnit Z { get; }
-    Point3D Freeze(LengthUnit unit);
+    Point3D Freeze(LengthUnit unit = StandardUnits.Length);
   }
 }
