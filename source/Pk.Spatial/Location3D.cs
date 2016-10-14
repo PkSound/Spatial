@@ -21,22 +21,22 @@ namespace Pk.Spatial
     }
 
 
-    public Location3D(double x, double y, double z, LengthUnit unit = StandardUnits.Length)
+    public Location3D(double x, double y, double z, LengthUnit unit)
         : this(Length.From(x, unit), Length.From(y, unit), Length.From(z, unit)) {}
 
 
-    public Location3D(Point3D point, LengthUnit unit = StandardUnits.Length)
+    public Location3D(Point3D point, LengthUnit unit)
         : this(Length.From(point.X, unit), Length.From(point.Y, unit), Length.From(point.Z, unit)) {}
 
 
     public static Location3D Origin => new Location3D();
-    public bool Equals(Location3D other) { return this.underlyingPoint.Equals(other.Freeze()); }
+    public bool Equals(Location3D other) { return this.underlyingPoint.Equals(other.FreezeTo(StandardUnits.Length)); }
     public Length X => Length.From(this.underlyingPoint.X, StandardUnits.Length);
     public Length Y => Length.From(this.underlyingPoint.Y, StandardUnits.Length);
     public Length Z => Length.From(this.underlyingPoint.Z, StandardUnits.Length);
 
 
-    public Point3D Freeze(LengthUnit unit = StandardUnits.Length)
+    public Point3D FreezeTo(LengthUnit unit)
     {
       return new Point3D(this.X.As(unit), this.Y.As(unit), this.Z.As(unit));
     }
@@ -58,7 +58,7 @@ namespace Pk.Spatial
 
     public static Location3D operator +(Location3D l, Displacement3D d)
     {
-      return new Location3D(l.Freeze() + d.Freeze());
+      return new Location3D(l.FreezeTo(StandardUnits.Length) + d.FreezeTo(StandardUnits.Length), StandardUnits.Length);
     }
 
 
@@ -68,13 +68,13 @@ namespace Pk.Spatial
 
     public static Location3D operator -(Location3D l, Displacement3D d)
     {
-      return new Location3D(l.Freeze() - d.Freeze());
+      return new Location3D(l.FreezeTo(StandardUnits.Length) - d.FreezeTo(StandardUnits.Length), StandardUnits.Length);
     }
 
 
     public static Displacement3D operator -(Location3D lhs, Location3D rhs)
     {
-      return new Displacement3D(lhs.Freeze() - rhs.Freeze());
+      return new Displacement3D(lhs.FreezeTo(StandardUnits.Length) - rhs.FreezeTo(StandardUnits.Length), StandardUnits.Length);
     }
   }
 }

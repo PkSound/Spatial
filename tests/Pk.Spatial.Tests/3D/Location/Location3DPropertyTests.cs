@@ -45,7 +45,7 @@ namespace Pk.Spatial.Tests._3D.Location
     [Fact]
     public void DefaultsDoublesToStandardLengthUnit()
     {
-      var locationUnderTest = new Location3D(1.1, 2.2, 3.3);
+      var locationUnderTest = new Location3D(1.1, 2.2, 3.3, StandardUnits.Length);
 
       locationUnderTest.X.As(StandardUnits.Length).ShouldBe(1.1);
       locationUnderTest.Y.As(StandardUnits.Length).ShouldBe(2.2);
@@ -56,7 +56,7 @@ namespace Pk.Spatial.Tests._3D.Location
     [Fact]
     public void GetsDisplacementFromOrigin()
     {
-      var locationUnderTest = new Location3D(3, 80, -92);
+      var locationUnderTest = new Location3D(3, 80, -92, StandardUnits.Length);
 
       var displacementFromOrigin = locationUnderTest.DisplacementFromOrigin();
       displacementFromOrigin.X.As(StandardUnits.Length).ShouldBe(3);
@@ -70,7 +70,7 @@ namespace Pk.Spatial.Tests._3D.Location
     {
       var locationUnderTest = new Location3D(10.0, 30.1, -85.0, LengthUnit.Kilometer);
 
-      var result = locationUnderTest.Freeze(LengthUnit.Mile);
+      var result = locationUnderTest.FreezeTo(LengthUnit.Mile);
       result.X.ShouldBe(6.2, Tolerance.ToWithinOneTenth);
       result.Y.ShouldBe(18.7, Tolerance.ToWithinOneTenth);
       result.Z.ShouldBe(-52.8, Tolerance.ToWithinOneTenth);

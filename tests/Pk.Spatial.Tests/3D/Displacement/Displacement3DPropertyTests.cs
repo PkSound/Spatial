@@ -13,7 +13,7 @@ namespace Pk.Spatial.Tests._3D.Displacement
     [Fact]
     public void CalculatedMagnitudeProperly()
     {
-      var displacementUnderTest = new Displacement3D(5.0, 5.0, 5.0);
+      var displacementUnderTest = new Displacement3D(5.0, 5.0, 5.0, StandardUnits.Length);
 
       displacementUnderTest.Magnitude.As(StandardUnits.Length).ShouldBe(8.7, Tolerance.ToWithinOneTenth);
     }
@@ -69,7 +69,7 @@ namespace Pk.Spatial.Tests._3D.Displacement
     [Fact]
     public void DefaultsDoublesToStandardLengthUnit()
     {
-      var displacementUnderTest = new Displacement3D(1.1, 2.2, 3.3);
+      var displacementUnderTest = new Displacement3D(1.1, 2.2, 3.3, StandardUnits.Length);
 
       displacementUnderTest.X.As(StandardUnits.Length).ShouldBe(1.1);
       displacementUnderTest.Y.As(StandardUnits.Length).ShouldBe(2.2);
@@ -95,7 +95,7 @@ namespace Pk.Spatial.Tests._3D.Displacement
     {
       var displacementUnderTest = new Displacement3D(10.0, 30.1, -85.0, LengthUnit.Kilometer);
 
-      var result = displacementUnderTest.Freeze(LengthUnit.Mile);
+      var result = displacementUnderTest.FreezeTo(LengthUnit.Mile);
       result.X.ShouldBe(6.2, Tolerance.ToWithinOneTenth);
       result.Y.ShouldBe(18.7, Tolerance.ToWithinOneTenth);
       result.Z.ShouldBe(-52.8, Tolerance.ToWithinOneTenth);

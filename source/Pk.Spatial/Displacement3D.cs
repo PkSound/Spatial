@@ -14,8 +14,8 @@ namespace Pk.Spatial
     private readonly Vector3D underlyingVector;
 
 
-    public Displacement3D(double x, double y, double z, LengthUnit units = StandardUnits.Length)
-        : this(Length.From(x, units), Length.From(y, units), Length.From(z, units)) {}
+    public Displacement3D(double x, double y, double z, LengthUnit unit)
+        : this(Length.From(x, unit), Length.From(y, unit), Length.From(z, unit)) {}
 
 
     public Displacement3D(Length x, Length y, Length z)
@@ -36,15 +36,15 @@ namespace Pk.Spatial
     }
 
 
-    public Displacement3D(Vector3D vector, LengthUnit units = StandardUnits.Length)
-        : this(Length.From(vector.X, units), Length.From(vector.Y, units), Length.From(vector.Z, units)) {}
+    public Displacement3D(Vector3D vector, LengthUnit unit)
+        : this(Length.From(vector.X, unit), Length.From(vector.Y, unit), Length.From(vector.Z, unit)) {}
 
 
-    public bool Equals(Displacement3D other) { return this.underlyingVector.Equals(other.Freeze()); }
+    public bool Equals(Displacement3D other) { return this.underlyingVector.Equals(other.FreezeTo(StandardUnits.Length)); }
     public Length Magnitude => Length.From(this.underlyingVector.Length, StandardUnits.Length);
 
 
-    public Vector3D Freeze(LengthUnit unit = StandardUnits.Length)
+    public Vector3D FreezeTo(LengthUnit unit)
     {
       return new Vector3D(this.X.As(unit), this.Y.As(unit), this.Z.As(unit));
     }
@@ -67,7 +67,8 @@ namespace Pk.Spatial
 
     public static Displacement3D operator +(Displacement3D lhs, Displacement3D rhs)
     {
-      return new Displacement3D(lhs.Freeze() + rhs.Freeze());
+      var frozenToStandard = lhs.FreezeTo(StandardUnits.Length) + rhs.FreezeTo(StandardUnits.Length);
+      return new Displacement3D(frozenToStandard, StandardUnits.Length);
     }
 
 
@@ -77,7 +78,8 @@ namespace Pk.Spatial
 
     public static Displacement3D operator -(Displacement3D lhs, Displacement3D rhs)
     {
-      return new Displacement3D(lhs.Freeze() - rhs.Freeze());
+      var frozenToStandard = lhs.FreezeTo(StandardUnits.Length) - rhs.FreezeTo(StandardUnits.Length);
+      return new Displacement3D(frozenToStandard, StandardUnits.Length);
     }
 
 
@@ -90,20 +92,20 @@ namespace Pk.Spatial
       var y = rotatedUnderlyingVector.Y;
       var z = rotatedUnderlyingVector.Z;
 
-      return new Displacement3D(x, y, z);
+      return new Displacement3D(x, y, z, StandardUnits.Length);
     }
 
 
     public Angle AngleTo(Displacement3D other)
     {
-      var result = this.Freeze().AngleTo(other.Freeze());
+      var result = this.FreezeTo(StandardUnits.Length).AngleTo(other.FreezeTo(StandardUnits.Length));
       return Angle.FromDegrees(result.Degrees);
     }
 
 
     public Angle AngleTo(UnitVector3D other)
     {
-      var result = this.Freeze().AngleTo(other);
+      var result = this.FreezeTo(StandardUnits.Length).AngleTo(other);
       return Angle.FromDegrees(result.Degrees);
     }
   }

@@ -11,7 +11,7 @@ namespace Pk.Spatial.Tests._3D.Location
     public void Location3DPlusDisplacement3DisALocation3D()
     {
       var location = new Location3D();
-      var displacement = new Displacement3D(4,3,2);
+      var displacement = new Displacement3D(4,3,2, StandardUnits.Length);
 
       var result = location + displacement;
       result.ShouldBeOfType<Location3D>();
@@ -23,8 +23,8 @@ namespace Pk.Spatial.Tests._3D.Location
     [Fact]
     public void Location3DLessLocation3DisADisplacement3D()
     {
-      var some = new Location3D(1, 1, 1);
-      var other = new Location3D(4, 3, 2);
+      var some = new Location3D(1, 1, 1, StandardUnits.Length);
+      var other = new Location3D(4, 3, 2, StandardUnits.Length);
 
       var result = other - some;
       result.ShouldBeOfType<Displacement3D>();
@@ -37,8 +37,8 @@ namespace Pk.Spatial.Tests._3D.Location
     [Fact]
     public void GivesDisplacementTo()
     {
-      var some = new Location3D(1, -1, 10);
-      var other = new Location3D(4, 3, 2);
+      var some = new Location3D(1, -1, 10, StandardUnits.Length);
+      var other = new Location3D(4, 3, 2, StandardUnits.Length);
 
       var result = some.DisplacementTo(other);
       result.ShouldBeOfType<Displacement3D>();
@@ -53,7 +53,7 @@ namespace Pk.Spatial.Tests._3D.Location
     public void Location3DLessDisplacement3DisALocation3D()
     {
       var some = new Location3D();
-      var other = new Displacement3D(4, 3, 2);
+      var other = new Displacement3D(4, 3, 2, StandardUnits.Length);
 
       var result = some - other;
       result.ShouldBeOfType<Location3D>();
@@ -66,7 +66,7 @@ namespace Pk.Spatial.Tests._3D.Location
     public void DifferentLocationsAreUnequal()
     {
       var some = new Location3D();
-      var other = new Location3D(1, 0, 0);
+      var other = new Location3D(1, 0, 0, StandardUnits.Length);
 
       (some != other).ShouldBeTrue();
       (some == other).ShouldBeFalse();
@@ -91,7 +91,7 @@ namespace Pk.Spatial.Tests._3D.Location
       var d = new Location3D();
       d.Equals((object)d).ShouldBeTrue();
 
-      var other = new Location3D(1, 2, 3);
+      var other = new Location3D(1, 2, 3, StandardUnits.Length);
       d.Equals((object)other).ShouldBeFalse();
 
       d.Equals(null).ShouldBeFalse();
@@ -101,7 +101,7 @@ namespace Pk.Spatial.Tests._3D.Location
     public void UnequalLocationsShouldHaveDifferentHashCode()
     {
       var some = new Location3D();
-      var other = new Location3D(1, 0, 0);
+      var other = new Location3D(1, 0, 0, StandardUnits.Length);
       some.GetHashCode().ShouldNotBe(other.GetHashCode());
     }
 
