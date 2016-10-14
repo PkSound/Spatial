@@ -118,6 +118,20 @@ namespace Pk.Spatial.Tests._3D.Displacement
       some.GetHashCode().ShouldNotBe(other.GetHashCode());
     }
 
+    [Fact]
+    public void EqualityAgainstObject()
+    {
+      new Displacement3D().Equals(new Location3D()).ShouldBeFalse();
+
+      var d = new Displacement3D();
+      d.Equals((object)d).ShouldBeTrue();
+
+      var other = new Displacement3D(1,2,3);
+      d.Equals((object)other).ShouldBeFalse();
+
+      d.Equals(null).ShouldBeFalse();
+    }
+
 
     [Fact]
     public void ZeroLengthDisplacementsAreEqual()

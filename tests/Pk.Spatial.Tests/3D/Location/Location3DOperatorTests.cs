@@ -81,7 +81,21 @@ namespace Pk.Spatial.Tests._3D.Location
 
       some.GetHashCode().ShouldBe(other.GetHashCode());
     }
-    
+
+
+    [Fact]
+    public void EqualityAgainstObject()
+    {
+      new Location3D().Equals(new Displacement3D()).ShouldBeFalse();
+
+      var d = new Location3D();
+      d.Equals((object)d).ShouldBeTrue();
+
+      var other = new Location3D(1, 2, 3);
+      d.Equals((object)other).ShouldBeFalse();
+
+      d.Equals(null).ShouldBeFalse();
+    }
 
     [Fact]
     public void UnequalLocationsShouldHaveDifferentHashCode()
