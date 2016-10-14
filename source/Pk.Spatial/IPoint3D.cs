@@ -1,9 +1,12 @@
-﻿namespace Pk.Spatial
+﻿using UnitsNet.Units;
+
+namespace Pk.Spatial
 {
-  internal interface IPoint3D<TUnit>
+  public interface IPoint3D<TUnit>
   {
     TUnit X { get; }
     TUnit Y { get; }
     TUnit Z { get; }
+    IPoint3D<double> Freeze(LengthUnit unit);
   }
 }

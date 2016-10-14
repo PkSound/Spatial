@@ -1,8 +1,8 @@
 ﻿using System;
 using MathNet.Spatial.Euclidean;
-using MathNet.Spatial.Units;
 using UnitsNet;
-using Angle = UnitsNet.Angle;
+using UnitsNet.Units;
+using AngleUnit = MathNet.Spatial.Units.AngleUnit;
 
 namespace Pk.Spatial
 {
@@ -11,15 +11,23 @@ namespace Pk.Spatial
   /// </summary>
   public struct Displacement3D : IEquatable<Displacement3D>, IVector3D<Length>
   {
-    private static readonly IHaveXyzEqualityComparer<Length> comparer = new IHaveXyzEqualityComparer<Length>();
     private readonly Vector3D underlyingVector;
-    public Displacement3D(double x, double y, double z) { this.underlyingVector = new Vector3D(x, y, z); }
-    public Displacement3D(Length x, Length y, Length z) : this(x.Meters, y.Meters, z.Meters) { }
+
+
+    public Displacement3D(double x, double y, double z, LengthUnit units = StandardUnits.Length)
+        : this(Length.From(x, units), Length.From(y, units), Length.From(z, units)) {}
+
+
+    public Displacement3D(Length x, Length y, Length z)
+    {
+      this.underlyingVector = new Vector3D(x.As(StandardUnits.Length), y.As(StandardUnits.Length),
+                                           z.As(StandardUnits.Length));
+    }
 
 
     public Displacement3D(UnitVector3D direction, Length magnitude) : this()
     {
-      var length = magnitude.Meters;
+      var length = magnitude.As(StandardUnits.Length);
       var x = direction.X*length;
       var y = direction.Y*length;
       var z = direction.Z*length;
@@ -28,14 +36,20 @@ namespace Pk.Spatial
     }
 
 
-    public bool Equals(Displacement3D other) { return comparer.Equals(this, other); }
+    public bool Equals(Displacement3D other)
+    {
+      return this.underlyingVector.Equals(other.Freeze(StandardUnits.Length));
+    }
+
+
     public Length Magnitude => Length.From(this.underlyingVector.Length, StandardUnits.Length);
+    public Vector3D Freeze(LengthUnit unit) { return new Vector3D(this.X.As(unit), this.Y.As(unit), this.Z.As(unit)); }
     public Length X => Length.From(this.underlyingVector.X, StandardUnits.Length);
     public Length Y => Length.From(this.underlyingVector.Y, StandardUnits.Length);
     public Length Z => Length.From(this.underlyingVector.Z, StandardUnits.Length);
-    public override int GetHashCode() { return comparer.GetHashCode(this); }
+    public override int GetHashCode() { return this.underlyingVector.GetHashCode(); }
     public static bool operator ==(Displacement3D left, Displacement3D right) { return left.Equals(right); }
-    public static bool operator !=(Displacement3D left, Displacement3D right) { return !left.Equals(right); }
+    public static bool operator !=(Displacement3D left, Displacement3D right) { return !(left == right); }
 
 
     public Displacement3D Rotate(UnitVector3D axisOfRotation, Angle angleOfRotation)

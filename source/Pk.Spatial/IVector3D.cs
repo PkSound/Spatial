@@ -1,7 +1,14 @@
-﻿namespace Pk.Spatial
+﻿using MathNet.Spatial.Euclidean;
+using UnitsNet.Units;
+
+namespace Pk.Spatial
 {
-  internal interface IVector3D<TUnit> : IPoint3D<TUnit>
+  public interface IVector3D<TUnit>
   {
+    TUnit X { get; }
+    TUnit Y { get; }
+    TUnit Z { get; }
     TUnit Magnitude { get; }
+    Vector3D Freeze(LengthUnit unit);
   }
 }

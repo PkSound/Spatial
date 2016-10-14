@@ -2,7 +2,7 @@
 
 namespace Pk.Spatial
 {
-  internal static class StandardUnits
+  public static class StandardUnits
   {
     public const LengthUnit Length = LengthUnit.Meter;
   }
