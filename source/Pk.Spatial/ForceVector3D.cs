@@ -18,16 +18,22 @@ namespace Pk.Spatial
 
 
     public bool Equals(ForceVector3D other) { return this.underlyingVector.Equals(other.FreezeTo(Force.BaseUnit)); }
+
+
     public Angle AngleTo(ForceVector3D other)
     {
       var result = this.FreezeTo(Force.BaseUnit).AngleTo(other.FreezeTo(Force.BaseUnit));
       return Angle.FromDegrees(result.Degrees);
     }
+
+
     public Angle AngleTo(UnitVector3D other)
     {
       var result = this.FreezeTo(Force.BaseUnit).AngleTo(other);
       return Angle.FromDegrees(result.Degrees);
     }
+
+
     public Vector3D FreezeTo(ForceUnit unit) { return new Vector3D(this.X.As(unit), this.Y.As(unit), this.Z.As(unit)); }
 
 

@@ -17,8 +17,7 @@ namespace Pk.Spatial
 
     public Location3D(Length x, Length y, Length z)
     {
-      this.underlyingPoint = new Point3D(x.As(Length.BaseUnit), y.As(Length.BaseUnit),
-                                         z.As(Length.BaseUnit));
+      this.underlyingPoint = new Point3D(x.As(Length.BaseUnit), y.As(Length.BaseUnit), z.As(Length.BaseUnit));
     }
 
 

@@ -11,8 +11,7 @@ namespace Pk.Spatial.Tests.ThreeDimensional.ForceVector
     [Fact]
     public void AngleTo()
     {
-      var angle =
-          ForceVector3D.From(1, 1, 0, Force.BaseUnit).AngleTo(ForceVector3D.From(10, 0, 0, Force.BaseUnit));
+      var angle = ForceVector3D.From(1, 1, 0, Force.BaseUnit).AngleTo(ForceVector3D.From(10, 0, 0, Force.BaseUnit));
       angle.Degrees.ShouldBe(45, Tolerance.ToWithinOneHundredth);
 
       angle = ForceVector3D.From(0, 1, 1, Force.BaseUnit).AngleTo(UnitVector3D.ZAxis);

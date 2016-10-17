@@ -46,7 +46,7 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
       displacementUnderTest.Y.As(LengthUnit.Decimeter).ShouldBe(0.6, Tolerance.ToWithinOneHundredth);
       displacementUnderTest.Z.As(LengthUnit.Decimeter).ShouldBe(0.7, Tolerance.ToWithinOneHundredth);
     }
-    
+
 
     [Fact]
     public void DefaultsToNoMagnitude()

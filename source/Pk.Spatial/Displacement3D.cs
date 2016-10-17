@@ -16,17 +16,11 @@ namespace Pk.Spatial
 
     public Displacement3D(Length x, Length y, Length z)
     {
-      this.underlyingVector = new Vector3D(x.As(Length.BaseUnit), y.As(Length.BaseUnit),
-                                           z.As(Length.BaseUnit));
+      this.underlyingVector = new Vector3D(x.As(Length.BaseUnit), y.As(Length.BaseUnit), z.As(Length.BaseUnit));
     }
 
 
-    public bool Equals(Displacement3D other)
-    {
-      return this.underlyingVector.Equals(other.FreezeTo(Length.BaseUnit));
-    }
-
-
+    public bool Equals(Displacement3D other) { return this.underlyingVector.Equals(other.FreezeTo(Length.BaseUnit)); }
     public Length Magnitude => Length.From(this.underlyingVector.Length, Length.BaseUnit);
 
 

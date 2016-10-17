@@ -11,9 +11,7 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
     [Fact]
     public void AngleTo()
     {
-      var angle =
-          Displacement3D.From(1, 1, 0, Length.BaseUnit)
-                        .AngleTo(Displacement3D.From(10, 0, 0, Length.BaseUnit));
+      var angle = Displacement3D.From(1, 1, 0, Length.BaseUnit).AngleTo(Displacement3D.From(10, 0, 0, Length.BaseUnit));
       angle.Degrees.ShouldBe(45, Tolerance.ToWithinOneHundredth);
 
       angle = Displacement3D.From(0, 1, 1, Length.BaseUnit).AngleTo(UnitVector3D.ZAxis);
