@@ -1,7 +1,8 @@
 using Shouldly;
+using UnitsNet;
 using Xunit;
 
-namespace Pk.Spatial.Tests._3D.Location
+namespace Pk.Spatial.Tests.ThreeDimensional.Location
 {
   [Trait(TestConstants.CategoryName, TestConstants.UnitTestsTag)]
   public class Location3DOperatorTests
@@ -10,7 +11,7 @@ namespace Pk.Spatial.Tests._3D.Location
     public void DifferentLocationsAreUnequal()
     {
       var some = new Location3D();
-      var other = Location3D.From(1, 0, 0, StandardUnits.Length);
+      var other = Location3D.From(1, 0, 0, Length.BaseUnit);
 
       (some != other).ShouldBeTrue();
       (some == other).ShouldBeFalse();
@@ -36,7 +37,7 @@ namespace Pk.Spatial.Tests._3D.Location
       var d = new Location3D();
       d.Equals((object) d).ShouldBeTrue();
 
-      var other = Location3D.From(1, 2, 3, StandardUnits.Length);
+      var other = Location3D.From(1, 2, 3, Length.BaseUnit);
       d.Equals((object) other).ShouldBeFalse();
 
       d.Equals(null).ShouldBeFalse();
@@ -56,14 +57,14 @@ namespace Pk.Spatial.Tests._3D.Location
     [Fact]
     public void GivesDisplacementTo()
     {
-      var some = Location3D.From(1, -1, 10, StandardUnits.Length);
-      var other = Location3D.From(4, 3, 2, StandardUnits.Length);
+      var some = Location3D.From(1, -1, 10, Length.BaseUnit);
+      var other = Location3D.From(4, 3, 2, Length.BaseUnit);
 
       var result = some.DisplacementTo(other);
       result.ShouldBeOfType<Displacement3D>();
-      result.X.As(StandardUnits.Length).ShouldBe(3);
-      result.Y.As(StandardUnits.Length).ShouldBe(4);
-      result.Z.As(StandardUnits.Length).ShouldBe(-8);
+      result.X.As(Length.BaseUnit).ShouldBe(3);
+      result.Y.As(Length.BaseUnit).ShouldBe(4);
+      result.Z.As(Length.BaseUnit).ShouldBe(-8);
     }
 
 
@@ -71,27 +72,27 @@ namespace Pk.Spatial.Tests._3D.Location
     public void Location3DLessDisplacement3DisALocation3D()
     {
       var some = new Location3D();
-      var other = Displacement3D.From(4, 3, 2, StandardUnits.Length);
+      var other = Displacement3D.From(4, 3, 2, Length.BaseUnit);
 
       var result = some - other;
       result.ShouldBeOfType<Location3D>();
-      result.X.As(StandardUnits.Length).ShouldBe(-4);
-      result.Y.As(StandardUnits.Length).ShouldBe(-3);
-      result.Z.As(StandardUnits.Length).ShouldBe(-2);
+      result.X.As(Length.BaseUnit).ShouldBe(-4);
+      result.Y.As(Length.BaseUnit).ShouldBe(-3);
+      result.Z.As(Length.BaseUnit).ShouldBe(-2);
     }
 
 
     [Fact]
     public void Location3DLessLocation3DisADisplacement3D()
     {
-      var some = Location3D.From(1, 1, 1, StandardUnits.Length);
-      var other = Location3D.From(4, 3, 2, StandardUnits.Length);
+      var some = Location3D.From(1, 1, 1, Length.BaseUnit);
+      var other = Location3D.From(4, 3, 2, Length.BaseUnit);
 
       var result = other - some;
       result.ShouldBeOfType<Displacement3D>();
-      result.X.As(StandardUnits.Length).ShouldBe(3);
-      result.Y.As(StandardUnits.Length).ShouldBe(2);
-      result.Z.As(StandardUnits.Length).ShouldBe(1);
+      result.X.As(Length.BaseUnit).ShouldBe(3);
+      result.Y.As(Length.BaseUnit).ShouldBe(2);
+      result.Z.As(Length.BaseUnit).ShouldBe(1);
     }
 
 
@@ -99,13 +100,13 @@ namespace Pk.Spatial.Tests._3D.Location
     public void Location3DPlusDisplacement3DisALocation3D()
     {
       var location = new Location3D();
-      var displacement = Displacement3D.From(4, 3, 2, StandardUnits.Length);
+      var displacement = Displacement3D.From(4, 3, 2, Length.BaseUnit);
 
       var result = location + displacement;
       result.ShouldBeOfType<Location3D>();
-      result.X.As(StandardUnits.Length).ShouldBe(4);
-      result.Y.As(StandardUnits.Length).ShouldBe(3);
-      result.Z.As(StandardUnits.Length).ShouldBe(2);
+      result.X.As(Length.BaseUnit).ShouldBe(4);
+      result.Y.As(Length.BaseUnit).ShouldBe(3);
+      result.Z.As(Length.BaseUnit).ShouldBe(2);
     }
 
 
@@ -113,7 +114,7 @@ namespace Pk.Spatial.Tests._3D.Location
     public void UnequalLocationsShouldHaveDifferentHashCode()
     {
       var some = new Location3D();
-      var other = Location3D.From(1, 0, 0, StandardUnits.Length);
+      var other = Location3D.From(1, 0, 0, Length.BaseUnit);
       some.GetHashCode().ShouldNotBe(other.GetHashCode());
     }
   }

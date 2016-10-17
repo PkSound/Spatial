@@ -17,16 +17,15 @@ namespace Pk.Spatial
 
     public Location3D(Length x, Length y, Length z)
     {
-      this.underlyingPoint = new Point3D(x.As(StandardUnits.Length), y.As(StandardUnits.Length),
-                                         z.As(StandardUnits.Length));
+      this.underlyingPoint = new Point3D(x.As(Length.BaseUnit), y.As(Length.BaseUnit), z.As(Length.BaseUnit));
     }
 
 
     public static Location3D Origin => new Location3D();
-    public bool Equals(Location3D other) { return this.underlyingPoint.Equals(other.FreezeTo(StandardUnits.Length)); }
-    public Length X => Length.From(this.underlyingPoint.X, StandardUnits.Length);
-    public Length Y => Length.From(this.underlyingPoint.Y, StandardUnits.Length);
-    public Length Z => Length.From(this.underlyingPoint.Z, StandardUnits.Length);
+    public bool Equals(Location3D other) { return this.underlyingPoint.Equals(other.FreezeTo(Length.BaseUnit)); }
+    public Length X => Length.From(this.underlyingPoint.X, Length.BaseUnit);
+    public Length Y => Length.From(this.underlyingPoint.Y, Length.BaseUnit);
+    public Length Z => Length.From(this.underlyingPoint.Z, Length.BaseUnit);
     public Point3D FreezeTo(LengthUnit unit) { return new Point3D(this.X.As(unit), this.Y.As(unit), this.Z.As(unit)); }
     public Displacement3D DisplacementFromOrigin() { return this - Location3D.Origin; }
     public Displacement3D DisplacementTo(Location3D other) { return other - this; }
@@ -65,8 +64,8 @@ namespace Pk.Spatial
 
     public static Location3D operator +(Location3D l, Displacement3D d)
     {
-      underlyingAddition = l.FreezeTo(StandardUnits.Length) + d.FreezeTo(StandardUnits.Length);
-      return Location3D.From(underlyingAddition, StandardUnits.Length);
+      underlyingAddition = l.FreezeTo(Length.BaseUnit) + d.FreezeTo(Length.BaseUnit);
+      return Location3D.From(underlyingAddition, Length.BaseUnit);
     }
 
 
@@ -76,15 +75,15 @@ namespace Pk.Spatial
 
     public static Location3D operator -(Location3D l, Displacement3D d)
     {
-      var underlyingPoint = l.FreezeTo(StandardUnits.Length) - d.FreezeTo(StandardUnits.Length);
-      return Location3D.From(underlyingPoint, StandardUnits.Length);
+      var underlyingPoint = l.FreezeTo(Length.BaseUnit) - d.FreezeTo(Length.BaseUnit);
+      return Location3D.From(underlyingPoint, Length.BaseUnit);
     }
 
 
     public static Displacement3D operator -(Location3D lhs, Location3D rhs)
     {
-      var underlyingVector = lhs.FreezeTo(StandardUnits.Length) - rhs.FreezeTo(StandardUnits.Length);
-      return Displacement3D.From(underlyingVector, StandardUnits.Length);
+      var underlyingVector = lhs.FreezeTo(Length.BaseUnit) - rhs.FreezeTo(Length.BaseUnit);
+      return Displacement3D.From(underlyingVector, Length.BaseUnit);
     }
   }
 }
