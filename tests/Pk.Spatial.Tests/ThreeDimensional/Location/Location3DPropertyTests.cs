@@ -23,12 +23,12 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Location
     [Fact]
     public void GetsDisplacementFromOrigin()
     {
-      var locationUnderTest = Location3D.From(3, 80, -92, StandardUnits.Length);
+      var locationUnderTest = Location3D.From(3, 80, -92, Length.BaseUnit);
 
       var displacementFromOrigin = locationUnderTest.DisplacementFromOrigin();
-      displacementFromOrigin.X.As(StandardUnits.Length).ShouldBe(3);
-      displacementFromOrigin.Y.As(StandardUnits.Length).ShouldBe(80);
-      displacementFromOrigin.Z.As(StandardUnits.Length).ShouldBe(-92);
+      displacementFromOrigin.X.As(Length.BaseUnit).ShouldBe(3);
+      displacementFromOrigin.Y.As(Length.BaseUnit).ShouldBe(80);
+      displacementFromOrigin.Z.As(Length.BaseUnit).ShouldBe(-92);
     }
 
 

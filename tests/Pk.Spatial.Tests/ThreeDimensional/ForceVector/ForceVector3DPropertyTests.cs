@@ -1,5 +1,4 @@
-﻿using System;
-using MathNet.Spatial.Euclidean;
+﻿using MathNet.Spatial.Euclidean;
 using Shouldly;
 using UnitsNet;
 using UnitsNet.Units;
@@ -8,7 +7,7 @@ using Xunit;
 namespace Pk.Spatial.Tests.ThreeDimensional.ForceVector
 {
   [Trait(TestConstants.CategoryName, TestConstants.UnitTestsTag)]
-  public class ForceVectorPropertyTests
+  public class ForceVector3DPropertyTests
   {
     [Fact]
     public void CheckConstructionMethods()
@@ -37,7 +36,7 @@ namespace Pk.Spatial.Tests.ThreeDimensional.ForceVector
       vectorUnderTest = ForceVector3D.From(new UnitVector3D(5.0, 20.0, 30.1), Force.FromKiloPonds(1.1));
 
       vectorUnderTest.Magnitude.KiloPonds.ShouldBe(1.1, Tolerance.ToWithinOneTenth);
-      vectorUnderTest.X.KiloPonds.ShouldBe(0.150755 , Tolerance.ToWithinOneHundredth);
+      vectorUnderTest.X.KiloPonds.ShouldBe(0.150755, Tolerance.ToWithinOneHundredth);
       vectorUnderTest.Y.KiloPonds.ShouldBe(0.60302, Tolerance.ToWithinOneHundredth);
       vectorUnderTest.Z.KiloPonds.ShouldBe(0.907546, Tolerance.ToWithinOneHundredth);
 

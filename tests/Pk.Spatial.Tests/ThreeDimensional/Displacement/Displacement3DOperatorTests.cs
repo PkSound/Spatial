@@ -12,10 +12,11 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
     public void AngleTo()
     {
       var angle =
-          Displacement3D.From(1, 1, 0, StandardUnits.Length).AngleTo(Displacement3D.From(10, 0, 0, StandardUnits.Length));
+          Displacement3D.From(1, 1, 0, Length.BaseUnit)
+                        .AngleTo(Displacement3D.From(10, 0, 0, Length.BaseUnit));
       angle.Degrees.ShouldBe(45, Tolerance.ToWithinOneHundredth);
 
-      angle = Displacement3D.From(0, 1, 1, StandardUnits.Length).AngleTo(UnitVector3D.ZAxis);
+      angle = Displacement3D.From(0, 1, 1, Length.BaseUnit).AngleTo(UnitVector3D.ZAxis);
       angle.Degrees.ShouldBe(45, Tolerance.ToWithinOneHundredth);
     }
 
@@ -24,7 +25,7 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
     public void DifferentLengthDisplacementsAreUnequal()
     {
       var some = new Displacement3D();
-      var other = Displacement3D.From(1, 0, 0, StandardUnits.Length);
+      var other = Displacement3D.From(1, 0, 0, Length.BaseUnit);
 
       (some != other).ShouldBeTrue();
       (some == other).ShouldBeFalse();
@@ -34,28 +35,28 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
     [Fact]
     public void Displacement3DLessDisplacement3DisADisplacement3D()
     {
-      var some = Displacement3D.From(2, 5, 10, StandardUnits.Length);
-      var other = Displacement3D.From(3, 7, 8, StandardUnits.Length);
+      var some = Displacement3D.From(3, 7, 8, Length.BaseUnit);
+      var other = Displacement3D.From(2, 5, 10, Length.BaseUnit);
 
-      var result = some + other;
+      var result = some - other;
       result.ShouldBeOfType<Displacement3D>();
-      result.X.As(StandardUnits.Length).ShouldBe(5);
-      result.Y.As(StandardUnits.Length).ShouldBe(12);
-      result.Z.As(StandardUnits.Length).ShouldBe(18);
+      result.X.As(Length.BaseUnit).ShouldBe(1);
+      result.Y.As(Length.BaseUnit).ShouldBe(2);
+      result.Z.As(Length.BaseUnit).ShouldBe(-2);
     }
 
 
     [Fact]
     public void Displacement3DPlusDisplacement3DisADisplacement3D()
     {
-      var some = Displacement3D.From(3, 7, 8, StandardUnits.Length);
-      var other = Displacement3D.From(2, 5, 10, StandardUnits.Length);
+      var some = Displacement3D.From(2, 5, 10, Length.BaseUnit);
+      var other = Displacement3D.From(3, 7, 8, Length.BaseUnit);
 
-      var result = some - other;
+      var result = some + other;
       result.ShouldBeOfType<Displacement3D>();
-      result.X.As(StandardUnits.Length).ShouldBe(1);
-      result.Y.As(StandardUnits.Length).ShouldBe(2);
-      result.Z.As(StandardUnits.Length).ShouldBe(-2);
+      result.X.As(Length.BaseUnit).ShouldBe(5);
+      result.Y.As(Length.BaseUnit).ShouldBe(12);
+      result.Z.As(Length.BaseUnit).ShouldBe(18);
     }
 
 
@@ -77,7 +78,7 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
       var d = new Displacement3D();
       d.Equals((object) d).ShouldBeTrue();
 
-      var other = Displacement3D.From(1, 2, 3, StandardUnits.Length);
+      var other = Displacement3D.From(1, 2, 3, Length.BaseUnit);
       d.Equals((object) other).ShouldBeFalse();
 
       d.Equals(null).ShouldBeFalse();
@@ -140,7 +141,7 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
     public void UnequalDisplacementsShouldHaveDifferentHashCode()
     {
       var some = new Displacement3D();
-      var other = Displacement3D.From(1, 0, 0, StandardUnits.Length);
+      var other = Displacement3D.From(1, 0, 0, Length.BaseUnit);
       some.GetHashCode().ShouldNotBe(other.GetHashCode());
     }
 
