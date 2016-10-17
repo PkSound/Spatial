@@ -3,7 +3,7 @@ using Shouldly;
 using UnitsNet;
 using Xunit;
 
-namespace Pk.Spatial.Tests._3D.Displacement
+namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
 {
   [Trait(TestConstants.CategoryName, TestConstants.UnitTestsTag)]
   public class Displacement3DOperatorTests

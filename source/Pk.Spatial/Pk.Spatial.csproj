@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Displacement3D.cs" />
+    <Compile Include="ForceVector3D.cs" />
+    <Compile Include="ICanFreeze.cs" />
     <Compile Include="IVector3D.cs" />
     <Compile Include="Location3D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

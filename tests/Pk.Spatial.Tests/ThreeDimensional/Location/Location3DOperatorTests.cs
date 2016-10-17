@@ -1,7 +1,7 @@
 using Shouldly;
 using Xunit;
 
-namespace Pk.Spatial.Tests._3D.Location
+namespace Pk.Spatial.Tests.ThreeDimensional.Location
 {
   [Trait(TestConstants.CategoryName, TestConstants.UnitTestsTag)]
   public class Location3DOperatorTests

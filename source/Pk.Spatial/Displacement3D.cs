@@ -9,7 +9,7 @@ namespace Pk.Spatial
   /// <summary>
   ///   Represents a 3D length vector.
   /// </summary>
-  public struct Displacement3D : IEquatable<Displacement3D>, IVector3D<Length>
+  public struct Displacement3D : IEquatable<Displacement3D>, IVector3D<Length>, ICanFreeze<LengthUnit>
   {
     private readonly Vector3D underlyingVector;
 

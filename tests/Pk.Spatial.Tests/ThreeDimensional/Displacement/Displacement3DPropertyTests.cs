@@ -4,20 +4,11 @@ using UnitsNet;
 using UnitsNet.Units;
 using Xunit;
 
-namespace Pk.Spatial.Tests._3D.Displacement
+namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
 {
   [Trait(TestConstants.CategoryName, TestConstants.UnitTestsTag)]
   public class Displacement3DPropertyTests
   {
-    [Fact]
-    public void CalculatedMagnitudeProperly()
-    {
-      var displacementUnderTest = Displacement3D.From(5.0, 5.0, 5.0, StandardUnits.Length);
-
-      displacementUnderTest.Magnitude.As(StandardUnits.Length).ShouldBe(8.7, Tolerance.ToWithinOneTenth);
-    }
-
-
     [Fact]
     public void CheckConstructionMethods()
     {
@@ -48,31 +39,14 @@ namespace Pk.Spatial.Tests._3D.Displacement
       displacementUnderTest.Y.Meters.ShouldBe(0.6, Tolerance.ToWithinOneTenth);
       displacementUnderTest.Z.Meters.ShouldBe(0.9, Tolerance.ToWithinOneTenth);
       displacementUnderTest.Magnitude.Meters.ShouldBe(1.1, Tolerance.ToWithinOneTenth);
+
+      displacementUnderTest = Displacement3D.From(new Vector3D(5.0, 6.0, 7.0), LengthUnit.Centimeter);
+
+      displacementUnderTest.X.As(LengthUnit.Decimeter).ShouldBe(0.5, Tolerance.ToWithinOneHundredth);
+      displacementUnderTest.Y.As(LengthUnit.Decimeter).ShouldBe(0.6, Tolerance.ToWithinOneHundredth);
+      displacementUnderTest.Z.As(LengthUnit.Decimeter).ShouldBe(0.7, Tolerance.ToWithinOneHundredth);
     }
-
-
-    [Fact]
-    public void ConstructsUsingDoublesAndALengthUnit()
-    {
-      var displacementUnderTest = Displacement3D.From(1.1, 2.2, 3.3, LengthUnit.Mile);
-
-      displacementUnderTest.X.Miles.ShouldBe(1.1);
-      displacementUnderTest.Y.Miles.ShouldBe(2.2);
-      displacementUnderTest.Z.Miles.ShouldBe(3.3);
-      displacementUnderTest.Magnitude.Miles.ShouldBe(4.1, Tolerance.ToWithinOneTenth);
-    }
-
-
-    [Fact]
-    public void ConstructUsingVector3D()
-    {
-      var locationUnderTest = Displacement3D.From(new Vector3D(5.0, 6.0, 7.0), LengthUnit.Centimeter);
-
-      locationUnderTest.X.As(LengthUnit.Decimeter).ShouldBe(0.5, Tolerance.ToWithinOneHundredth);
-      locationUnderTest.Y.As(LengthUnit.Decimeter).ShouldBe(0.6, Tolerance.ToWithinOneHundredth);
-      locationUnderTest.Z.As(LengthUnit.Decimeter).ShouldBe(0.7, Tolerance.ToWithinOneHundredth);
-    }
-
+    
 
     [Fact]
     public void DefaultsToNoMagnitude()
