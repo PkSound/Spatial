@@ -85,5 +85,8 @@ namespace Pk.Spatial
       var underlyingVector = lhs.FreezeTo(Length.BaseUnit) - rhs.FreezeTo(Length.BaseUnit);
       return Displacement3D.From(underlyingVector, Length.BaseUnit);
     }
+
+
+    public override string ToString() { return $"{{{this.X}, {this.Y}, {this.Z}}}"; }
   }
 }
