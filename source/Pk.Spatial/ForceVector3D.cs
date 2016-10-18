@@ -46,7 +46,7 @@ namespace Pk.Spatial
     }
 
 
-    public UnitVector3D Normalize(ForceUnit unit) { throw new NotImplementedException(); }
+    public UnitVector3D Normalize(ForceUnit unit) { return this.FreezeTo(unit).Normalize(); }
     public Force X => Force.From(this.underlyingVector.X, Force.BaseUnit);
     public Force Y => Force.From(this.underlyingVector.Y, Force.BaseUnit);
     public Force Z => Force.From(this.underlyingVector.Z, Force.BaseUnit);
@@ -99,8 +99,22 @@ namespace Pk.Spatial
     }
 
 
+    public static ForceVector3D operator /(ForceVector3D lhs, double rhs)
+    {
+      var frozenToStandard = lhs.FreezeTo(Force.BaseUnit)/rhs;
+      return ForceVector3D.From(frozenToStandard, Force.BaseUnit);
+    }
+
+
     public static bool operator ==(ForceVector3D lhs, ForceVector3D rhs) { return lhs.Equals(rhs); }
     public static bool operator !=(ForceVector3D lhs, ForceVector3D rhs) { return !(lhs == rhs); }
+
+
+    public static ForceVector3D operator *(double lhs, ForceVector3D rhs)
+    {
+      var frozenToStandard = lhs*rhs.FreezeTo(Force.BaseUnit);
+      return ForceVector3D.From(frozenToStandard, Force.BaseUnit);
+    }
 
 
     public static ForceVector3D operator -(ForceVector3D lhs, ForceVector3D rhs)
