@@ -70,5 +70,13 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
       result.Y.ShouldBe(18.7, Tolerance.ToWithinOneTenth);
       result.Z.ShouldBe(-52.8, Tolerance.ToWithinOneTenth);
     }
+
+
+    [Fact]
+    public void ToStringGivesUnits()
+    {
+      var result = Displacement3D.FromMeters(4.6, 5.2, 6.8).ToString();
+      result.ShouldBe("{4.6 m, 5.2 m, 6.8 m}");
+    }
   }
 }
