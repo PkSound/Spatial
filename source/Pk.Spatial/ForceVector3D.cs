@@ -46,6 +46,7 @@ namespace Pk.Spatial
     }
 
 
+    public UnitVector3D Normalize(ForceUnit unit) { throw new NotImplementedException(); }
     public Force X => Force.From(this.underlyingVector.X, Force.BaseUnit);
     public Force Y => Force.From(this.underlyingVector.Y, Force.BaseUnit);
     public Force Z => Force.From(this.underlyingVector.Z, Force.BaseUnit);
@@ -88,6 +89,7 @@ namespace Pk.Spatial
 
 
     public override int GetHashCode() { return this.underlyingVector.GetHashCode(); }
+    public UnitVector3D NormalizeToNewtons() { return this.Normalize(ForceUnit.Newton); }
 
 
     public static ForceVector3D operator +(ForceVector3D lhs, ForceVector3D rhs)

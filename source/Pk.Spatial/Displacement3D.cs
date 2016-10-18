@@ -112,5 +112,21 @@ namespace Pk.Spatial
       var frozenToStandard = lhs.FreezeTo(Length.BaseUnit) - rhs.FreezeTo(Length.BaseUnit);
       return Displacement3D.From(frozenToStandard, Length.BaseUnit);
     }
+
+    public static Displacement3D operator /(Displacement3D lhs, double rhs)
+    {
+      var frozenToStandard = lhs.FreezeTo(Length.BaseUnit) / rhs;
+      return Displacement3D.From(frozenToStandard, Length.BaseUnit);
+    }
+
+    public static Displacement3D operator *(double lhs, Displacement3D rhs)
+    {
+      var frozenToStandard = lhs * rhs.FreezeTo(Length.BaseUnit);
+      return Displacement3D.From(frozenToStandard, Length.BaseUnit);
+    }
+
+
+    public UnitVector3D Normalize(LengthUnit unit) { return this.FreezeTo(unit).Normalize(); }
+    public UnitVector3D NormalizeToMeters() { return this.Normalize(LengthUnit.Meter); }
   }
 }
