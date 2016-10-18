@@ -118,12 +118,19 @@ namespace Pk.Spatial.Tests.ThreeDimensional.ForceVector
     [Fact]
     public void NegationInvertsSignOfXYZ()
     {
-      var displacement = ForceVector3D.FromNewtons(3, -4, 5);
-      var result = displacement.Negate();
+      var forceVector = ForceVector3D.FromNewtons(3, -4, 5);
+      var result = forceVector.Negate();
       result.X.Newtons.ShouldBe(-3);
       result.Y.Newtons.ShouldBe(4);
       result.Z.Newtons.ShouldBe(-5);
-      result.Magnitude.Newtons.ShouldBe(displacement.Magnitude.Newtons, Tolerance.ToWithinUnitsNetError);
+      result.Magnitude.Newtons.ShouldBe(forceVector.Magnitude.Newtons, Tolerance.ToWithinUnitsNetError);
+
+      var forceVector2 = ForceVector3D.FromNewtons(-5, 4, 3);
+      var result2 = -forceVector2;
+      result2.X.Newtons.ShouldBe(5);
+      result2.Y.Newtons.ShouldBe(-4);
+      result2.Z.Newtons.ShouldBe(-3);
+      result2.Magnitude.Newtons.ShouldBe(forceVector2.Magnitude.Newtons, Tolerance.ToWithinUnitsNetError);
     }
 
 

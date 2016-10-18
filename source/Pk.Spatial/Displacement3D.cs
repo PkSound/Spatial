@@ -58,6 +58,15 @@ namespace Pk.Spatial
     }
 
 
+    public UnitVector3D Normalize(LengthUnit unit) { return this.FreezeTo(unit).Normalize(); }
+
+
+    public Displacement3D Negate()
+    {
+      return Displacement3D.From(this.underlyingVector.Negate(), Length.BaseUnit);
+    }
+
+
     public override bool Equals(object obj)
     {
       if (object.ReferenceEquals(null, obj)) return false;
@@ -94,6 +103,7 @@ namespace Pk.Spatial
 
 
     public override int GetHashCode() { return this.underlyingVector.GetHashCode(); }
+    public UnitVector3D NormalizeToMeters() { return this.Normalize(LengthUnit.Meter); }
 
 
     public static Displacement3D operator +(Displacement3D lhs, Displacement3D rhs)
@@ -103,31 +113,29 @@ namespace Pk.Spatial
     }
 
 
+    public static Displacement3D operator /(Displacement3D lhs, double rhs)
+    {
+      var frozenToStandard = lhs.FreezeTo(Length.BaseUnit)/rhs;
+      return Displacement3D.From(frozenToStandard, Length.BaseUnit);
+    }
+
+
     public static bool operator ==(Displacement3D lhs, Displacement3D rhs) { return lhs.Equals(rhs); }
     public static bool operator !=(Displacement3D lhs, Displacement3D rhs) { return !(lhs == rhs); }
 
+
+    public static Displacement3D operator *(double lhs, Displacement3D rhs)
+    {
+      var frozenToStandard = lhs*rhs.FreezeTo(Length.BaseUnit);
+      return Displacement3D.From(frozenToStandard, Length.BaseUnit);
+    }
+
+    public static Displacement3D operator -(Displacement3D lhs) { return lhs.Negate(); }
 
     public static Displacement3D operator -(Displacement3D lhs, Displacement3D rhs)
     {
       var frozenToStandard = lhs.FreezeTo(Length.BaseUnit) - rhs.FreezeTo(Length.BaseUnit);
       return Displacement3D.From(frozenToStandard, Length.BaseUnit);
     }
-
-    public static Displacement3D operator /(Displacement3D lhs, double rhs)
-    {
-      var frozenToStandard = lhs.FreezeTo(Length.BaseUnit) / rhs;
-      return Displacement3D.From(frozenToStandard, Length.BaseUnit);
-    }
-
-    public static Displacement3D operator *(double lhs, Displacement3D rhs)
-    {
-      var frozenToStandard = lhs * rhs.FreezeTo(Length.BaseUnit);
-      return Displacement3D.From(frozenToStandard, Length.BaseUnit);
-    }
-
-
-    public UnitVector3D Normalize(LengthUnit unit) { return this.FreezeTo(unit).Normalize(); }
-    public Displacement3D Negate() { throw new NotImplementedException(); }
-    public UnitVector3D NormalizeToMeters() { return this.Normalize(LengthUnit.Meter); }
   }
 }
