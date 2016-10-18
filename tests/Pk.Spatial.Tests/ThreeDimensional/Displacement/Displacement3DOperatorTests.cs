@@ -59,6 +59,17 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
       result.Z.As(Length.BaseUnit).ShouldBe(18);
     }
 
+    [Fact]
+    public void NegationInvertsSignOfXYZ()
+    {
+      var displacement = Displacement3D.FromMeters(3, -4, 5);
+      var result = displacement.Negate();
+      result.X.Meters.ShouldBe(-3);
+      result.Y.Meters.ShouldBe(4);
+      result.Z.Meters.ShouldBe(-5);
+      result.Magnitude.Meters.ShouldBe(displacement.Magnitude.Meters, Tolerance.ToWithinUnitsNetError);
+    }
+
 
     [Fact]
     public void DividingByAScalarDecreasesMagnitude()

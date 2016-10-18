@@ -20,36 +20,6 @@ namespace Pk.Spatial.Tests.ThreeDimensional.ForceVector
 
 
     [Fact]
-    public void MultiplyingByAScalarIncreasesMagnitude()
-    {
-      var force = ForceVector3D.FromNewtons(3, 4, 5);
-      var result = 7.5*force ;
-      result.Magnitude.Newtons.ShouldBe(force.Magnitude.Newtons * 7.5, Tolerance.ToWithinOne);
-
-      var normalized1 = force.NormalizeToNewtons();
-      var normalized2 = result.NormalizeToNewtons();
-
-      normalized2.X.ShouldBe(normalized1.X, Tolerance.ToWithinUnitsNetError);
-      normalized2.Y.ShouldBe(normalized1.Y, Tolerance.ToWithinUnitsNetError);
-      normalized2.Z.ShouldBe(normalized1.Z, Tolerance.ToWithinUnitsNetError);
-    }
-
-    [Fact]
-    public void DividingByAScalarDecreasesMagnitude()
-    {
-      var force = ForceVector3D.FromNewtons(3, 4, 5);
-      var result = force / 3.2;
-      result.Magnitude.Newtons.ShouldBe(force.Magnitude.Newtons / 3.2, Tolerance.ToWithinOne);
-
-      var normalized1 = force.NormalizeToNewtons();
-      var normalized2 = result.NormalizeToNewtons();
-
-      normalized2.X.ShouldBe(normalized1.X, Tolerance.ToWithinUnitsNetError);
-      normalized2.Y.ShouldBe(normalized1.Y, Tolerance.ToWithinUnitsNetError);
-      normalized2.Z.ShouldBe(normalized1.Z, Tolerance.ToWithinUnitsNetError);
-    }
-
-    [Fact]
     public void DifferentForceVectorsAreUnequal()
     {
       var some = new ForceVector3D();
@@ -57,6 +27,47 @@ namespace Pk.Spatial.Tests.ThreeDimensional.ForceVector
 
       (some != other).ShouldBeTrue();
       (some == other).ShouldBeFalse();
+    }
+
+
+    [Fact]
+    public void DividingByAScalarDecreasesMagnitude()
+    {
+      var force = ForceVector3D.FromNewtons(3, 4, 5);
+      var result = force/3.2;
+      result.Magnitude.Newtons.ShouldBe(force.Magnitude.Newtons/3.2, Tolerance.ToWithinOne);
+
+      var normalized1 = force.NormalizeToNewtons();
+      var normalized2 = result.NormalizeToNewtons();
+
+      normalized2.X.ShouldBe(normalized1.X, Tolerance.ToWithinUnitsNetError);
+      normalized2.Y.ShouldBe(normalized1.Y, Tolerance.ToWithinUnitsNetError);
+      normalized2.Z.ShouldBe(normalized1.Z, Tolerance.ToWithinUnitsNetError);
+    }
+
+
+    [Fact]
+    public void EqualForceVectorsShouldHaveSameHashCode()
+    {
+      var some = new ForceVector3D();
+      var other = new ForceVector3D();
+
+      some.GetHashCode().ShouldBe(other.GetHashCode());
+    }
+
+
+    [Fact]
+    public void EqualityAgainstObject()
+    {
+      new ForceVector3D().Equals(new Location3D()).ShouldBeFalse();
+
+      var d = new ForceVector3D();
+      d.Equals((object) d).ShouldBeTrue();
+
+      var other = ForceVector3D.From(1, 2, 3, Force.BaseUnit);
+      d.Equals((object) other).ShouldBeFalse();
+
+      d.Equals(null).ShouldBeFalse();
     }
 
 
@@ -89,27 +100,30 @@ namespace Pk.Spatial.Tests.ThreeDimensional.ForceVector
 
 
     [Fact]
-    public void EqualForceVectorsShouldHaveSameHashCode()
+    public void MultiplyingByAScalarIncreasesMagnitude()
     {
-      var some = new ForceVector3D();
-      var other = new ForceVector3D();
+      var force = ForceVector3D.FromNewtons(3, 4, 5);
+      var result = 7.5*force;
+      result.Magnitude.Newtons.ShouldBe(force.Magnitude.Newtons*7.5, Tolerance.ToWithinOne);
 
-      some.GetHashCode().ShouldBe(other.GetHashCode());
+      var normalized1 = force.NormalizeToNewtons();
+      var normalized2 = result.NormalizeToNewtons();
+
+      normalized2.X.ShouldBe(normalized1.X, Tolerance.ToWithinUnitsNetError);
+      normalized2.Y.ShouldBe(normalized1.Y, Tolerance.ToWithinUnitsNetError);
+      normalized2.Z.ShouldBe(normalized1.Z, Tolerance.ToWithinUnitsNetError);
     }
 
 
     [Fact]
-    public void EqualityAgainstObject()
+    public void NegationInvertsSignOfXYZ()
     {
-      new ForceVector3D().Equals(new Location3D()).ShouldBeFalse();
-
-      var d = new ForceVector3D();
-      d.Equals((object) d).ShouldBeTrue();
-
-      var other = ForceVector3D.From(1, 2, 3, Force.BaseUnit);
-      d.Equals((object) other).ShouldBeFalse();
-
-      d.Equals(null).ShouldBeFalse();
+      var displacement = ForceVector3D.FromNewtons(3, -4, 5);
+      var result = displacement.Negate();
+      result.X.Newtons.ShouldBe(-3);
+      result.Y.Newtons.ShouldBe(4);
+      result.Z.Newtons.ShouldBe(-5);
+      result.Magnitude.Newtons.ShouldBe(displacement.Magnitude.Newtons, Tolerance.ToWithinUnitsNetError);
     }
 
 

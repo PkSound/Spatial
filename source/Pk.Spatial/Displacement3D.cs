@@ -127,6 +127,7 @@ namespace Pk.Spatial
 
 
     public UnitVector3D Normalize(LengthUnit unit) { return this.FreezeTo(unit).Normalize(); }
+    public Displacement3D Negate() { throw new NotImplementedException(); }
     public UnitVector3D NormalizeToMeters() { return this.Normalize(LengthUnit.Meter); }
   }
 }

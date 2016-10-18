@@ -47,6 +47,7 @@ namespace Pk.Spatial
 
 
     public UnitVector3D Normalize(ForceUnit unit) { return this.FreezeTo(unit).Normalize(); }
+    public ForceVector3D Negate() { throw new NotImplementedException(); }
     public Force X => Force.From(this.underlyingVector.X, Force.BaseUnit);
     public Force Y => Force.From(this.underlyingVector.Y, Force.BaseUnit);
     public Force Z => Force.From(this.underlyingVector.Z, Force.BaseUnit);
