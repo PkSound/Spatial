@@ -19,6 +19,12 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Location
       locationUnderTest.Z.Meters.ShouldBe(1);
     }
 
+    [Fact]
+    public void ToStringGivesUnits()
+    {
+      var result = Location3D.FromMeters(4.6, 5.2, 6.8).ToString();
+      result.ShouldBe("{4.6 m, 5.2 m, 6.8 m}");
+    }
 
     [Fact]
     public void GetsDisplacementFromOrigin()

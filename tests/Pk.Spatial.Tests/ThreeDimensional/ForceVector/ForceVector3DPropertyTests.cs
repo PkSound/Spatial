@@ -71,5 +71,13 @@ namespace Pk.Spatial.Tests.ThreeDimensional.ForceVector
       result.Y.ShouldBe(30100.0, Tolerance.ToWithinUnitsNetError);
       result.Z.ShouldBe(-85000.0, Tolerance.ToWithinUnitsNetError);
     }
+
+
+    [Fact]
+    public void ToStringGivesUnits()
+    {
+      var result = ForceVector3D.FromNewtons(4.6, 5.2, 6.8).ToString();
+      result.ShouldBe("{4.6 N, 5.2 N, 6.8 N}");
+    }
   }
 }

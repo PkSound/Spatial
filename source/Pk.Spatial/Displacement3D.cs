@@ -9,7 +9,7 @@ namespace Pk.Spatial
   /// <summary>
   ///   Represents a 3D length vector.
   /// </summary>
-  public struct Displacement3D : IEquatable<Displacement3D>, IVector3D<Displacement3D, Length, LengthUnit>
+  public struct Displacement3D : IVector3D<Displacement3D, Length, LengthUnit>, IEquatable<Displacement3D>
   {
     private readonly Vector3D underlyingVector;
 
@@ -59,12 +59,7 @@ namespace Pk.Spatial
 
 
     public UnitVector3D Normalize(LengthUnit unit) { return this.FreezeTo(unit).Normalize(); }
-
-
-    public Displacement3D Negate()
-    {
-      return Displacement3D.From(this.underlyingVector.Negate(), Length.BaseUnit);
-    }
+    public Displacement3D Negate() { return Displacement3D.From(this.underlyingVector.Negate(), Length.BaseUnit); }
 
 
     public override bool Equals(object obj)
@@ -130,12 +125,15 @@ namespace Pk.Spatial
       return Displacement3D.From(frozenToStandard, Length.BaseUnit);
     }
 
-    public static Displacement3D operator -(Displacement3D lhs) { return lhs.Negate(); }
 
     public static Displacement3D operator -(Displacement3D lhs, Displacement3D rhs)
     {
       var frozenToStandard = lhs.FreezeTo(Length.BaseUnit) - rhs.FreezeTo(Length.BaseUnit);
       return Displacement3D.From(frozenToStandard, Length.BaseUnit);
     }
+
+
+    public static Displacement3D operator -(Displacement3D lhs) { return lhs.Negate(); }
+    public override string ToString() { return $"{{{this.X}, {this.Y}, {this.Z}}}"; }
   }
 }
