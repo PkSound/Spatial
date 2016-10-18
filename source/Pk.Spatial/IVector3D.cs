@@ -14,5 +14,6 @@ namespace Pk.Spatial
     Vector3D FreezeTo(TUnitEnumType unit);
     TVector Rotate(UnitVector3D axisOfRotation, Angle angleOfRotation);
     UnitVector3D Normalize(TUnitEnumType unit);
+    TVector Negate();
   }
 }
