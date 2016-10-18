@@ -1,6 +1,8 @@
+using System.Runtime.InteropServices;
 using MathNet.Spatial.Euclidean;
 using Shouldly;
 using UnitsNet;
+using UnitsNet.Units;
 using Xunit;
 
 namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
@@ -59,6 +61,22 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
 
 
     [Fact]
+    public void DividingByAScalarDecreasesMagnitude()
+    {
+      var displacement = Displacement3D.FromMeters(3, 4, 5);
+      var result = displacement/3.2;
+      result.Magnitude.Meters.ShouldBe(displacement.Magnitude.Meters/3.2, Tolerance.ToWithinOne);
+
+      var normalized1 = displacement.NormalizeToMeters();
+      var normalized2 = result.NormalizeToMeters();
+
+      normalized2.X.ShouldBe(normalized1.X, Tolerance.ToWithinUnitsNetError);
+      normalized2.Y.ShouldBe(normalized1.Y, Tolerance.ToWithinUnitsNetError);
+      normalized2.Z.ShouldBe(normalized1.Z, Tolerance.ToWithinUnitsNetError);
+    }
+
+
+    [Fact]
     public void EqualDisplacementsShouldHaveSameHashCode()
     {
       var some = new Displacement3D();
@@ -80,6 +98,22 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
       d.Equals((object) other).ShouldBeFalse();
 
       d.Equals(null).ShouldBeFalse();
+    }
+
+
+    [Fact]
+    public void MultiplyingByAScalarIncreasesMagnitude()
+    {
+      var displacement = Displacement3D.FromMeters(1, 1, 1);
+      var result = 4.3*displacement;
+      result.Magnitude.Meters.ShouldBe(displacement.Magnitude.Meters*4.3, Tolerance.ToWithinOne);
+
+      var normalized1 = displacement.NormalizeToMeters();
+      var normalized2 = result.NormalizeToMeters();
+
+      normalized2.X.ShouldBe(normalized1.X, Tolerance.ToWithinUnitsNetError);
+      normalized2.Y.ShouldBe(normalized1.Y, Tolerance.ToWithinUnitsNetError);
+      normalized2.Z.ShouldBe(normalized1.Z, Tolerance.ToWithinUnitsNetError);
     }
 
 
