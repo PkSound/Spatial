@@ -10,6 +10,7 @@ By using Units.Net and MathNet.Spatial together, new types such as Location3D ca
 
 # Build Status
 [![Build status](https://ci.appveyor.com/api/projects/status/jrhpgefql680lyb6/branch/develop?svg=true)](https://ci.appveyor.com/project/JKSnd/spatial/branch/develop)
+[![Coverage Status](https://coveralls.io/repos/github/PkSound/Spatial/badge.svg)](https://coveralls.io/github/PkSound/Spatial)
 
 # Deployment
 There's currently a pre-release NuGet package up on Nuget. Please note that while we're in beta there may be breaking changes to the library's interfaces without notice. Once we've released 1.0.0 we promise we'll be very strict about backward-compatibility.
