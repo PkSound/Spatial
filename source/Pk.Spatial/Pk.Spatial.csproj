@@ -44,9 +44,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UnitsNet">
       <HintPath>..\..\libraries\Nuget\UnitsNet.3.42.0\lib\net35\UnitsNet.dll</HintPath>
