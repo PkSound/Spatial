@@ -127,5 +127,6 @@ namespace Pk.Spatial
 
     public static ForceVector3D operator -(ForceVector3D lhs) { return lhs.Negate(); }
     public override string ToString() { return $"{{{this.X}, {this.Y}, {this.Z}}}"; }
+    public static ForceVector3D Zero() { return new ForceVector3D();}
   }
 }

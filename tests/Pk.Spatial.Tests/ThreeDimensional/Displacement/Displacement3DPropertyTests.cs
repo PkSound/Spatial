@@ -45,6 +45,12 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
       displacementUnderTest.X.As(LengthUnit.Decimeter).ShouldBe(0.5, Tolerance.ToWithinOneHundredth);
       displacementUnderTest.Y.As(LengthUnit.Decimeter).ShouldBe(0.6, Tolerance.ToWithinOneHundredth);
       displacementUnderTest.Z.As(LengthUnit.Decimeter).ShouldBe(0.7, Tolerance.ToWithinOneHundredth);
+
+      displacementUnderTest = Displacement3D.Zero();
+
+      displacementUnderTest.X.As(LengthUnit.Meter).ShouldBe(0);
+      displacementUnderTest.Y.As(LengthUnit.Meter).ShouldBe(0);
+      displacementUnderTest.Z.As(LengthUnit.Meter).ShouldBe(0);
     }
 
 
