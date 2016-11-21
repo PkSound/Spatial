@@ -135,5 +135,6 @@ namespace Pk.Spatial
 
     public static Displacement3D operator -(Displacement3D lhs) { return lhs.Negate(); }
     public override string ToString() { return $"{{{this.X}, {this.Y}, {this.Z}}}"; }
+    public static Displacement3D Zero() { return new Displacement3D(); }
   }
 }
