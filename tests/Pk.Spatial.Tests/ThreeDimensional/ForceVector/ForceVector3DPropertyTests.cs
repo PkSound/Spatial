@@ -45,6 +45,12 @@ namespace Pk.Spatial.Tests.ThreeDimensional.ForceVector
       vectorUnderTest.X.Kilonewtons.ShouldBe(5, Tolerance.ToWithinUnitsNetError);
       vectorUnderTest.Y.Kilonewtons.ShouldBe(6, Tolerance.ToWithinUnitsNetError);
       vectorUnderTest.Z.Kilonewtons.ShouldBe(7, Tolerance.ToWithinUnitsNetError);
+
+      vectorUnderTest = ForceVector3D.Zero();
+
+      vectorUnderTest.X.Newtons.ShouldBe(0);
+      vectorUnderTest.Y.Newtons.ShouldBe(0);
+      vectorUnderTest.Z.Newtons.ShouldBe(0);
     }
 
 
