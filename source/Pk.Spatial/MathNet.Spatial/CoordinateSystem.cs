@@ -10,7 +10,7 @@ namespace MathNet.Spatial.Euclidean
     [Serializable]
     public class CoordinateSystem : Numerics.LinearAlgebra.Double.DenseMatrix, IEquatable<CoordinateSystem>
     {
-        static string _item3DPattern = Parser.Vector3DPattern.Trim('^', '$');
+        static readonly string _item3DPattern = Parser.Vector3DPattern.Trim('^', '$');
 
         public static readonly string CsPattern = string.Format(@"^ *o: *{{(?<op>{0})}} *x: *{{(?<xv>{0})}} *y: *{{(?<yv>{0})}} *z: *{{(?<zv>{0})}} *$", _item3DPattern);
 
@@ -119,8 +119,30 @@ namespace MathNet.Spatial.Euclidean
             CoordinateSystem cs = SetRotationSubMatrix(r, coordinateSystem);
             return cs;
         }
-    
-    
+
+        /// <summary>
+        /// Creates a coordinate system that rotates 
+        /// </summary>
+        /// <param name="a">Angle to rotate</param>
+        /// <param name="unit">The unit of the angle</param>
+        /// <param name="v">Vector to rotate about</param>
+        /// <returns></returns>
+        public static CoordinateSystem Rotation(double a, AngleUnit unit, UnitVector3D v) 
+        {
+            return Rotation(Angle.From(a, unit), v);
+        }
+
+        /// <summary>
+        /// Creates a coordinate system that rotates 
+        /// </summary>
+        /// <param name="a">Angle to rotate</param>
+        /// <param name="unit">The unit of the angle</param>
+        /// <param name="v">Vector to rotate about</param>
+        /// <returns></returns>
+        public static CoordinateSystem Rotation(double a, AngleUnit unit, Vector3D v)
+        {
+            return Rotation(Angle.From(a, unit), v.Normalize());
+        }
 
         /// <summary>
         /// Creates a coordinate system that rotates 
@@ -184,7 +206,7 @@ namespace MathNet.Spatial.Euclidean
         /// </summary>
         /// <param name="a"></param>
         /// <param name="unit"></param>
-        public static CoordinateSystem Yaw(double a, AngleUnit unit)
+        public static CoordinateSystem Yaw<T>(double a, AngleUnit unit)
         {
             return Yaw(Angle.From(a, unit));
         }
@@ -204,7 +226,7 @@ namespace MathNet.Spatial.Euclidean
         /// <param name="a"></param>
         /// <param name="unit"></param>
         public static CoordinateSystem Pitch<T>(double a, AngleUnit unit)
-    {
+        {
             return Pitch(Angle.From(a, unit));
         }
 
@@ -222,8 +244,8 @@ namespace MathNet.Spatial.Euclidean
         /// </summary>
         /// <param name="a"></param>
         /// <param name="unit"></param>
-        public static CoordinateSystem Roll(double a, AngleUnit unit)
-    {
+        public static CoordinateSystem Roll(double a, AngleUnit unit) 
+        {
             return Roll(Angle.From(a, unit));
         }
 
@@ -325,15 +347,15 @@ namespace MathNet.Spatial.Euclidean
             return new CoordinateSystem(x, y, z, this.Origin);
         }
 
-        public CoordinateSystem RotateCoordSysAroundVector<T>(Vector3D aboutVector3D, double angle, AngleUnit unit)
+        public CoordinateSystem RotateCoordSysAroundVector(Vector3D aboutVector3D, double angle, AngleUnit angleUnit)
         {
-            var rcs = Rotation(Angle.From(angle, unit), aboutVector3D.Normalize());
+            var rcs = Rotation(Angle.From(angle, angleUnit), aboutVector3D.Normalize());
             return rcs.Transform(this);
         }
 
-        public CoordinateSystem RotateNoReset<T>(double yaw, double pitch, double roll, AngleUnit unit)
+        public CoordinateSystem RotateNoReset(double yaw, double pitch, double roll, AngleUnit angleUnit) 
         {
-            var rcs = Rotation(yaw, pitch, roll, unit);
+            var rcs = Rotation(yaw, pitch, roll, angleUnit);
             return rcs.Transform(this);
         }
 

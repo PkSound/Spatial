@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
+
+
+
+
 using MathNet.Numerics.LinearAlgebra;
 using UnitsNet;
+using UnitsNet.Units;
 
 namespace MathNet.Spatial.Euclidean
 {
@@ -207,7 +212,8 @@ namespace MathNet.Spatial.Euclidean
             }
         }
 
-        public static UnitVector3D XAxis
+
+      public static UnitVector3D XAxis
         {
             get { return new UnitVector3D(1, 0, 0); }
         }
@@ -515,7 +521,17 @@ namespace MathNet.Spatial.Euclidean
             var angle = Math.Acos(dp);
             return Angle.FromRadians(angle);
         }
-    
+
+        /// <summary>
+        /// Returns a vector that is this vector rotated the signed angle around the about vector
+        /// </summary>
+        /// <param name="about"></param>
+        /// <param name="angle"></param>
+        /// <returns></returns>
+        public UnitVector3D Rotate(UnitVector3D about, double angle, AngleUnit angleUnit)
+        {
+            return this.Rotate(about, Angle.From(angle, angleUnit));
+        }
 
         /// <summary>
         /// Returns a vector that is this vector rotated the signed angle around the about vector

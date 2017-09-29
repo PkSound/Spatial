@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+
+
+
+
 using MathNet.Numerics.LinearAlgebra;
 using UnitsNet;
 using UnitsNet.Units;
@@ -89,7 +93,7 @@ namespace MathNet.Spatial.Euclidean
         /// <returns></returns>
         public static Vector3D Parse(string s)
         {
-            var doubles = MathNet.Spatial.Parser.ParseItem3D(s);
+            var doubles = Parser.ParseItem3D(s);
             return new Vector3D(doubles);
         }
 
@@ -201,9 +205,7 @@ namespace MathNet.Spatial.Euclidean
                 return hashCode;
             }
         }
-    
-    
-        public static Vector3D operator +(Vector3D v1, Vector3D v2)
+    public static Vector3D operator +(Vector3D v1, Vector3D v2)
         {
             return new Vector3D(v1.X + v2.X, v1.Y + v2.Y, v1.Z + v2.Z);
         }

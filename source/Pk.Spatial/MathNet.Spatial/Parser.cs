@@ -17,7 +17,7 @@ namespace MathNet.Spatial
         public static readonly string PlanePointVectorPattern = string.Format(@"^ *p: *{{(?<p>{0})}} *v: *{{(?<v>{0})}} *$", _item3DPattern);
         public static readonly string PlaneAbcdPattern = string.Format(@"^ *\(?(?<a>{0}){1}(?<b>{0}){1}(?<c>{0}){1}(?<d>{0})\)? *$", DoublePattern, SeparatorPattern);
 
-        internal static double[] ParseItem2D(string vectorString)
+        public static double[] ParseItem2D(string vectorString)
         {
             var match = Regex.Match(vectorString, Vector2DPattern);
             Group[] ss = { match.Groups["x"], match.Groups["y"] };
@@ -25,7 +25,7 @@ namespace MathNet.Spatial
             return ds;
         }
 
-        internal static double[] ParseItem3D(string vectorString)
+        public static double[] ParseItem3D(string vectorString)
         {
             var match = Regex.Match(vectorString, Vector3DPattern);
             Group[] ss = { match.Groups["x"], match.Groups["y"], match.Groups["z"] };

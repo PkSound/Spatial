@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 
+
 namespace MathNet.Spatial.Euclidean
 {
     [Serializable]

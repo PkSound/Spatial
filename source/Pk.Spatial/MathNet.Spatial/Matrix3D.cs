@@ -2,6 +2,7 @@ using System;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 using UnitsNet;
+using UnitsNet.Units;
 
 namespace MathNet.Spatial.Euclidean
 {
@@ -90,7 +91,13 @@ namespace MathNet.Spatial.Euclidean
         /// </summary>
         /// <param name="aboutVector"></param>
         /// <param name="angle">Angle in degrees</param>
+        /// <param name="angleUnit"></param>
         /// <returns></returns>
+        public static Matrix<double> RotationAroundArbitraryVector(UnitVector3D aboutVector, double angle, AngleUnit angleUnit) 
+        {
+            return RotationAroundArbitraryVector(aboutVector, Angle.From(angle, angleUnit));
+        }
+
         public static Matrix<double> RotationAroundArbitraryVector(UnitVector3D aboutVector, Angle angle)
         {
             // http://en.wikipedia.org/wiki/Rotation_matrix
