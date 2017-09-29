@@ -19,6 +19,25 @@ namespace MathNet.Spatial.UnitTests.Euclidean
       AssertGeometry.AreEqual(Vector3D.Parse(evs), ray.Direction);
     }
 
+    [Fact]
+    public void ConstructionTest()
+    {
+      var ray = new Ray3D(new Point3D(1,2,3), new Vector3D(3,4,5));
+
+      AssertGeometry.AreEqual(new Point3D(1,2,3), ray.ThroughPoint);
+      AssertGeometry.AreEqual(new Vector3D(3,4,5).Normalize(), ray.Direction);
+    }
+ 
+    [Fact]
+    public void ShouldGetIntersecionPoint()
+    {
+      var plane = new Plane(Point3D.Origin, new Point3D(1,1,0), new Point3D(-1, -2 ,0));
+      var ray = new Ray3D(Point3D.Origin, UnitVector3D.ZAxis);
+      var intersectionPoint = ray.IntersectionWith(plane);
+      intersectionPoint.ShouldNotBeNull();
+
+      AssertGeometry.AreEqual(Point3D.Origin, intersectionPoint.Value);
+    }
 
     [Theory]
     [InlineData("p:{0, 0, 0} v:{0, 0, 1}", "p:{0, 0, 0} v:{0, 1, 0}", "0, 0, 0", "-1, 0, 0")]
@@ -29,8 +48,31 @@ namespace MathNet.Spatial.UnitTests.Euclidean
       var plane2 = Plane.Parse(pl2s);
       var actual = Ray3D.IntersectionOf(plane1, plane2);
       var expected = Ray3D.Parse(eps, evs);
+
       AssertGeometry.AreEqual(expected, actual);
     }
+
+
+    [Theory]
+    [InlineData("0, 0, 0", "1, -1, 1", "0, 0, 0", "1, -1, 1", true)]
+    [InlineData("0, 0, 2", "1, -1, 1", "0, 0, 0", "1, -1, 1", false)]
+    [InlineData("0, 0, 0", "1, -1, 1", "0, 0, 0", "2, -1, 1", false)]
+    public void EqualsObject(string p1s, string v1s, string p2s, string v2s, bool expected)
+    {
+      var ray1 = Ray3D.Parse(p1s, v1s);
+      var ray2 =  Ray3D.Parse(p2s, v2s);
+      expected.ShouldBe(ray1.Equals((object)ray2));
+      expected.ShouldBe(ray1 == ray2);
+      (!expected).ShouldBe(ray1 != ray2);
+    }
+
+    [Fact]
+    public void ToStringTest()
+    {
+      var ray = new Ray3D(Point3D.Origin, UnitVector3D.XAxis);
+      var result = ray.ToString();
+      result.ShouldBe("ThroughPoint: (0, 0, 0), Direction: (1, 0, 0)");
+    } 
 
 
     [Theory]
