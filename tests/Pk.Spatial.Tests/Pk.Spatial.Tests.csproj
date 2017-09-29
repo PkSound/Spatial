@@ -44,6 +44,7 @@
       <HintPath>..\..\libraries\Nuget\Shouldly.2.8.2\lib\net451\Shouldly.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Xml" />
     <Reference Include="UnitsNet">
@@ -68,6 +69,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MathNet.Spatial\AssertGeometry.cs" />
+    <Compile Include="MathNet.Spatial\CoordinateSystemTest.cs" />
+    <Compile Include="MathNet.Spatial\Line3DTests.cs" />
+    <Compile Include="MathNet.Spatial\ParserTests.cs" />
+    <Compile Include="MathNet.Spatial\PlaneTest.cs" />
+    <Compile Include="MathNet.Spatial\Point3DTests.cs" />
+    <Compile Include="MathNet.Spatial\Ray3DTests.cs" />
+    <Compile Include="MathNet.Spatial\Vector3DTests.cs" />
     <Compile Include="ThreeDimensional\Displacement\Displacement3DOperatorTests.cs" />
     <Compile Include="ThreeDimensional\Displacement\Displacement3DPropertyTests.cs" />
     <Compile Include="ThreeDimensional\ForceVector\ForceVector3DOperatorTests.cs" />
