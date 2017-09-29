@@ -143,16 +143,16 @@ namespace MathNet.Spatial.Euclidean
             return plane.Project(this);
         }
 
-        /// <summary>
-        /// Find the intersection between the line and a plane
-        /// </summary>
-        /// <param name="plane"></param>
-        /// <param name="tolerance"></param>
-        /// <returns></returns>
-        public Point3D? IntersectionWith(Plane plane, double tolerance = double.Epsilon)
-        {
-            return plane.IntersectionWith(this, tolerance);
-        }
+//        /// <summary>
+//        /// Find the intersection between the line and a plane
+//        /// </summary>
+//        /// <param name="plane"></param>
+//        /// <param name="tolerance"></param>
+//        /// <returns></returns>
+//        public Point3D? IntersectionWith(Plane plane, double tolerance = double.Epsilon)
+//        {
+//            return plane.IntersectionWith(this, tolerance);
+//        }
 
         /// <summary>
         /// Checks to determine whether or not two lines are parallel to each other, using the dot product within 

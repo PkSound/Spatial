@@ -52,10 +52,10 @@ namespace MathNet.Spatial.Euclidean
         }
 
 
-        public static Vector3D NaN
-        {
-            get { return new Vector3D(double.NaN, double.NaN, double.NaN); }
-        }
+//        public static Vector3D NaN
+//        {
+//            get { return new Vector3D(double.NaN, double.NaN, double.NaN); }
+//        }
 
         /// <summary>
         /// The length of the vector not the count of elements
@@ -81,10 +81,10 @@ namespace MathNet.Spatial.Euclidean
             }
         }
 
-        internal Matrix<double> CrossProductMatrix
-        {
-            get { return Matrix<double>.Build.Dense(3, 3, new[] { 0d, Z, -Y, -Z, 0d, X, Y, -X, 0d }); }
-        }
+//        internal Matrix<double> CrossProductMatrix
+//        {
+//            get { return Matrix<double>.Build.Dense(3, 3, new[] { 0d, Z, -Y, -Z, 0d, X, Y, -X, 0d }); }
+//        }
 
         /// <summary>
         /// Creates a Vector3D from its string representation
@@ -129,10 +129,10 @@ namespace MathNet.Spatial.Euclidean
             return this.ToString(null, CultureInfo.InvariantCulture);
         }
 
-        public string ToString(IFormatProvider provider)
-        {
-            return this.ToString(null, provider);
-        }
+//        public string ToString(IFormatProvider provider)
+//        {
+//            return this.ToString(null, provider);
+//        }
 
         public string ToString(string format, IFormatProvider provider = null)
         {
@@ -172,17 +172,17 @@ namespace MathNet.Spatial.Euclidean
                    Math.Abs(other.Z - this.Z) < tolerance;
         }
 
-        public bool Equals(UnitVector3D other, double tolerance)
-        {
-            if (tolerance < 0)
-            {
-                throw new ArgumentException("epsilon < 0");
-            }
-
-            return Math.Abs(other.X - this.X) < tolerance &&
-                   Math.Abs(other.Y - this.Y) < tolerance &&
-                   Math.Abs(other.Z - this.Z) < tolerance;
-        }
+//        public bool Equals(UnitVector3D other, double tolerance)
+//        {
+//            if (tolerance < 0)
+//            {
+//                throw new ArgumentException("epsilon < 0");
+//            }
+//
+//            return Math.Abs(other.X - this.X) < tolerance &&
+//                   Math.Abs(other.Y - this.Y) < tolerance &&
+//                   Math.Abs(other.Z - this.Z) < tolerance;
+//        }
 
         public override bool Equals(object obj)
         {
@@ -260,10 +260,10 @@ namespace MathNet.Spatial.Euclidean
             return scaleFactor*this;
         }
 
-        public Ray3D ProjectOn(Plane planeToProjectOn)
-        {
-            return planeToProjectOn.Project(this);
-        }
+//        public Ray3D ProjectOn(Plane planeToProjectOn)
+//        {
+//            return planeToProjectOn.Project(this);
+//        }
 
         public Vector3D ProjectOn(UnitVector3D uv)
         {
@@ -335,18 +335,18 @@ namespace MathNet.Spatial.Euclidean
             return Math.Abs(@this.DotProduct(other)) < tolerance;
         }
 
-        /// <summary>
-        /// Computes whether or not this vector is perpendicular to another vector using the dot product method and
-        /// comparing it to within a specified tolerance
-        /// </summary>
-        /// <param name="othervector"></param>
-        /// <param name="tolerance"></param>
-        /// <returns>true if the vector dot product is within the given tolerance of zero, false if not</returns>
-        public bool IsPerpendicularTo(UnitVector3D othervector, double tolerance = 1e-6)
-        {
-            var @this = this.Normalize();
-            return Math.Abs(@this.DotProduct(othervector)) < tolerance;
-        }
+//        /// <summary>
+//        /// Computes whether or not this vector is perpendicular to another vector using the dot product method and
+//        /// comparing it to within a specified tolerance
+//        /// </summary>
+//        /// <param name="othervector"></param>
+//        /// <param name="tolerance"></param>
+//        /// <returns>true if the vector dot product is within the given tolerance of zero, false if not</returns>
+//        public bool IsPerpendicularTo(UnitVector3D othervector, double tolerance = 1e-6)
+//        {
+//            var @this = this.Normalize();
+//            return Math.Abs(@this.DotProduct(othervector)) < tolerance;
+//        }
 
         /// <summary>
         /// Inverses the direction of the vector, equivalent to multiplying by -1
@@ -367,18 +367,6 @@ namespace MathNet.Spatial.Euclidean
             return (this.X*v.X) + (this.Y*v.Y) + (this.Z*v.Z);
         }
 
-        [Obsolete("Use - instead")]
-        public Vector3D Subtract(Vector3D v)
-        {
-            return new Vector3D(this.X - v.X, this.Y - v.Y, this.Z - v.Z);
-        }
-
-        [Obsolete("Use + instead")]
-        public Vector3D Add(Vector3D v)
-        {
-            return new Vector3D(this.X + v.X, this.Y + v.Y, this.Z + v.Z);
-        }
-
         public Vector3D CrossProduct(Vector3D inVector3D)
         {
             var x = (this.Y*inVector3D.Z) - (this.Z*inVector3D.Y);
@@ -397,14 +385,14 @@ namespace MathNet.Spatial.Euclidean
             return v;
         }
 
-        public Matrix<double> GetUnitTensorProduct()
-        {
-            // unitTensorProduct:matrix([ux^2,ux*uy,ux*uz],[ux*uy,uy^2,uy*uz],[ux*uz,uy*uz,uz^2]),
-            double xy = X*Y;
-            double xz = X*Z;
-            double yz = Y*Z;
-            return Matrix<double>.Build.Dense(3, 3, new[] { X*X, xy, xz, xy, Y*Y, yz, xz, yz, Z*Z });
-        }
+//        public Matrix<double> GetUnitTensorProduct()
+//        {
+//            // unitTensorProduct:matrix([ux^2,ux*uy,ux*uz],[ux*uy,uy^2,uy*uz],[ux*uz,uy*uz,uz^2]),
+//            double xy = X*Y;
+//            double xz = X*Z;
+//            double yz = Y*Z;
+//            return Matrix<double>.Build.Dense(3, 3, new[] { X*X, xy, xz, xy, Y*Y, yz, xz, yz, Z*Z });
+//        }
 
         /// <summary>
         /// Returns signed angle
@@ -494,33 +482,33 @@ namespace MathNet.Spatial.Euclidean
             return new Point3D(this.X, this.Y, this.Z);
         }
 
-        /// <summary>
-        /// Transforms the vector by a coordinate system and returns the transformed.
-        /// </summary>
-        /// <param name="coordinateSystem"></param>
-        /// <returns></returns>
-        public Vector3D TransformBy(CoordinateSystem coordinateSystem)
-        {
-            return coordinateSystem.Transform(this);
-        }
+//        /// <summary>
+//        /// Transforms the vector by a coordinate system and returns the transformed.
+//        /// </summary>
+//        /// <param name="coordinateSystem"></param>
+//        /// <returns></returns>
+//        public Vector3D TransformBy(CoordinateSystem coordinateSystem)
+//        {
+//            return coordinateSystem.Transform(this);
+//        }
+//
+//        public Vector3D TransformBy(Matrix<double> m)
+//        {
+//            return new Vector3D(m.Multiply(this.ToVector()));
+//        }
 
-        public Vector3D TransformBy(Matrix<double> m)
-        {
-            return new Vector3D(m.Multiply(this.ToVector()));
-        }
-
-        /// <summary>
-        /// Create a new Vector3D from a Math.NET Numerics vector of length 3.
-        /// </summary>
-        public static Vector3D OfVector(Vector<double> vector)
-        {
-            if (vector.Count != 3)
-            {
-                throw new ArgumentException("The vector length must be 3 in order to convert it to a Vector3D");
-            }
-
-            return new Vector3D(vector.At(0), vector.At(1), vector.At(2));
-        }
+//        /// <summary>
+//        /// Create a new Vector3D from a Math.NET Numerics vector of length 3.
+//        /// </summary>
+//        public static Vector3D OfVector(Vector<double> vector)
+//        {
+//            if (vector.Count != 3)
+//            {
+//                throw new ArgumentException("The vector length must be 3 in order to convert it to a Vector3D");
+//            }
+//
+//            return new Vector3D(vector.At(0), vector.At(1), vector.At(2));
+//        }
 
         /// <summary>
         /// Convert to a Math.NET Numerics dense vector of length 3.

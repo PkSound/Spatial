@@ -88,10 +88,10 @@ namespace MathNet.Spatial.Euclidean
             return this.ToString(null, CultureInfo.InvariantCulture);
         }
 
-        public string ToString(IFormatProvider provider)
-        {
-            return this.ToString(null, provider);
-        }
+//        public string ToString(IFormatProvider provider)
+//        {
+//            return this.ToString(null, provider);
+//        }
 
         public string ToString(string format, IFormatProvider provider = null)
         {
@@ -145,15 +145,15 @@ namespace MathNet.Spatial.Euclidean
             get { return new Point3D(0, 0, 0); }
         }
 
-        public static Point3D NaN
-        {
-            get { return new Point3D(double.NaN, double.NaN, double.NaN); }
-        }
+//        public static Point3D NaN
+//        {
+//            get { return new Point3D(double.NaN, double.NaN, double.NaN); }
+//        }
 
-        public static Point3D Centroid(IEnumerable<Point3D> points)
-        {
-            return Centroid(points.ToArray());
-        }
+//        public static Point3D Centroid(IEnumerable<Point3D> points)
+//        {
+//            return Centroid(points.ToArray());
+//        }
 
         public static Point3D Centroid(params Point3D[] points)
         {
@@ -174,10 +174,10 @@ namespace MathNet.Spatial.Euclidean
             return plane3.IntersectionWith(ray);
         }
 
-        public static Point3D IntersectionOf(Plane plane, Ray3D ray)
-        {
-            return plane.IntersectionWith(ray);
-        }
+//        public static Point3D IntersectionOf(Plane plane, Ray3D ray)
+//        {
+//            return plane.IntersectionWith(ray);
+//        }
 
         public static Point3D operator +(Point3D p, Vector3D v)
         {
@@ -225,16 +225,16 @@ namespace MathNet.Spatial.Euclidean
             return plane.Project(this);
         }
 
-        public Point3D Rotate(Vector3D aboutVector, Angle angle)
-        {
-            return Rotate(aboutVector.Normalize(), angle);
-        }
+//        public Point3D Rotate(Vector3D aboutVector, Angle angle)
+//        {
+//            return Rotate(aboutVector.Normalize(), angle);
+//        }
 
-        public Point3D Rotate(UnitVector3D aboutVector, Angle angle)
-        {
-            var cs = CoordinateSystem.Rotation(angle, aboutVector);
-            return cs.Transform(this);
-        }
+//        public Point3D Rotate(UnitVector3D aboutVector, Angle angle)
+//        {
+//            var cs = CoordinateSystem.Rotation(angle, aboutVector);
+//            return cs.Transform(this);
+//        }
 
         [Pure]
         public Vector3D VectorTo(Point3D p)
@@ -258,23 +258,23 @@ namespace MathNet.Spatial.Euclidean
             return cs.Transform(this);
         }
 
-        public Point3D TransformBy(Matrix<double> m)
-        {
-            return new Point3D(m.Multiply(this.ToVector()));
-        }
-
-        /// <summary>
-        /// Create a new Point3D from a Math.NET Numerics vector of length 3.
-        /// </summary>
-        public static Point3D OfVector(Vector<double> vector)
-        {
-            if (vector.Count != 3)
-            {
-                throw new ArgumentException("The vector length must be 3 in order to convert it to a Point3D");
-            }
-
-            return new Point3D(vector.At(0), vector.At(1), vector.At(2));
-        }
+//        public Point3D TransformBy(Matrix<double> m)
+//        {
+//            return new Point3D(m.Multiply(this.ToVector()));
+//        }
+//
+//        /// <summary>
+//        /// Create a new Point3D from a Math.NET Numerics vector of length 3.
+//        /// </summary>
+//        public static Point3D OfVector(Vector<double> vector)
+//        {
+//            if (vector.Count != 3)
+//            {
+//                throw new ArgumentException("The vector length must be 3 in order to convert it to a Point3D");
+//            }
+//
+//            return new Point3D(vector.At(0), vector.At(1), vector.At(2));
+//        }
 
         /// <summary>
         /// Convert to a Math.NET Numerics dense vector of length 3.

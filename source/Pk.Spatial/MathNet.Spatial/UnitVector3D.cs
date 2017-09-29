@@ -140,10 +140,10 @@ namespace MathNet.Spatial.Euclidean
             return this.ToString(null, CultureInfo.InvariantCulture);
         }
 
-        public string ToString(IFormatProvider provider)
-        {
-            return this.ToString(null, provider);
-        }
+//        public string ToString(IFormatProvider provider)
+//        {
+//            return this.ToString(null, provider);
+//        }
 
         public string ToString(string format, IFormatProvider provider = null)
         {
@@ -166,29 +166,29 @@ namespace MathNet.Spatial.Euclidean
             // ReSharper restore CompareOfFloatsByEqualityOperator
         }
 
-        public bool Equals(UnitVector3D other, double tolerance)
-        {
-            if (tolerance < 0)
-            {
-                throw new ArgumentException("epsilon < 0");
-            }
-
-            return Math.Abs(other.X - this.X) < tolerance &&
-                   Math.Abs(other.Y - this.Y) < tolerance &&
-                   Math.Abs(other.Z - this.Z) < tolerance;
-        }
-
-        public bool Equals(Vector3D other, double tolerance)
-        {
-            if (tolerance < 0)
-            {
-                throw new ArgumentException("epsilon < 0");
-            }
-
-            return Math.Abs(other.X - this.X) < tolerance &&
-                   Math.Abs(other.Y - this.Y) < tolerance &&
-                   Math.Abs(other.Z - this.Z) < tolerance;
-        }
+//        public bool Equals(UnitVector3D other, double tolerance)
+//        {
+//            if (tolerance < 0)
+//            {
+//                throw new ArgumentException("epsilon < 0");
+//            }
+//
+//            return Math.Abs(other.X - this.X) < tolerance &&
+//                   Math.Abs(other.Y - this.Y) < tolerance &&
+//                   Math.Abs(other.Z - this.Z) < tolerance;
+//        }
+//
+//        public bool Equals(Vector3D other, double tolerance)
+//        {
+//            if (tolerance < 0)
+//            {
+//                throw new ArgumentException("epsilon < 0");
+//            }
+//
+//            return Math.Abs(other.X - this.X) < tolerance &&
+//                   Math.Abs(other.Y - this.Y) < tolerance &&
+//                   Math.Abs(other.Z - this.Z) < tolerance;
+//        }
 
         public override bool Equals(object obj)
         {
@@ -233,13 +233,13 @@ namespace MathNet.Spatial.Euclidean
             get { return Matrix<double>.Build.Dense(3, 3, new[] { 0d, Z, -Y, -Z, 0d, X, Y, -X, 0d }); }
         }
 
-        /// <summary>
-        /// The length of the vector not the count of elements
-        /// </summary>
-        public double Length
-        {
-            get { return 1; }
-        }
+//        /// <summary>
+//        /// The length of the vector not the count of elements
+//        /// </summary>
+//        public double Length
+//        {
+//            get { return 1; }
+//        }
 
         public static Vector3D operator +(UnitVector3D v1, UnitVector3D v2)
         {
@@ -302,10 +302,10 @@ namespace MathNet.Spatial.Euclidean
         ////    return new System.Windows.Media.Media3D.Vector3D(p.X, p.Y, p.Z);
         ////}
 
-        public Vector3D ScaleBy(double scaleFactor)
-        {
-            return scaleFactor*this;
-        }
+//        public Vector3D ScaleBy(double scaleFactor)
+//        {
+//            return scaleFactor*this;
+//        }
 
         [Pure]
         public Ray3D ProjectOn(Plane planeToProjectOn)
@@ -313,11 +313,11 @@ namespace MathNet.Spatial.Euclidean
             return planeToProjectOn.Project(this.ToVector3D());
         }
 
-        public Vector3D ProjectOn(UnitVector3D uv)
-        {
-            double pd = DotProduct(uv);
-            return pd*this;
-        }
+//        public Vector3D ProjectOn(UnitVector3D uv)
+//        {
+//            double pd = DotProduct(uv);
+//            return pd*this;
+//        }
 
         /// <summary>
         /// Computes whether or not this unit vector is parallel to another vector using the dot product method and comparing it
@@ -381,24 +381,24 @@ namespace MathNet.Spatial.Euclidean
             return IsParallelTo(other, angleTolerance);
         }
 
-        [Pure]
-        public bool IsPerpendicularTo(Vector3D othervector, double tolerance = 1e-10)
-        {
-            var other = othervector.Normalize();
-            return Math.Abs(this.DotProduct(other)) < tolerance;
-        }
+//        [Pure]
+//        public bool IsPerpendicularTo(Vector3D othervector, double tolerance = 1e-10)
+//        {
+//            var other = othervector.Normalize();
+//            return Math.Abs(this.DotProduct(other)) < tolerance;
+//        }
 
-        [Pure]
-        public bool IsPerpendicularTo(UnitVector3D othervector, double tolerance = 1e-10)
-        {
-            return Math.Abs(this.DotProduct(othervector)) < tolerance;
-        }
+//        [Pure]
+//        public bool IsPerpendicularTo(UnitVector3D othervector, double tolerance = 1e-10)
+//        {
+//            return Math.Abs(this.DotProduct(othervector)) < tolerance;
+//        }
 
-        [Pure]
-        public UnitVector3D Negate()
-        {
-            return new UnitVector3D(-1*this.X, -1*this.Y, -1*this.Z);
-        }
+//        [Pure]
+//        public UnitVector3D Negate()
+//        {
+//            return new UnitVector3D(-1*this.X, -1*this.Y, -1*this.Z);
+//        }
 
         [Pure]
         public double DotProduct(Vector3D v)
@@ -413,19 +413,7 @@ namespace MathNet.Spatial.Euclidean
             return Math.Max(-1, Math.Min(dp, 1));
         }
 
-        [Obsolete("Use - instead")]
-        public Vector3D Subtract(UnitVector3D v)
-        {
-            return new Vector3D(this.X - v.X, this.Y - v.Y, this.Z - v.Z);
-        }
-
-        [Obsolete("Use + instead")]
-        public Vector3D Add(UnitVector3D v)
-        {
-            return new Vector3D(this.X + v.X, this.Y + v.Y, this.Z + v.Z);
-        }
-
-        public UnitVector3D CrossProduct(UnitVector3D inVector3D)
+       public UnitVector3D CrossProduct(UnitVector3D inVector3D)
         {
             var x = (this.Y*inVector3D.Z) - (this.Z*inVector3D.Y);
             var y = (this.Z*inVector3D.X) - (this.X*inVector3D.Z);
@@ -434,14 +422,14 @@ namespace MathNet.Spatial.Euclidean
             return v;
         }
 
-        public Vector3D CrossProduct(Vector3D inVector3D)
-        {
-            var x = (this.Y*inVector3D.Z) - (this.Z*inVector3D.Y);
-            var y = (this.Z*inVector3D.X) - (this.X*inVector3D.Z);
-            var z = (this.X*inVector3D.Y) - (this.Y*inVector3D.X);
-            var v = new Vector3D(x, y, z);
-            return v;
-        }
+//        public Vector3D CrossProduct(Vector3D inVector3D)
+//        {
+//            var x = (this.Y*inVector3D.Z) - (this.Z*inVector3D.Y);
+//            var y = (this.Z*inVector3D.X) - (this.X*inVector3D.Z);
+//            var z = (this.X*inVector3D.Y) - (this.Y*inVector3D.X);
+//            var v = new Vector3D(x, y, z);
+//            return v;
+//        }
 
         public Matrix<double> GetUnitTensorProduct()
         {
@@ -452,15 +440,15 @@ namespace MathNet.Spatial.Euclidean
             return Matrix<double>.Build.Dense(3, 3, new[] { X*X, xy, xz, xy, Y*Y, yz, xz, yz, Z*Z });
         }
 
-        /// <summary>
-        /// Returns signed angle
-        /// </summary>
-        /// <param name="v">The fromVector3D to calculate the signed angle to </param>
-        /// <param name="about">The vector around which to rotate to get the correct sign</param>
-        public Angle SignedAngleTo(Vector3D v, UnitVector3D about)
-        {
-            return SignedAngleTo(v.Normalize(), about);
-        }
+//        /// <summary>
+//        /// Returns signed angle
+//        /// </summary>
+//        /// <param name="v">The fromVector3D to calculate the signed angle to </param>
+//        /// <param name="about">The vector around which to rotate to get the correct sign</param>
+//        public Angle SignedAngleTo(Vector3D v, UnitVector3D about)
+//        {
+//            return SignedAngleTo(v.Normalize(), about);
+//        }
 
         /// <summary>
         /// Returns signed angle
@@ -500,15 +488,15 @@ namespace MathNet.Spatial.Euclidean
             return Angle.FromRadians(signedAngle);
         }
 
-        /// <summary>
-        /// The nearest angle between the vectors
-        /// </summary>
-        /// <param name="v">The other vector</param>
-        /// <returns>The angle</returns>
-        public Angle AngleTo(Vector3D v)
-        {
-            return AngleTo(v.Normalize());
-        }
+//        /// <summary>
+//        /// The nearest angle between the vectors
+//        /// </summary>
+//        /// <param name="v">The other vector</param>
+//        /// <returns>The angle</returns>
+//        public Angle AngleTo(Vector3D v)
+//        {
+//            return AngleTo(v.Normalize());
+//        }
 
         /// <summary>
         /// Compute the angle between this vector and a unit vector using the arccosine of the dot product.
@@ -522,33 +510,33 @@ namespace MathNet.Spatial.Euclidean
             return Angle.FromRadians(angle);
         }
 
-        /// <summary>
-        /// Returns a vector that is this vector rotated the signed angle around the about vector
-        /// </summary>
-        /// <param name="about"></param>
-        /// <param name="angle"></param>
-        /// <returns></returns>
-        public UnitVector3D Rotate(UnitVector3D about, double angle, AngleUnit angleUnit)
-        {
-            return this.Rotate(about, Angle.From(angle, angleUnit));
-        }
+//        /// <summary>
+//        /// Returns a vector that is this vector rotated the signed angle around the about vector
+//        /// </summary>
+//        /// <param name="about"></param>
+//        /// <param name="angle"></param>
+//        /// <returns></returns>
+//        public UnitVector3D Rotate(UnitVector3D about, double angle, AngleUnit angleUnit)
+//        {
+//            return this.Rotate(about, Angle.From(angle, angleUnit));
+//        }
 
-        /// <summary>
-        /// Returns a vector that is this vector rotated the signed angle around the about vector
-        /// </summary>
-        /// <param name="about"></param>
-        /// <param name="angle"></param>
-        /// <returns></returns>
-        public UnitVector3D Rotate(UnitVector3D about, Angle angle)
-        {
-            var cs = CoordinateSystem.Rotation(angle, about);
-            return cs.Transform(this).Normalize();
-        }
+//        /// <summary>
+//        /// Returns a vector that is this vector rotated the signed angle around the about vector
+//        /// </summary>
+//        /// <param name="about"></param>
+//        /// <param name="angle"></param>
+//        /// <returns></returns>
+//        public UnitVector3D Rotate(UnitVector3D about, Angle angle)
+//        {
+//            var cs = CoordinateSystem.Rotation(angle, about);
+//            return cs.Transform(this).Normalize();
+//        }
 
-        public Point3D ToPoint3D()
-        {
-            return new Point3D(this.X, this.Y, this.Z);
-        }
+//        public Point3D ToPoint3D()
+//        {
+//            return new Point3D(this.X, this.Y, this.Z);
+//        }
 
         [Pure]
         public Vector3D ToVector3D()
@@ -556,15 +544,15 @@ namespace MathNet.Spatial.Euclidean
             return new Vector3D(this.X, this.Y, this.Z);
         }
 
-        public Vector3D TransformBy(CoordinateSystem coordinateSystem)
-        {
-            return coordinateSystem.Transform(this.ToVector3D());
-        }
-
-        public Vector3D TransformBy(Matrix<double> m)
-        {
-            return new Vector3D(m.Multiply(this.ToVector()));
-        }
+//        public Vector3D TransformBy(CoordinateSystem coordinateSystem)
+//        {
+//            return coordinateSystem.Transform(this.ToVector3D());
+//        }
+//
+//        public Vector3D TransformBy(Matrix<double> m)
+//        {
+//            return new Vector3D(m.Multiply(this.ToVector()));
+//        }
 
         /// <summary>
         /// Convert to a Math.NET Numerics dense vector of length 3.

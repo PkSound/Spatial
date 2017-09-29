@@ -123,10 +123,10 @@ namespace MathNet.Spatial.Euclidean
             return 0;
         }
 
-        public double AbsoluteDistanceTo(Point3D point)
-        {
-            return Math.Abs(SignedDistanceTo(point));
-        }
+//        public double AbsoluteDistanceTo(Point3D point)
+//        {
+//            return Math.Abs(SignedDistanceTo(point));
+//        }
 
         public Point3D Project(Point3D p, UnitVector3D? projectionDirection = null)
         {
@@ -142,13 +142,13 @@ namespace MathNet.Spatial.Euclidean
             var projectedEndPoint = Project(line3DToProject.EndPoint);
             return new Line3D(projectedStartPoint, projectedEndPoint);
         }
-
-        public Ray3D Project(Ray3D rayToProject)
-        {
-            var projectedThroughPoint = Project(rayToProject.ThroughPoint);
-            var projectedDirection = Project(rayToProject.Direction.ToVector3D());
-            return new Ray3D(projectedThroughPoint, projectedDirection.Direction);
-        }
+//
+//        public Ray3D Project(Ray3D rayToProject)
+//        {
+//            var projectedThroughPoint = Project(rayToProject.ThroughPoint);
+//            var projectedDirection = Project(rayToProject.Direction.ToVector3D());
+//            return new Ray3D(projectedThroughPoint, projectedDirection.Direction);
+//        }
 
         /// <summary>
         /// Project Vector3D onto this plane
@@ -162,15 +162,15 @@ namespace MathNet.Spatial.Euclidean
             return new Ray3D(projectedZero, projectedZero.VectorTo(projectedEndPoint).Normalize());
         }
 
-        /// <summary>
-        /// Project Vector3D onto this plane
-        /// </summary>
-        /// <param name="vector3DToProject">The Vector3D to project</param>
-        /// <returns>The projected Vector3D</returns>
-        public Ray3D Project(UnitVector3D vector3DToProject)
-        {
-            return Project(vector3DToProject.ToVector3D());
-        }
+//        /// <summary>
+//        /// Project Vector3D onto this plane
+//        /// </summary>
+//        /// <param name="vector3DToProject">The Vector3D to project</param>
+//        /// <returns>The projected Vector3D</returns>
+//        public Ray3D Project(UnitVector3D vector3DToProject)
+//        {
+//            return Project(vector3DToProject.ToVector3D());
+//        }
 
         /// <summary>
         /// Finds the intersection of the two planes, throws if they are parallel
@@ -202,36 +202,36 @@ namespace MathNet.Spatial.Euclidean
             return new Ray3D(throughPoint, direction);
         }
 
-        /// <summary>
-        /// Find intersection between Line3D and Plane
-        /// http://geomalgorithms.com/a05-_intersect-1.html
-        /// </summary>
-        /// <param name="line"></param>
-        /// <param name="tolerance"></param>
-        /// <returns>Intersection Point or null</returns>
-        public Point3D? IntersectionWith(Line3D line, double tolerance = float.Epsilon)
-        {
-            if (line.Direction.IsPerpendicularTo(this.Normal)) //either parallel or lies in the plane
-            {
-                Point3D projectedPoint = this.Project(line.StartPoint, line.Direction);
-                if (projectedPoint == line.StartPoint) //Line lies in the plane
-                {
-                    throw new InvalidOperationException("Line lies in the plane"); //Not sure what should be done here
-                }
-                else // Line and plane are parallel
-                {
-                    return null;
-                }
-            }
-            var d = SignedDistanceTo(line.StartPoint);
-            var u = line.StartPoint.VectorTo(line.EndPoint);
-            var t = -1 * d / u.DotProduct(this.Normal);
-            if (t > 1 || t < 0) // They are not intersected
-            {
-                return null;
-            }
-            return line.StartPoint + (t * u);
-        }
+//        /// <summary>
+//        /// Find intersection between Line3D and Plane
+//        /// http://geomalgorithms.com/a05-_intersect-1.html
+//        /// </summary>
+//        /// <param name="line"></param>
+//        /// <param name="tolerance"></param>
+//        /// <returns>Intersection Point or null</returns>
+//        public Point3D? IntersectionWith(Line3D line, double tolerance = float.Epsilon)
+//        {
+//            if (line.Direction.IsPerpendicularTo(this.Normal)) //either parallel or lies in the plane
+//            {
+//                Point3D projectedPoint = this.Project(line.StartPoint, line.Direction);
+//                if (projectedPoint == line.StartPoint) //Line lies in the plane
+//                {
+//                    throw new InvalidOperationException("Line lies in the plane"); //Not sure what should be done here
+//                }
+//                else // Line and plane are parallel
+//                {
+//                    return null;
+//                }
+//            }
+//            var d = SignedDistanceTo(line.StartPoint);
+//            var u = line.StartPoint.VectorTo(line.EndPoint);
+//            var t = -1 * d / u.DotProduct(this.Normal);
+//            if (t > 1 || t < 0) // They are not intersected
+//            {
+//                return null;
+//            }
+//            return line.StartPoint + (t * u);
+//        }
 
         /// <summary>
         /// http://www.cs.princeton.edu/courses/archive/fall00/cs426/lectures/raycast/sld017.htm
@@ -253,13 +253,13 @@ namespace MathNet.Spatial.Euclidean
             return p2 - (1*d*this.Normal);
         }
 
-        public Plane Rotate(UnitVector3D aboutVector, Angle angle)
-        {
-            var rootPoint = this.RootPoint;
-            var rotatedPoint = rootPoint.Rotate(aboutVector, angle);
-            var rotatedPlaneVector = this.Normal.Rotate(aboutVector, angle);
-            return new Plane(rotatedPlaneVector, rotatedPoint);
-        }
+//        public Plane Rotate(UnitVector3D aboutVector, Angle angle)
+//        {
+//            var rootPoint = this.RootPoint;
+//            var rotatedPoint = rootPoint.Rotate(aboutVector, angle);
+//            var rotatedPlaneVector = this.Normal.Rotate(aboutVector, angle);
+//            return new Plane(rotatedPlaneVector, rotatedPoint);
+//        }
 
         /// <summary>
         /// Indicates whether the current object is equal to another object of the same type.

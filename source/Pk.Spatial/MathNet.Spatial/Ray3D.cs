@@ -83,10 +83,10 @@ namespace MathNet.Spatial.Euclidean
             return plane.IntersectionWith(this);
         }
 
-        public bool IsCollinear(Ray3D otherRay, double tolerance = float.Epsilon)
-        {
-            return this.Direction.IsParallelTo(otherRay.Direction, tolerance);
-        }
+//        public bool IsCollinear(Ray3D otherRay, double tolerance = float.Epsilon)
+//        {
+//            return this.Direction.IsParallelTo(otherRay.Direction, tolerance);
+//        }
 
         public bool Equals(Ray3D other)
         {
@@ -94,11 +94,11 @@ namespace MathNet.Spatial.Euclidean
                    this.ThroughPoint.Equals(other.ThroughPoint);
         }
 
-        public bool Equals(Ray3D other, double tolerance)
-        {
-            return this.Direction.Equals(other.Direction, tolerance) &&
-                   this.ThroughPoint.Equals(other.ThroughPoint, tolerance);
-        }
+//        public bool Equals(Ray3D other, double tolerance)
+//        {
+//            return this.Direction.Equals(other.Direction, tolerance) &&
+//                   this.ThroughPoint.Equals(other.ThroughPoint, tolerance);
+//        }
 
         public override bool Equals(object obj)
         {

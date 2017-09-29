@@ -81,19 +81,19 @@ namespace MathNet.Spatial.Euclidean
             get { return this.Origin.ToVector3D(); }
         }
 
-        /// <summary>
-        ///
-        /// </summary>
-        public CoordinateSystem BaseChangeMatrix
-        {
-            get
-            {
-                var matrix = Build.DenseOfColumnVectors(XAxis.ToVector(), YAxis.ToVector(), ZAxis.ToVector());
-                var cs = new CoordinateSystem(this);
-                cs.SetRotationSubMatrix(matrix.Transpose());
-                return cs;
-            }
-        }
+//        /// <summary>
+//        ///
+//        /// </summary>
+//        public CoordinateSystem BaseChangeMatrix
+//        {
+//            get
+//            {
+//                var matrix = Build.DenseOfColumnVectors(XAxis.ToVector(), YAxis.ToVector(), ZAxis.ToVector());
+//                var cs = new CoordinateSystem(this);
+//                cs.SetRotationSubMatrix(matrix.Transpose());
+//                return cs;
+//            }
+//        }
 
         public static CoordinateSystem Parse(string s)
         {
@@ -201,15 +201,15 @@ namespace MathNet.Spatial.Euclidean
             return rt.Transform(pt.Transform(yt.Transform(cs)));
         }
 
-        /// <summary>
-        /// Rotates around Z
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="unit"></param>
-        public static CoordinateSystem Yaw<T>(double a, AngleUnit unit)
-        {
-            return Yaw(Angle.From(a, unit));
-        }
+//        /// <summary>
+//        /// Rotates around Z
+//        /// </summary>
+//        /// <param name="a"></param>
+//        /// <param name="unit"></param>
+//        public static CoordinateSystem Yaw<T>(double a, AngleUnit unit)
+//        {
+//            return Yaw(Angle.From(a, unit));
+//        }
 
         /// <summary>
         /// Rotates around Z
@@ -220,15 +220,15 @@ namespace MathNet.Spatial.Euclidean
             return Rotation(av, UnitVector3D.ZAxis);
         }
 
-        /// <summary>
-        /// Rotates around Y
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="unit"></param>
-        public static CoordinateSystem Pitch<T>(double a, AngleUnit unit)
-        {
-            return Pitch(Angle.From(a, unit));
-        }
+//        /// <summary>
+//        /// Rotates around Y
+//        /// </summary>
+//        /// <param name="a"></param>
+//        /// <param name="unit"></param>
+//        public static CoordinateSystem Pitch<T>(double a, AngleUnit unit)
+//        {
+//            return Pitch(Angle.From(a, unit));
+//        }
 
         /// <summary>
         /// Rotates around Y
@@ -239,15 +239,15 @@ namespace MathNet.Spatial.Euclidean
             return Rotation(av, UnitVector3D.YAxis);
         }
 
-        /// <summary>
-        /// Rotates around X
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="unit"></param>
-        public static CoordinateSystem Roll(double a, AngleUnit unit) 
-        {
-            return Roll(Angle.From(a, unit));
-        }
+//        /// <summary>
+//        /// Rotates around X
+//        /// </summary>
+//        /// <param name="a"></param>
+//        /// <param name="unit"></param>
+//        public static CoordinateSystem Roll(double a, AngleUnit unit) 
+//        {
+//            return Roll(Angle.From(a, unit));
+//        }
 
         /// <summary>
         /// Rotates around X
@@ -336,84 +336,84 @@ namespace MathNet.Spatial.Euclidean
         ////    return new CoordinateSystem(matrix);
         ////}
 
-        /// <summary>
-        /// Resets rotations preserves scales
-        /// </summary>
-        public CoordinateSystem ResetRotations()
-        {
-            var x = this.XAxis.Length * UnitVector3D.XAxis;
-            var y = this.YAxis.Length * UnitVector3D.YAxis;
-            var z = this.ZAxis.Length * UnitVector3D.ZAxis;
-            return new CoordinateSystem(x, y, z, this.Origin);
-        }
+//        /// <summary>
+//        /// Resets rotations preserves scales
+//        /// </summary>
+//        public CoordinateSystem ResetRotations()
+//        {
+//            var x = this.XAxis.Length * UnitVector3D.XAxis;
+//            var y = this.YAxis.Length * UnitVector3D.YAxis;
+//            var z = this.ZAxis.Length * UnitVector3D.ZAxis;
+//            return new CoordinateSystem(x, y, z, this.Origin);
+//        }
 
-        public CoordinateSystem RotateCoordSysAroundVector(Vector3D aboutVector3D, double angle, AngleUnit angleUnit)
-        {
-            var rcs = Rotation(Angle.From(angle, angleUnit), aboutVector3D.Normalize());
-            return rcs.Transform(this);
-        }
-
-        public CoordinateSystem RotateNoReset(double yaw, double pitch, double roll, AngleUnit angleUnit) 
-        {
-            var rcs = Rotation(yaw, pitch, roll, angleUnit);
-            return rcs.Transform(this);
-        }
-
-        public CoordinateSystem OffsetBy(Vector3D v)
-        {
-            return new CoordinateSystem(this.Origin + v, this.XAxis, this.YAxis, this.ZAxis);
-        }
-
-        public CoordinateSystem OffsetBy(UnitVector3D v)
-        {
-            return new CoordinateSystem(this.Origin + v, this.XAxis, this.YAxis, this.ZAxis);
-        }
-
-        public Ray3D TransformToCoordSys(Ray3D r)
-        {
-            var p = r.ThroughPoint;
-            var uv = r.Direction;
-
-            // positionen och vektorn transformeras
-            var baseChangeMatrix = this.BaseChangeMatrix;
-            var point = baseChangeMatrix.Transform(p) + this.OffsetToBase;
-            var direction = uv.TransformBy(baseChangeMatrix);
-            return new Ray3D(point, direction);
-        }
-
-        public Point3D TransformToCoordSys(Point3D p)
-        {
-            var baseChangeMatrix = this.BaseChangeMatrix;
-            var point = baseChangeMatrix.Transform(p) + this.OffsetToBase;
-            return point;
-        }
-
-        public Ray3D TransformFromCoordSys(Ray3D r)
-        {
-            var p = r.ThroughPoint;
-            var uv = r.Direction;
-
-            // positionen och vektorn transformeras
-            var point = this.BaseChangeMatrix.Invert().Transform(p) + this.OffsetToBase;
-            var direction = this.BaseChangeMatrix.Invert().Transform(uv);
-            return new Ray3D(point, direction);
-        }
-
-        public Point3D TransformFromCoordSys(Point3D p)
-        {
-            var point = this.BaseChangeMatrix.Invert().Transform(p) + this.OffsetToBase;
-            return point;
-        }
-
-        public CoordinateSystem SetRotationSubMatrix(Matrix<double> r)
-        {
-            return SetRotationSubMatrix(r, this);
-        }
-
-        public CoordinateSystem SetTranslation(Vector3D v)
-        {
-            return new CoordinateSystem(v.ToPoint3D(), this.XAxis, this.YAxis, this.ZAxis);
-        }
+//        public CoordinateSystem RotateCoordSysAroundVector(Vector3D aboutVector3D, double angle, AngleUnit angleUnit)
+//        {
+//            var rcs = Rotation(Angle.From(angle, angleUnit), aboutVector3D.Normalize());
+//            return rcs.Transform(this);
+//        }
+//
+//        public CoordinateSystem RotateNoReset(double yaw, double pitch, double roll, AngleUnit angleUnit) 
+//        {
+//            var rcs = Rotation(yaw, pitch, roll, angleUnit);
+//            return rcs.Transform(this);
+//        }
+//
+//        public CoordinateSystem OffsetBy(Vector3D v)
+//        {
+//            return new CoordinateSystem(this.Origin + v, this.XAxis, this.YAxis, this.ZAxis);
+//        }
+//
+//        public CoordinateSystem OffsetBy(UnitVector3D v)
+//        {
+//            return new CoordinateSystem(this.Origin + v, this.XAxis, this.YAxis, this.ZAxis);
+//        }
+//
+//        public Ray3D TransformToCoordSys(Ray3D r)
+//        {
+//            var p = r.ThroughPoint;
+//            var uv = r.Direction;
+//
+//            // positionen och vektorn transformeras
+//            var baseChangeMatrix = this.BaseChangeMatrix;
+//            var point = baseChangeMatrix.Transform(p) + this.OffsetToBase;
+//            var direction = uv.TransformBy(baseChangeMatrix);
+//            return new Ray3D(point, direction);
+//        }
+//
+//        public Point3D TransformToCoordSys(Point3D p)
+//        {
+//            var baseChangeMatrix = this.BaseChangeMatrix;
+//            var point = baseChangeMatrix.Transform(p) + this.OffsetToBase;
+//            return point;
+//        }
+//
+//        public Ray3D TransformFromCoordSys(Ray3D r)
+//        {
+//            var p = r.ThroughPoint;
+//            var uv = r.Direction;
+//
+//            // positionen och vektorn transformeras
+//            var point = this.BaseChangeMatrix.Invert().Transform(p) + this.OffsetToBase;
+//            var direction = this.BaseChangeMatrix.Invert().Transform(uv);
+//            return new Ray3D(point, direction);
+//        }
+//
+//        public Point3D TransformFromCoordSys(Point3D p)
+//        {
+//            var point = this.BaseChangeMatrix.Invert().Transform(p) + this.OffsetToBase;
+//            return point;
+//        }
+//
+//        public CoordinateSystem SetRotationSubMatrix(Matrix<double> r)
+//        {
+//            return SetRotationSubMatrix(r, this);
+//        }
+//
+//        public CoordinateSystem SetTranslation(Vector3D v)
+//        {
+//            return new CoordinateSystem(v.ToPoint3D(), this.XAxis, this.YAxis, this.ZAxis);
+//        }
 
         public Matrix<double> GetRotationSubMatrix()
         {
@@ -466,40 +466,40 @@ namespace MathNet.Spatial.Euclidean
             return new CoordinateSystem(this.Multiply(cs));
         }
 
-        /// <summary>
-        /// Transforms a line and returns the transformed.
-        /// </summary>
-        /// <param name="l"></param>
-        /// <returns></returns>
-        public Line3D Transform(Line3D l)
-        {
-            return new Line3D(this.Transform(l.StartPoint), this.Transform(l.EndPoint));
-        }
-
-        /// <summary>
-        /// Transforms a ray and returns the transformed.
-        /// </summary>
-        /// <param name="ray"></param>
-        /// <returns></returns>
-        public Ray3D Transform(Ray3D ray)
-        {
-            return new Ray3D(this.Transform(ray.ThroughPoint), this.Transform(ray.Direction));
-        }
-
-        public CoordinateSystem TransformBy(Matrix<double> matrix)
-        {
-            return new CoordinateSystem(matrix.Multiply(this));
-        }
-
-        /// <summary>
-        /// Transfomes this by the coordinate system and returns the tranformed.
-        /// </summary>
-        /// <param name="cs"></param>
-        /// <returns></returns>
-        public CoordinateSystem TransformBy(CoordinateSystem cs)
-        {
-            return cs.Transform(this);
-        }
+//        /// <summary>
+//        /// Transforms a line and returns the transformed.
+//        /// </summary>
+//        /// <param name="l"></param>
+//        /// <returns></returns>
+//        public Line3D Transform(Line3D l)
+//        {
+//            return new Line3D(this.Transform(l.StartPoint), this.Transform(l.EndPoint));
+//        }
+//
+//        /// <summary>
+//        /// Transforms a ray and returns the transformed.
+//        /// </summary>
+//        /// <param name="ray"></param>
+//        /// <returns></returns>
+//        public Ray3D Transform(Ray3D ray)
+//        {
+//            return new Ray3D(this.Transform(ray.ThroughPoint), this.Transform(ray.Direction));
+//        }
+//
+//        public CoordinateSystem TransformBy(Matrix<double> matrix)
+//        {
+//            return new CoordinateSystem(matrix.Multiply(this));
+//        }
+//
+//        /// <summary>
+//        /// Transfomes this by the coordinate system and returns the tranformed.
+//        /// </summary>
+//        /// <param name="cs"></param>
+//        /// <returns></returns>
+//        public CoordinateSystem TransformBy(CoordinateSystem cs)
+//        {
+//            return cs.Transform(this);
+//        }
 
         public CoordinateSystem Invert()
         {
