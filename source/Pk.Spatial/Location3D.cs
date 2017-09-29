@@ -22,10 +22,10 @@ namespace Pk.Spatial
 
 
     public static Location3D Origin => new Location3D();
-    public bool Equals(Location3D other) { return this.underlyingPoint.Equals(other.FreezeTo(Length.BaseUnit)); }
     public Length X => Length.From(this.underlyingPoint.X, Length.BaseUnit);
     public Length Y => Length.From(this.underlyingPoint.Y, Length.BaseUnit);
     public Length Z => Length.From(this.underlyingPoint.Z, Length.BaseUnit);
+    public bool Equals(Location3D other) { return this.underlyingPoint.Equals(other.FreezeTo(Length.BaseUnit)); }
     public Point3D FreezeTo(LengthUnit unit) { return new Point3D(this.X.As(unit), this.Y.As(unit), this.Z.As(unit)); }
     public Displacement3D DisplacementFromOrigin() { return this - Location3D.Origin; }
     public Displacement3D DisplacementTo(Location3D other) { return other - this; }
