@@ -36,10 +36,6 @@
       <HintPath>..\..\libraries\Nuget\MathNet.Numerics.3.0.2\lib\net40\MathNet.Numerics.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MathNet.Spatial">
-      <HintPath>..\..\libraries\Nuget\MathNet.Spatial.0.2.0-alpha\lib\net40\MathNet.Spatial.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
@@ -55,12 +51,32 @@
     <Compile Include="ForceVector3D.cs" />
     <Compile Include="IVector3D.cs" />
     <Compile Include="Location3D.cs" />
+    <Compile Include="MathNet.Spatial\Circle3D.cs" />
+    <Compile Include="MathNet.Spatial\CoordinateSystem.cs" />
+    <Compile Include="MathNet.Spatial\EulerAngles.cs" />
+    <Compile Include="MathNet.Spatial\Line2D.cs" />
+    <Compile Include="MathNet.Spatial\Line3D.cs" />
+    <Compile Include="MathNet.Spatial\Matrix2D.cs" />
+    <Compile Include="MathNet.Spatial\Matrix3D.cs" />
+    <Compile Include="MathNet.Spatial\Parser.cs" />
+    <Compile Include="MathNet.Spatial\Plane.cs" />
+    <Compile Include="MathNet.Spatial\Point2D.cs" />
+    <Compile Include="MathNet.Spatial\Point3D.cs" />
+    <Compile Include="MathNet.Spatial\Polygon2D.cs" />
+    <Compile Include="MathNet.Spatial\PolyLine2D.cs" />
+    <Compile Include="MathNet.Spatial\PolyLine3D.cs" />
+    <Compile Include="MathNet.Spatial\Quaternion.cs" />
+    <Compile Include="MathNet.Spatial\Ray3D.cs" />
+    <Compile Include="MathNet.Spatial\UnitVector3D.cs" />
+    <Compile Include="MathNet.Spatial\Vector2D.cs" />
+    <Compile Include="MathNet.Spatial\Vector3D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IPoint3D.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

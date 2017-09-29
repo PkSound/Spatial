@@ -39,10 +39,6 @@
       <HintPath>..\..\libraries\Nuget\MathNet.Numerics.3.0.2\lib\net40\MathNet.Numerics.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MathNet.Spatial">
-      <HintPath>..\..\libraries\Nuget\MathNet.Spatial.0.2.0-alpha\lib\net40\MathNet.Spatial.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Shouldly">
       <HintPath>..\..\libraries\Nuget\Shouldly.2.8.2\lib\net451\Shouldly.dll</HintPath>

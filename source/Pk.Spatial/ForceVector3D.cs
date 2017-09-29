@@ -2,7 +2,6 @@
 using MathNet.Spatial.Euclidean;
 using UnitsNet;
 using UnitsNet.Units;
-using AngleUnit = MathNet.Spatial.Units.AngleUnit;
 
 namespace Pk.Spatial
 {
@@ -40,7 +39,7 @@ namespace Pk.Spatial
     public ForceVector3D Rotate(UnitVector3D axisOfRotation, Angle angleOfRotation)
     {
       var degrees = angleOfRotation.Degrees;
-      var rotatedUnderlyingVector = this.underlyingVector.Rotate(axisOfRotation, degrees, AngleUnit.Degrees);
+      var rotatedUnderlyingVector = this.underlyingVector.Rotate(axisOfRotation, degrees, AngleUnit.Degree);
 
       return ForceVector3D.From(rotatedUnderlyingVector, Force.BaseUnit);
     }

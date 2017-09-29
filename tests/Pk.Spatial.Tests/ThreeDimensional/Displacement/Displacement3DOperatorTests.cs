@@ -1,8 +1,6 @@
-using System.Runtime.InteropServices;
 using MathNet.Spatial.Euclidean;
 using Shouldly;
 using UnitsNet;
-using UnitsNet.Units;
 using Xunit;
 
 namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
