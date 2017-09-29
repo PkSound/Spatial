@@ -2,7 +2,6 @@
 using MathNet.Spatial.Euclidean;
 using UnitsNet;
 using UnitsNet.Units;
-using AngleUnit = MathNet.Spatial.Units.AngleUnit;
 
 namespace Pk.Spatial
 {
@@ -16,6 +15,11 @@ namespace Pk.Spatial
       this.underlyingVector = new Vector3D(x.As(Force.BaseUnit), y.As(Force.BaseUnit), z.As(Force.BaseUnit));
     }
 
+
+    public Force Magnitude => Force.From(this.underlyingVector.Length, Force.BaseUnit);
+    public Force X => Force.From(this.underlyingVector.X, Force.BaseUnit);
+    public Force Y => Force.From(this.underlyingVector.Y, Force.BaseUnit);
+    public Force Z => Force.From(this.underlyingVector.Z, Force.BaseUnit);
 
     public bool Equals(ForceVector3D other) { return this.underlyingVector.Equals(other.FreezeTo(Force.BaseUnit)); }
 
@@ -40,7 +44,7 @@ namespace Pk.Spatial
     public ForceVector3D Rotate(UnitVector3D axisOfRotation, Angle angleOfRotation)
     {
       var degrees = angleOfRotation.Degrees;
-      var rotatedUnderlyingVector = this.underlyingVector.Rotate(axisOfRotation, degrees, AngleUnit.Degrees);
+      var rotatedUnderlyingVector = this.underlyingVector.Rotate(axisOfRotation, degrees, AngleUnit.Degree);
 
       return ForceVector3D.From(rotatedUnderlyingVector, Force.BaseUnit);
     }
@@ -48,10 +52,6 @@ namespace Pk.Spatial
 
     public UnitVector3D Normalize(ForceUnit unit) { return this.FreezeTo(unit).Normalize(); }
     public ForceVector3D Negate() { return ForceVector3D.From(this.underlyingVector.Negate(), Force.BaseUnit); }
-    public Force X => Force.From(this.underlyingVector.X, Force.BaseUnit);
-    public Force Y => Force.From(this.underlyingVector.Y, Force.BaseUnit);
-    public Force Z => Force.From(this.underlyingVector.Z, Force.BaseUnit);
-    public Force Magnitude => Force.From(this.underlyingVector.Length, Force.BaseUnit);
 
 
     public override bool Equals(object obj)
@@ -127,6 +127,6 @@ namespace Pk.Spatial
 
     public static ForceVector3D operator -(ForceVector3D lhs) { return lhs.Negate(); }
     public override string ToString() { return $"{{{this.X}, {this.Y}, {this.Z}}}"; }
-    public static ForceVector3D Zero() { return new ForceVector3D();}
+    public static ForceVector3D Zero() { return new ForceVector3D(); }
   }
 }

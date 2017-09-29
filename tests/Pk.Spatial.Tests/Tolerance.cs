@@ -1,6 +1,6 @@
 namespace Pk.Spatial.Tests
 {
-  internal static class Tolerance
+  public static class Tolerance
   {
     public const double ToWithinOne = 1.0;
     public const double ToWithinOneTenth = 0.1;

@@ -2,7 +2,6 @@
 using MathNet.Spatial.Euclidean;
 using UnitsNet;
 using UnitsNet.Units;
-using AngleUnit = MathNet.Spatial.Units.AngleUnit;
 
 namespace Pk.Spatial
 {
@@ -20,19 +19,19 @@ namespace Pk.Spatial
     }
 
 
-    public bool Equals(Displacement3D other) { return this.underlyingVector.Equals(other.FreezeTo(Length.BaseUnit)); }
     public Length Magnitude => Length.From(this.underlyingVector.Length, Length.BaseUnit);
+
+    public Length X => Length.From(this.underlyingVector.X, Length.BaseUnit);
+    public Length Y => Length.From(this.underlyingVector.Y, Length.BaseUnit);
+    public Length Z => Length.From(this.underlyingVector.Z, Length.BaseUnit);
+
+    public bool Equals(Displacement3D other) { return this.underlyingVector.Equals(other.FreezeTo(Length.BaseUnit)); }
 
 
     public Vector3D FreezeTo(LengthUnit unit)
     {
       return new Vector3D(this.X.As(unit), this.Y.As(unit), this.Z.As(unit));
     }
-
-
-    public Length X => Length.From(this.underlyingVector.X, Length.BaseUnit);
-    public Length Y => Length.From(this.underlyingVector.Y, Length.BaseUnit);
-    public Length Z => Length.From(this.underlyingVector.Z, Length.BaseUnit);
 
 
     public Angle AngleTo(Displacement3D other)
@@ -52,7 +51,7 @@ namespace Pk.Spatial
     public Displacement3D Rotate(UnitVector3D axisOfRotation, Angle angleOfRotation)
     {
       var degrees = angleOfRotation.Degrees;
-      var rotatedUnderlyingVector = this.underlyingVector.Rotate(axisOfRotation, degrees, AngleUnit.Degrees);
+      var rotatedUnderlyingVector = this.underlyingVector.Rotate(axisOfRotation, degrees, AngleUnit.Degree);
 
       return Displacement3D.From(rotatedUnderlyingVector, Length.BaseUnit);
     }
