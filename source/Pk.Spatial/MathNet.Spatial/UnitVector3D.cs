@@ -58,6 +58,11 @@ namespace MathNet.Spatial.Euclidean
       }
     }
 
+    /// <summary>
+    ///   The length of the vector not the count of elements
+    /// </summary>
+    public double Length { get { return Math.Sqrt((this.X * this.X) + (this.Y * this.Y) + (this.Z * this.Z)); } }
+
 
     internal Matrix<double> CrossProductMatrix
     {
@@ -108,6 +113,14 @@ namespace MathNet.Spatial.Euclidean
       // ReSharper restore CompareOfFloatsByEqualityOperator
     }
 
+    /// <summary>
+    ///   Inverses the direction of the vector, equivalent to multiplying by -1
+    /// </summary>
+    /// <returns></returns>
+    public UnitVector3D Negate()
+    {
+      return new UnitVector3D(-1 * this.X, -1 * this.Y, -1 * this.Z);
+    }
 
     public bool Equals(Vector3D other)
     {
@@ -166,16 +179,16 @@ namespace MathNet.Spatial.Euclidean
 
 
     //        [Pure]
-    //        public bool IsPerpendicularTo(Vector3D othervector, double tolerance = 1e-10)
+    //        public bool IsPerpendicularTo(Vector3D otherVector, double tolerance = 1e-10)
     //        {
-    //            var other = othervector.Normalize();
+    //            var other = otherVector.Normalize();
     //            return Math.Abs(this.DotProduct(other)) < tolerance;
     //        }
 
     //        [Pure]
-    //        public bool IsPerpendicularTo(UnitVector3D othervector, double tolerance = 1e-10)
+    //        public bool IsPerpendicularTo(UnitVector3D otherVector, double tolerance = 1e-10)
     //        {
-    //            return Math.Abs(this.DotProduct(othervector)) < tolerance;
+    //            return Math.Abs(this.DotProduct(otherVector)) < tolerance;
     //        }
 
     //        [Pure]
@@ -583,6 +596,45 @@ namespace MathNet.Spatial.Euclidean
     public Vector3D ToVector3D()
     {
       return new Vector3D(this.X, this.Y, this.Z);
+    }
+
+
+    /// <summary>
+    ///   Returns a vector that is this vector rotated the signed angle around the about vector
+    /// </summary>
+    /// <param name="about"></param>
+    /// <param name="angle"></param>
+    /// <returns></returns>
+    public Vector3D Rotate(UnitVector3D about, Angle angle)
+    {
+      var cs = CoordinateSystem.Rotation(angle, about);
+      return cs.Transform(this);
+    }
+
+
+    /// <summary>
+    ///   Computes whether or not this vector is perpendicular to another vector using the dot product method and
+    ///   comparing it to within a specified tolerance
+    /// </summary>
+    /// <param name="otherVector"></param>
+    /// <param name="tolerance"></param>
+    /// <returns>true if the vector dot product is within the given tolerance of zero, false if not</returns>
+    public bool IsPerpendicularTo(Vector3D otherVector, double tolerance = 1e-6)
+    {
+      return this.IsPerpendicularTo(otherVector.Normalize(), tolerance);
+    }
+
+    /// <summary>
+    ///   Computes whether or not this vector is perpendicular to another vector using the dot product method and
+    ///   comparing it to within a specified tolerance
+    /// </summary>
+    /// <param name="othervector"></param>
+    /// <param name="tolerance"></param>
+    /// <returns>true if the vector dot product is within the given tolerance of zero, false if not</returns>
+    public bool IsPerpendicularTo(UnitVector3D othervector, double tolerance = 1e-6)
+    {
+      var other = othervector;
+      return Math.Abs(this.DotProduct(other)) < tolerance;
     }
   }
 }

@@ -402,7 +402,6 @@ namespace MathNet.Spatial.Euclidean
     /// <summary>
     ///   Returns a vector that is this vector rotated the signed angle around the about vector
     /// </summary>
-    /// <typeparam name="T">Constraining it like this does not box</typeparam>
     /// <param name="about"></param>
     /// <param name="angle"></param>
     /// <param name="angleUnit"></param>
