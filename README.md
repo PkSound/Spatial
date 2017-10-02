@@ -9,7 +9,7 @@ At PK Sound we need to be able to model physical systems of interconnected speak
 By using Units.Net and MathNet.Spatial together, new types such as Location3D can be created that offer type-safety and convenient unit conversion to projects that include geometric concerns. Now we know that our speaker is located at, say, {3.2 ft, 4.8 ft, 20.1 ft}. Better!
 
 # Build Status
-[![Build status](https://ci.appveyor.com/api/projects/status/jrhpgefql680lyb6/branch/develop?svg=true)](https://ci.appveyor.com/project/JKSnd/spatial/branch/develop)
+[![Build status](https://ci.appveyor.com/api/projects/status/jrhpgefql680lyb6?svg=true)](https://ci.appveyor.com/project/JKSnd/spatial)
 [![Coverage Status](https://coveralls.io/repos/github/PkSound/Spatial/badge.svg)](https://coveralls.io/github/PkSound/Spatial)
 
 # Deployment
