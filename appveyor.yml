@@ -34,11 +34,14 @@ artifacts:
   - path: .\coverage.xml
   - path: .\xunit-results.xml
 
-  
+
+branches:
+  only:
+    - master
+    - develop
+
 deploy:
   provider: NuGet
   api_key:
     secure: BUCXu9ZvnXlGLJHtJTxMDa8nT3UavyVq8azak1NAfiYBLkd/x1n37p+WPB8wSP8i
   artifact: /.*\.nupkg/
-  on:
-    branch: master develop
