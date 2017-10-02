@@ -83,10 +83,10 @@ namespace MathNet.Spatial.UnitTests
                                 string message = "")
     {
       if (string.IsNullOrEmpty(message)) message = string.Format("Expected {0} but was {1}", expected, actual);
-      expected.Values.Length.ShouldBe(actual.Values.Length, message);
+      expected.Values.Length.ShouldBe(expected.Values.Length, message);
       for (int i = 0; i < expected.Values.Length; i++)
       {
-        expected.Values[i].ShouldBe(actual.Values[i], tolerance);
+        actual.Values[i].ShouldBe(expected.Values[i], tolerance);
       }
     }
 
@@ -96,10 +96,10 @@ namespace MathNet.Spatial.UnitTests
       if (string.IsNullOrEmpty(message))
         message = string.Format("Expected {0} but was {1}", "{" + string.Join(",", expected) + "}",
                                 "{" + string.Join(",", actual) + "}");
-      expected.Length.ShouldBe(actual.Length, message);
+      expected.Length.ShouldBe(expected.Length, message);
       for (int i = 0; i < expected.Length; i++)
       {
-        expected[i].ShouldBe(actual[i], tolerance);
+        actual[i].ShouldBe(expected[i], tolerance);
       }
     }
 
@@ -122,44 +122,44 @@ namespace MathNet.Spatial.UnitTests
     {
       AssertGeometry.AreEqual(expected.Normal, actual.Normal, tolerance, message);
       AssertGeometry.AreEqual(expected.RootPoint, actual.RootPoint, tolerance, message);
-      expected.D.ShouldBe(actual.D, tolerance, message);
+      actual.D.ShouldBe(expected.D, tolerance, message);
     }
 
 
     public static void AreEqual(Matrix<double> expected, Matrix<double> actual, double tolerance = 1e-6)
     {
-      expected.RowCount.ShouldBe(actual.RowCount);
-      expected.ColumnCount.ShouldBe(actual.ColumnCount);
+      expected.RowCount.ShouldBe(expected.RowCount);
+      expected.ColumnCount.ShouldBe(expected.ColumnCount);
       double[] expectedRowWiseArray = expected.ToRowWiseArray();
       double[] actualRowWiseArray = actual.ToRowWiseArray();
       for (int i = 0; i < expectedRowWiseArray.Length; i++)
       {
-        expectedRowWiseArray[i].ShouldBe(actualRowWiseArray[i], tolerance);
+         actualRowWiseArray[i].ShouldBe(expectedRowWiseArray[i], tolerance);
       }
     }
 
 
     private static void assertEqual(Point3D expected, Point3D actual, double tolerance, string message)
     {
-      expected.X.ShouldBe(actual.X, tolerance, message);
-      expected.Y.ShouldBe(actual.Y, tolerance, message);
-      expected.Z.ShouldBe(actual.Z, tolerance, message);
+      actual.X.ShouldBe(expected.X, tolerance, message);
+      actual.Y.ShouldBe(expected.Y, tolerance, message);
+      actual.Z.ShouldBe(expected.Z, tolerance, message);
     }
 
 
     private static void assertEqual(Vector3D expected, Vector3D actual, double tolerance, string message)
     {
-      expected.X.ShouldBe(actual.X, tolerance, message);
-      expected.Y.ShouldBe(actual.Y, tolerance, message);
-      expected.Z.ShouldBe(actual.Z, tolerance, message);
+      actual.X.ShouldBe(expected.X, tolerance, message);
+      actual.Y.ShouldBe(expected.Y, tolerance, message);
+      actual.Z.ShouldBe(expected.Z, tolerance, message);
     }
 
 
     private static void assertEqual(UnitVector3D expected, UnitVector3D actual, double tolerance, string message)
     {
-      expected.X.ShouldBe(actual.X, tolerance, message);
-      expected.Y.ShouldBe(actual.Y, tolerance, message);
-      expected.Z.ShouldBe(actual.Z, tolerance, message);
+      actual.X.ShouldBe(expected.X, tolerance, message);
+      actual.Y.ShouldBe(expected.Y, tolerance, message);
+      actual.Z.ShouldBe(expected.Z, tolerance, message);
     }
   }
 }
