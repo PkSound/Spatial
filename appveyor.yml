@@ -43,5 +43,5 @@ branches:
 deploy:
   provider: NuGet
   api_key:
-    secure: BUCXu9ZvnXlGLJHtJTxMDa8nT3UavyVq8azak1NAfiYBLkd/x1n37p+WPB8wSP8i
+    secure: z2kMjA0PCcgHae4mRrz9MkutI/F38qns4eQVowLlpM13mLpFWkgmlR5gBPWdkKvQ
   artifact: /.*\.nupkg/
