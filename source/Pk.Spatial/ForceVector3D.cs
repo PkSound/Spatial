@@ -102,14 +102,23 @@ namespace Pk.Spatial
 
     public static ForceVector3D operator /(ForceVector3D lhs, double rhs)
     {
-      var frozenToStandard = lhs.FreezeTo(Force.BaseUnit)/rhs;
+      var frozenToStandard = lhs.FreezeTo(Force.BaseUnit) / rhs;
       return ForceVector3D.From(frozenToStandard, Force.BaseUnit);
+    }
+
+    public static ForceVector3D operator /(ForceVector3D lhs, Force rhs)
+    {
+      return lhs/rhs.As(Force.BaseUnit);
     }
 
 
     public static bool operator ==(ForceVector3D lhs, ForceVector3D rhs) { return lhs.Equals(rhs); }
     public static bool operator !=(ForceVector3D lhs, ForceVector3D rhs) { return !(lhs == rhs); }
 
+    public static ForceVector3D operator *(Force lhs, ForceVector3D rhs)
+    {
+      return lhs.As(Force.BaseUnit)*rhs;
+    }
 
     public static ForceVector3D operator *(double lhs, ForceVector3D rhs)
     {

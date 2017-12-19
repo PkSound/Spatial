@@ -29,13 +29,27 @@ namespace Pk.Spatial.Tests.ThreeDimensional.ForceVector
       (some == other).ShouldBeFalse();
     }
 
+    [Fact]
+    public void DividingByAForceDecreasesMagnitude()
+    {
+      var forceVector = ForceVector3D.FromNewtons(3, 4, 5);
+      var result = forceVector / Force.FromNewtons(4.7);
+      result.Magnitude.Newtons.ShouldBe(forceVector.Magnitude.Newtons / 4.7, Tolerance.ToWithinOneHundredth);
+
+      var normalized1 = forceVector.NormalizeToNewtons();
+      var normalized2 = result.NormalizeToNewtons();
+
+      normalized2.X.ShouldBe(normalized1.X, Tolerance.ToWithinUnitsNetError);
+      normalized2.Y.ShouldBe(normalized1.Y, Tolerance.ToWithinUnitsNetError);
+      normalized2.Z.ShouldBe(normalized1.Z, Tolerance.ToWithinUnitsNetError);
+    }
 
     [Fact]
     public void DividingByAScalarDecreasesMagnitude()
     {
       var force = ForceVector3D.FromNewtons(3, 4, 5);
       var result = force/3.2;
-      result.Magnitude.Newtons.ShouldBe(force.Magnitude.Newtons/3.2, Tolerance.ToWithinOne);
+      result.Magnitude.Newtons.ShouldBe(force.Magnitude.Newtons/3.2, Tolerance.ToWithinOneHundredth);
 
       var normalized1 = force.NormalizeToNewtons();
       var normalized2 = result.NormalizeToNewtons();
@@ -100,11 +114,26 @@ namespace Pk.Spatial.Tests.ThreeDimensional.ForceVector
 
 
     [Fact]
+    public void MultiplyingByAForceIncreasesMagnitude()
+    {
+      var forceVector = ForceVector3D.FromNewtons(3, 4, 5);
+      var result = Force.FromNewtons(9.2) * forceVector;
+      result.Magnitude.Newtons.ShouldBe(forceVector.Magnitude.Newtons * 9.2, Tolerance.ToWithinOneHundredth);
+
+      var normalized1 = forceVector.NormalizeToNewtons();
+      var normalized2 = result.NormalizeToNewtons();
+
+      normalized2.X.ShouldBe(normalized1.X, Tolerance.ToWithinUnitsNetError);
+      normalized2.Y.ShouldBe(normalized1.Y, Tolerance.ToWithinUnitsNetError);
+      normalized2.Z.ShouldBe(normalized1.Z, Tolerance.ToWithinUnitsNetError);
+    }
+
+    [Fact]
     public void MultiplyingByAScalarIncreasesMagnitude()
     {
       var force = ForceVector3D.FromNewtons(3, 4, 5);
       var result = 7.5*force;
-      result.Magnitude.Newtons.ShouldBe(force.Magnitude.Newtons*7.5, Tolerance.ToWithinOne);
+      result.Magnitude.Newtons.ShouldBe(force.Magnitude.Newtons*7.5, Tolerance.ToWithinOneHundredth);
 
       var normalized1 = force.NormalizeToNewtons();
       var normalized2 = result.NormalizeToNewtons();

@@ -106,6 +106,10 @@ namespace Pk.Spatial
       return Displacement3D.From(frozenToStandard, Length.BaseUnit);
     }
 
+    public static Displacement3D operator /(Displacement3D lhs, Length rhs)
+    {
+      return lhs / rhs.As(Length.BaseUnit);
+    }
 
     public static Displacement3D operator /(Displacement3D lhs, double rhs)
     {
@@ -117,6 +121,10 @@ namespace Pk.Spatial
     public static bool operator ==(Displacement3D lhs, Displacement3D rhs) { return lhs.Equals(rhs); }
     public static bool operator !=(Displacement3D lhs, Displacement3D rhs) { return !(lhs == rhs); }
 
+    public static Displacement3D operator *(Length lhs, Displacement3D rhs)
+    {
+      return lhs.As(Length.BaseUnit)*rhs;
+    }
 
     public static Displacement3D operator *(double lhs, Displacement3D rhs)
     {

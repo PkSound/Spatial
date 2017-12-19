@@ -81,7 +81,7 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
     {
       var displacement = Displacement3D.FromMeters(3, 4, 5);
       var result = displacement/3.2;
-      result.Magnitude.Meters.ShouldBe(displacement.Magnitude.Meters/3.2, Tolerance.ToWithinOne);
+      result.Magnitude.Meters.ShouldBe(displacement.Magnitude.Meters/3.2, Tolerance.ToWithinOneHundredth);
 
       var normalized1 = displacement.NormalizeToMeters();
       var normalized2 = result.NormalizeToMeters();
@@ -91,6 +91,20 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
       normalized2.Z.ShouldBe(normalized1.Z, Tolerance.ToWithinUnitsNetError);
     }
 
+    [Fact]
+    public void DividingByALengthDecreasesMagnitude()
+    {
+      var displacement = Displacement3D.FromMeters(3, 4, 5);
+      var result = displacement / Length.FromMeters(5);
+      result.Magnitude.Meters.ShouldBe(displacement.Magnitude.Meters / 5, Tolerance.ToWithinOneHundredth);
+
+      var normalized1 = displacement.NormalizeToMeters();
+      var normalized2 = result.NormalizeToMeters();
+
+      normalized2.X.ShouldBe(normalized1.X, Tolerance.ToWithinUnitsNetError);
+      normalized2.Y.ShouldBe(normalized1.Y, Tolerance.ToWithinUnitsNetError);
+      normalized2.Z.ShouldBe(normalized1.Z, Tolerance.ToWithinUnitsNetError);
+    }
 
     [Fact]
     public void EqualDisplacementsShouldHaveSameHashCode()
@@ -116,13 +130,27 @@ namespace Pk.Spatial.Tests.ThreeDimensional.Displacement
       d.Equals(null).ShouldBeFalse();
     }
 
+    [Fact]
+    public void MultiplyingByALengthIncreasesMagnitude()
+    {
+      var displacement = Displacement3D.FromMeters(1, 1, 1);
+      var result = Length.FromMeters(6) * displacement;
+      result.Magnitude.Meters.ShouldBe(displacement.Magnitude.Meters * 6, Tolerance.ToWithinOneHundredth);
+
+      var normalized1 = displacement.NormalizeToMeters();
+      var normalized2 = result.NormalizeToMeters();
+
+      normalized2.X.ShouldBe(normalized1.X, Tolerance.ToWithinUnitsNetError);
+      normalized2.Y.ShouldBe(normalized1.Y, Tolerance.ToWithinUnitsNetError);
+      normalized2.Z.ShouldBe(normalized1.Z, Tolerance.ToWithinUnitsNetError);
+    }
 
     [Fact]
     public void MultiplyingByAScalarIncreasesMagnitude()
     {
       var displacement = Displacement3D.FromMeters(1, 1, 1);
       var result = 4.3*displacement;
-      result.Magnitude.Meters.ShouldBe(displacement.Magnitude.Meters*4.3, Tolerance.ToWithinOne);
+      result.Magnitude.Meters.ShouldBe(displacement.Magnitude.Meters*4.3, Tolerance.ToWithinOneHundredth);
 
       var normalized1 = displacement.NormalizeToMeters();
       var normalized2 = result.NormalizeToMeters();
