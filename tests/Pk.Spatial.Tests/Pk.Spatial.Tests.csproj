@@ -76,6 +76,7 @@
     <Compile Include="MathNet.Spatial\PlaneTest.cs" />
     <Compile Include="MathNet.Spatial\Point3DTests.cs" />
     <Compile Include="MathNet.Spatial\Ray3DTests.cs" />
+    <Compile Include="MathNet.Spatial\UnitVector3DTests.cs" />
     <Compile Include="MathNet.Spatial\Vector3DTests.cs" />
     <Compile Include="ThreeDimensional\Displacement\Displacement3DOperatorTests.cs" />
     <Compile Include="ThreeDimensional\Displacement\Displacement3DPropertyTests.cs" />
